@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class M_Platform : ProjectileModifier
 {
-    private float velocityMultiplier = 0.6f;
+    private float velocityMultiplier = 0.5f;
     private float horizontalModifier = 4f;
     private float verticalModifier = 0.2f;
 
@@ -15,6 +15,8 @@ public class M_Platform : ProjectileModifier
         projectileRigidbody.velocity *= velocityMultiplier;
 
         projectileComponent.MultiplyProjectileScale(new Vector3(horizontalModifier, verticalModifier, horizontalModifier));
+
+        projectileTransform.gameObject.layer = LayerMask.NameToLayer("Ground");
 
         projectileComponent.onDestroyed += OnDestroyed;
     }
@@ -27,8 +29,6 @@ public class M_Platform : ProjectileModifier
     private void OnDestroyed()
     {
         projectileTransform.SetParent(null);
-
-        projectileTransform.gameObject.layer = LayerMask.NameToLayer("Ground");
 
         UnityEngine.Object.Destroy(projectileTransform.gameObject, platformLifetime);
     }

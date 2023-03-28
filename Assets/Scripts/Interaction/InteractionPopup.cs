@@ -1,23 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class InteractionPopup : MonoBehaviour
 {
+
+    [Header("General Interactable")]
+    [SerializeField] private CanvasGroup generalCG;
+    [SerializeField] private TextMeshProUGUI displayNameTxt;
+
+    [Header("Weapon Interactable")]
+    [SerializeField] private CanvasGroup weaponCG;
+    [SerializeField] private TextMeshProUGUI weaponNameTxt;
+    [SerializeField] private TextMeshProUGUI weaponModifiersTxt;
+    [SerializeField] private TextMeshProUGUI weaponAdditiveDelayTxt;
+    [SerializeField] private Image effectIcon;
+
     private Transform cameraTransform;
     private Vector3 rayCastPos;
 
     private bool isShown;
-    private CanvasGroup cg;
-    private TextMeshProUGUI text;
+    private CanvasGroup baseCG;
 
     private void Start()
     {
-        cg = GetComponent<CanvasGroup>();
+        baseCG = GetComponent<CanvasGroup>();
         cameraTransform = ServiceLocator.instance.GetService<PlayerCamera>().transform;
 
-        text = GetComponentInChildren<TextMeshProUGUI>();
+        baseCG.alpha = 0f;
     }
 
     public void SetVisibleState(bool shown)
@@ -28,15 +40,42 @@ public class InteractionPopup : MonoBehaviour
             rayCastPos += Vector3.down * 5f;
     }
 
-    public void SetData(Vector3 pos, string displayName)
+    public void SetData(Vector3 pos, Interactable interactable)
     {
         rayCastPos = pos;
-        text.text = displayName;
+
+        if (interactable is WeaponController)
+        {
+            generalCG.alpha = 0f;
+            weaponCG.alpha = 1f;
+
+            int[] dna = ((WeaponController)interactable).dna;
+
+            weaponNameTxt.text = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetWeaponObject(dna).displayName;
+            effectIcon.sprite = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna).icon;
+            weaponAdditiveDelayTxt.text = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetModifierAdditiveDelay(dna) + "s";
+
+            string modifierDescription = "";
+
+            foreach (ProjectileModifier m in ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna))
+            {
+                modifierDescription += m.ToString() + "\n";
+            }
+
+            weaponModifiersTxt.text = modifierDescription;
+        }
+        else
+        {
+            generalCG.alpha = 1f;
+            weaponCG.alpha = 0f;
+
+            displayNameTxt.text = interactable.GetName();
+        }
     }
 
     private void Update()
     {
-        cg.alpha = Mathf.Lerp(cg.alpha, isShown ? 1f : 0f, Time.deltaTime * 10f);
+        baseCG.alpha = Mathf.Lerp(baseCG.alpha, isShown ? 1f : 0f, Time.deltaTime * 10f);
 
         if (isShown)
         {

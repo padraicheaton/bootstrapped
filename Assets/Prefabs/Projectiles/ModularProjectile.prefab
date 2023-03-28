@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7810803532740497953}
   - component: {fileID: 4211327158158715783}
   - component: {fileID: 8035928279816372337}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collidable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7264690256657572134}
   - component: {fileID: 735679997261951944}
   - component: {fileID: 863097484481516273}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ModularProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

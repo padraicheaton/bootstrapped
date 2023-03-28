@@ -6,6 +6,7 @@ public class M_VelocityBoost : ProjectileModifier
 {
     // Settings
     private float launchForce = 50f;
+    private float continuousForwardAccel = 1f;
 
     public override void OnModifierApplied()
     {
@@ -16,6 +17,6 @@ public class M_VelocityBoost : ProjectileModifier
 
     public override void TickModifier(float deltaTime)
     {
-
+        projectileRigidbody.AddForce(projectileRigidbody.velocity.normalized * continuousForwardAccel, ForceMode.Acceleration);
     }
 }

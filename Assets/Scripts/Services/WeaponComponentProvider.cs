@@ -21,9 +21,6 @@ public class WeaponComponentProvider : MonoBehaviour
 
         effects = GetAllScriptableObjects<EffectData>();
         weapons = GetAllScriptableObjects<WeaponData>();
-
-        Debug.Log(effects.Length);
-        Debug.Log(weapons.Length);
     }
 
     private void LoadAllProjectileModifiers()
@@ -34,6 +31,8 @@ public class WeaponComponentProvider : MonoBehaviour
         {
             foundModifiers.Add(Activator.CreateInstance(cls) as ProjectileModifier);
         }
+
+        foundModifiers.Sort((a, b) => string.Compare(a.ToString(), b.ToString(), StringComparison.Ordinal));
 
         modifiers = foundModifiers.ToArray();
     }

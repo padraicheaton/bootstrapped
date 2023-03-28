@@ -10,9 +10,6 @@ public class M_Sticky : ProjectileModifier
         {
             projectileRigidbody.velocity = Vector3.zero;
             projectileRigidbody.isKinematic = true;
-
-            if (projectileTransform.parent && other.transform)
-                projectileTransform.parent.SetParent(other.transform);
         };
     }
 

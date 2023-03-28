@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     //* Control Events
     public UnityAction<bool> OnFireButton;
     public UnityAction<bool> OnInteractButton;
+    public UnityAction<bool> OnDropWeapon;
 
     private void Awake()
     {
@@ -24,6 +25,9 @@ public class InputManager : MonoBehaviour
 
         inputActions.Interact.performed += ctxt => OnInteractButton?.Invoke(true);
         inputActions.Interact.canceled += ctxt => OnInteractButton?.Invoke(false);
+
+        inputActions.Drop.performed += ctxt => OnDropWeapon?.Invoke(true);
+        inputActions.Drop.canceled += ctxt => OnDropWeapon?.Invoke(false);
     }
 
     private void OnEnable() => inputActions.Enable();
@@ -31,11 +35,16 @@ public class InputManager : MonoBehaviour
 
     public Vector2 GetMovementInput()
     {
-        return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        return inputActions.Movement.ReadValue<Vector2>();
     }
 
     public Vector2 GetLookInput()
     {
-        return new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        return inputActions.Look.ReadValue<Vector2>();
+    }
+
+    public float GetScrollInput()
+    {
+        return inputActions.SwapWeapons.ReadValue<float>();
     }
 }

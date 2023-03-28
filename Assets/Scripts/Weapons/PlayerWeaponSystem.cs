@@ -9,7 +9,7 @@ public class PlayerWeaponSystem : MonoBehaviour
     [SerializeField] private Transform weaponFirePoint;
 
     [Header("Settings")]
-    [SerializeField] private GameObject[] startingWeapons;
+    [SerializeField] private int[] startingWeapon;
 
     private int weaponSlotCount = 4;
     private List<WeaponController> weaponSlots = new List<WeaponController>();
@@ -19,42 +19,79 @@ public class PlayerWeaponSystem : MonoBehaviour
     {
         activeWeaponIndex = -1;
 
-        foreach (GameObject startingWeapon in startingWeapons)
-        {
-            GameObject wep = Instantiate(startingWeapon, Vector3.zero, Quaternion.identity);
+        GameObject wep = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(startingWeapon, Vector3.zero);
 
-            AddWeapon(wep);
-        }
+        AddWeapon(wep);
 
         SwitchToWeaponIndex(0);
 
         SetupControls();
     }
 
+    private void Update()
+    {
+        float scrollValue = ServiceLocator.instance.GetService<InputManager>().GetScrollInput();
+
+        if (scrollValue != 0)
+        {
+            SwitchWeapons(Mathf.RoundToInt(Mathf.Sign(scrollValue)));
+        }
+    }
+
     private void SetupControls()
     {
         ServiceLocator.instance.GetService<InputManager>().OnFireButton += OnFireInput;
+        ServiceLocator.instance.GetService<InputManager>().OnDropWeapon += OnDropInput;
     }
 
     private void OnFireInput(bool performed)
     {
-        if (weaponSlots[activeWeaponIndex])
+        if (weaponSlots.Count > 0 && GetActiveWeapon())
         {
-            weaponSlots[activeWeaponIndex].OnFireInput(performed);
+            GetActiveWeapon().OnFireInput(performed);
         }
+    }
+
+    private void OnDropInput(bool performed)
+    {
+        if (performed)
+            DropActiveWeapon();
+    }
+
+    private void SwitchWeapons(int direction)
+    {
+        int newIndex = activeWeaponIndex + direction;
+
+        if (newIndex > weaponSlots.Count - 1) newIndex = 0;
+        if (newIndex < 0) newIndex = weaponSlots.Count - 1;
+
+        SwitchToWeaponIndex(newIndex);
     }
 
     private void SwitchToWeaponIndex(int newWeaponIndex)
     {
-        if (weaponSlots[newWeaponIndex] == null) return;
+        if (weaponSlots.Count == 0 || weaponSlots[newWeaponIndex] == null) return;
 
         // Handle unequipping current weapon
-        if (activeWeaponIndex != -1 && weaponSlots[activeWeaponIndex] != null)
-            weaponSlots[activeWeaponIndex].ShowWeapon(false);
+        if (GetActiveWeapon() != null)
+            GetActiveWeapon().ShowWeapon(false);
 
         // Show weapon
         weaponSlots[newWeaponIndex].ShowWeapon(true);
         activeWeaponIndex = newWeaponIndex;
+    }
+
+    private void DropActiveWeapon()
+    {
+        if (!GetActiveWeapon()) return;
+
+        GetActiveWeapon().transform.SetParent(null);
+
+        GetActiveWeapon().OnDropped();
+        weaponSlots.RemoveAt(activeWeaponIndex);
+
+        if (weaponSlots.Count > 0 && weaponSlots[0])
+            SwitchToWeaponIndex(0);
     }
 
     public void AddWeapon(GameObject weapon)
@@ -68,9 +105,6 @@ public class PlayerWeaponSystem : MonoBehaviour
         // Cache reference to it
         WeaponController weaponController = weapon.GetComponent<WeaponController>();
 
-        //! DEBUG, WILL BE CALLED ON GENERATION
-        weaponController.Construct(ServiceLocator.instance.GetService<WeaponComponentProvider>().GetRandomDNA());
-
         // Call on picked up
         weaponController.OnPickedUp(weaponFirePoint);
 
@@ -79,6 +113,20 @@ public class PlayerWeaponSystem : MonoBehaviour
 
         // Deactivate the weapon by default
         weaponController.ShowWeapon(false);
+
+        // Switch to it if first weapon picked up
+        if (weaponSlots.Count == 1)
+            SwitchToWeaponIndex(0);
+    }
+
+    private WeaponController GetActiveWeapon()
+    {
+        if (weaponSlots.Count > activeWeaponIndex && activeWeaponIndex >= 0)
+        {
+            return weaponSlots[activeWeaponIndex];
+        }
+        else
+            return null;
     }
 
     private bool HasCapacity()

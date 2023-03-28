@@ -41,6 +41,13 @@ public class ModularProjectile : MonoBehaviour
 
         chosenModifiers.AddRange(ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna));
 
+        string debug = "Modifiers: ";
+
+        foreach (ProjectileModifier m in ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna))
+            debug += m.ToString() + ", ";
+
+        Debug.Log(debug);
+
         effectToApply = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna);
 
         rb.AddForce(transform.forward * launchForce, ForceMode.Impulse);
@@ -80,6 +87,12 @@ public class ModularProjectile : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (onCollided != null)
+            onCollided.Invoke(other);
+    }
+
 
     private bool IsGameObjectInLayerMask(GameObject obj, LayerMask mask)
     {
@@ -100,6 +113,11 @@ public class ModularProjectile : MonoBehaviour
                 effectScript.OnEffectApplied(hc, damage, collidableTransform.gameObject); // passing the child here as this ref is used for force calculation
             }
         }
+
+        if (onDestroyed != null)
+            onDestroyed.Invoke();
+
+        Destroy(gameObject);
     }
 
     public LayerMask GetAffectingLayers()

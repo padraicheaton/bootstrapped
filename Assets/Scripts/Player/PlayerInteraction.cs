@@ -40,7 +40,7 @@ public class PlayerInteraction : MonoBehaviour
                 highlightedInteractable = interactable;
 
                 popup.SetVisibleState(true);
-                popup.SetData(hit.collider.transform.position + Vector3.up * 0.75f, interactable.GetName());
+                popup.SetData(hit.collider.transform.position + Vector3.up * 0.75f, interactable);
             }
         }
     }
