@@ -53,7 +53,7 @@ MonoBehaviour:
   displayName: Fire Machine Gun
   damage: 10
   timeBetweenShots: 0.25
-  initialLaunchForce: 50
+  initialLaunchForce: 20
   clipSize: 50
   isAutomatic: 1
 --- !u!65 &7958299124740438811

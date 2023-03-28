@@ -9,6 +9,7 @@ public class WeaponController : Interactable
     [Header("References")]
     [SerializeField] private Transform visuals;
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private LayerMask enemyLayer;
 
     [Header("Settings")]
     [SerializeField] private string displayName;
@@ -27,8 +28,13 @@ public class WeaponController : Interactable
     private Rigidbody rb;
     private BoxCollider coll;
 
+    // ! The Important Stuff
+    private int[] dna;
+
     public void Construct(int[] dna)
     {
+        this.dna = dna;
+
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<BoxCollider>();
     }
@@ -81,7 +87,9 @@ public class WeaponController : Interactable
     {
         if (!weaponFirePoint) return;
 
-        Instantiate(projectilePrefab, weaponFirePoint.position, weaponFirePoint.rotation);
+        GameObject projectile = Instantiate(projectilePrefab, weaponFirePoint.position, weaponFirePoint.rotation);
+
+        projectile.GetComponent<ModularProjectile>().Construct(dna, initialLaunchForce, damage, enemyLayer);
     }
 
     public void ShowWeapon(bool shown)

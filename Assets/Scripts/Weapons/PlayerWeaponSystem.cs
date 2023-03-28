@@ -69,7 +69,7 @@ public class PlayerWeaponSystem : MonoBehaviour
         WeaponController weaponController = weapon.GetComponent<WeaponController>();
 
         //! DEBUG, WILL BE CALLED ON GENERATION
-        weaponController.Construct(new int[] { });
+        weaponController.Construct(ServiceLocator.instance.GetService<WeaponComponentProvider>().GetRandomDNA());
 
         // Call on picked up
         weaponController.OnPickedUp(weaponFirePoint);
