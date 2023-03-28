@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class MoveCamera : MonoBehaviour {
-
+public class PlayerCamera : MonoBehaviour
+{
     public Transform player;
 
-    void Update() {
+    void Update()
+    {
         transform.position = player.transform.position;
     }
 }

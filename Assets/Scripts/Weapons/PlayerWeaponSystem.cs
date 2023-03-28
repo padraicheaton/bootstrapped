@@ -6,6 +6,7 @@ public class PlayerWeaponSystem : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform weaponContainer;
+    [SerializeField] private Transform weaponFirePoint;
 
     [Header("Settings")]
     [SerializeField] private GameObject[] startingWeapons;
@@ -27,20 +28,19 @@ public class PlayerWeaponSystem : MonoBehaviour
 
         SwitchToWeaponIndex(0);
 
-        StartCoroutine(TestSwitchWeapons());
+        SetupControls();
     }
 
-    IEnumerator TestSwitchWeapons()
+    private void SetupControls()
     {
-        while (true)
+        ServiceLocator.instance.GetService<InputManager>().OnFireButton += OnFireInput;
+    }
+
+    private void OnFireInput(bool performed)
+    {
+        if (weaponSlots[activeWeaponIndex])
         {
-            yield return new WaitForSeconds(2f);
-
-            int index = activeWeaponIndex + 1;
-
-            if (index > weaponSlotCount - 1) index = 0;
-
-            SwitchToWeaponIndex(index);
+            weaponSlots[activeWeaponIndex].OnFireInput(performed);
         }
     }
 
@@ -57,7 +57,7 @@ public class PlayerWeaponSystem : MonoBehaviour
         activeWeaponIndex = newWeaponIndex;
     }
 
-    private void AddWeapon(GameObject weapon)
+    public void AddWeapon(GameObject weapon)
     {
         if (!HasCapacity()) return;
 
@@ -67,6 +67,12 @@ public class PlayerWeaponSystem : MonoBehaviour
 
         // Cache reference to it
         WeaponController weaponController = weapon.GetComponent<WeaponController>();
+
+        //! DEBUG, WILL BE CALLED ON GENERATION
+        weaponController.Construct(new int[] { });
+
+        // Call on picked up
+        weaponController.OnPickedUp(weaponFirePoint);
 
         // Fill first empty slot in array
         weaponSlots.Add(weaponController);
