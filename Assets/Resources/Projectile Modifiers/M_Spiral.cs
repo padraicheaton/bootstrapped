@@ -5,8 +5,8 @@ using UnityEngine;
 public class M_Spiral : ProjectileModifier
 {
     //* Settings
-    private float spiralRadius = 4f;
-    private float spiralSpeed = 5f;
+    private float spiralRadius = 1f;
+    private float spiralSpeed = 2f;
 
     private Transform childTransform;
     private Vector3 spiralPosition = Vector3.zero;

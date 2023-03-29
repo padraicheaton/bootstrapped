@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] private bool destroyOnDeath = false;
+
     [Header("Stats")]
     [SerializeField] private float damageTakenMultiplier = 1f;
     [SerializeField] public float maximumHealth;
@@ -18,6 +21,9 @@ public class HealthComponent : MonoBehaviour
     private void Start()
     {
         Reset();
+
+        if (destroyOnDeath)
+            onDeath += () => Destroy(gameObject);
     }
 
     public void SetHealth(float amount)

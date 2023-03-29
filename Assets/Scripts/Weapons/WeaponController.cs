@@ -23,7 +23,7 @@ public class WeaponController : Interactable
 
     private bool isFireInputPressed;
     private float timeSinceLastFired;
-    private int remainingAmmo;
+    public int remainingAmmo { get; private set; }
 
     private Transform weaponFirePoint;
 

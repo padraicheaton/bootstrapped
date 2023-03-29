@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -39,14 +40,10 @@ public class ModularProjectile : MonoBehaviour
 
         modifierAdditiveDelay = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetModifierAdditiveDelay(dna);
 
-        chosenModifiers.AddRange(ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna));
-
-        string debug = "Modifiers: ";
-
         foreach (ProjectileModifier m in ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna))
-            debug += m.ToString() + ", ";
-
-        Debug.Log(debug);
+        {
+            chosenModifiers.Add((ProjectileModifier)Activator.CreateInstance(m.GetType()));
+        }
 
         effectToApply = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna);
 
@@ -73,11 +70,11 @@ public class ModularProjectile : MonoBehaviour
     {
         foreach (ProjectileModifier m in chosenModifiers)
         {
-            yield return new WaitForSeconds(modifierAdditiveDelay);
-
             m.SetupModifier(rb, collidableTransform, this);
 
             activeModifiers.Add(m);
+
+            yield return new WaitForSeconds(modifierAdditiveDelay);
         }
 
         yield return new WaitForSeconds(timeToLive);
@@ -89,6 +86,19 @@ public class ModularProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (IsGameObjectInLayerMask(other.gameObject, affectingLayers))
+        {
+            // Apply effect, destroy, return
+            ExplodeEffect();
+
+            if (onDestroyed != null)
+                onDestroyed.Invoke();
+
+            Destroy(gameObject);
+
+            return;
+        }
+
         if (onCollided != null)
             onCollided.Invoke(other);
     }
@@ -113,11 +123,6 @@ public class ModularProjectile : MonoBehaviour
                 effectScript.OnEffectApplied(hc, damage, collidableTransform.gameObject); // passing the child here as this ref is used for force calculation
             }
         }
-
-        if (onDestroyed != null)
-            onDestroyed.Invoke();
-
-        Destroy(gameObject);
     }
 
     public LayerMask GetAffectingLayers()

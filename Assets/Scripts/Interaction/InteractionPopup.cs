@@ -16,6 +16,7 @@ public class InteractionPopup : MonoBehaviour
     [SerializeField] private TextMeshProUGUI weaponNameTxt;
     [SerializeField] private TextMeshProUGUI weaponModifiersTxt;
     [SerializeField] private TextMeshProUGUI weaponAdditiveDelayTxt;
+    [SerializeField] private TextMeshProUGUI weaponAmmoTxt;
     [SerializeField] private Image effectIcon;
 
     private Transform cameraTransform;
@@ -54,6 +55,7 @@ public class InteractionPopup : MonoBehaviour
             weaponNameTxt.text = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetWeaponObject(dna).displayName;
             effectIcon.sprite = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna).icon;
             weaponAdditiveDelayTxt.text = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetModifierAdditiveDelay(dna) + "s";
+            weaponAmmoTxt.text = ((WeaponController)interactable).remainingAmmo.ToString();
 
             string modifierDescription = "";
 

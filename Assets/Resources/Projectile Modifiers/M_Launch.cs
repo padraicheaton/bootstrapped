@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class M_Launch : ProjectileModifier
 {
-    private float launchForce = 30f;
-    private float continuousForwardAccel = 1f;
+    private float launchForce = 5f;
+    private float continuousForwardAccel = 2f;
 
     public override void OnModifierApplied()
     {

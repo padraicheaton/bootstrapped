@@ -5,6 +5,7 @@ using UnityEngine;
 public class M_Featherweight : ProjectileModifier
 {
     private float massMultiplier = 0.5f;
+    private float gravityCounterForce = 1f;
 
     public override void OnModifierApplied()
     {
@@ -13,6 +14,7 @@ public class M_Featherweight : ProjectileModifier
 
     public override void TickModifier(float deltaTime)
     {
-
+        if (projectileRigidbody.velocity.y < 0)
+            projectileRigidbody.AddForce(Vector3.up * gravityCounterForce, ForceMode.Acceleration);
     }
 }

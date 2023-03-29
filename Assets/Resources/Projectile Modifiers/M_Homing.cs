@@ -5,7 +5,7 @@ using UnityEngine;
 public class M_Homing : ProjectileModifier
 {
     private float searchRadius = 15f;
-    private float moveForce = 4f;
+    private float moveForce = 8f;
     private Transform target;
 
     public override void OnModifierApplied()

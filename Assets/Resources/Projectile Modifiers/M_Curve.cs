@@ -14,7 +14,7 @@ public class M_Curve : ProjectileModifier
     {
         curveDir = possibleCurveDirs[Random.Range(0, possibleCurveDirs.Length)];
 
-        projectileRigidbody.AddForce(curveDir * -curveForce, ForceMode.Impulse);
+        // projectileRigidbody.AddForce(curveDir * -curveForce, ForceMode.Impulse);
     }
 
     public override void TickModifier(float deltaTime)

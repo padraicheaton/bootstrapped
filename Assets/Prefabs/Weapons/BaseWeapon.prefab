@@ -52,7 +52,7 @@ MonoBehaviour:
     type: 3}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   displayName: Base Weapon
   damage: 10
   timeBetweenShots: 0.25

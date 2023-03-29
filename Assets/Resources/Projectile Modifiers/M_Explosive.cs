@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class M_Explosive : ProjectileModifier
 {
-    private float explosionRadiusMultiplier = 1.25f;
+    private float explosionRadiusMultiplier = 1.5f;
 
     public override void OnModifierApplied()
     {
