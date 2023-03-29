@@ -20,13 +20,17 @@ public class ModularProjectile : MonoBehaviour
     private float explosionRadiusMultiplier = 1f;
     private float damage;
     private float timeToLive = 3f;
+    private int lives = 1;
     private LayerMask affectingLayers;
     private Vector3 desiredScale = Vector3.one;
     private bool shouldTick = false;
+    private bool collidedThisFrame = false;
 
     private float modifierAdditiveDelay;
 
     private EffectData effectToApply;
+
+    private Collider[] colliders;
 
     public void Construct(int[] dna, float launchForce, float damage, LayerMask affectingLayers)
     {
@@ -37,6 +41,8 @@ public class ModularProjectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         collidableTransform = transform.GetChild(0);
+
+        colliders = GetComponentsInChildren<Collider>();
 
         modifierAdditiveDelay = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetModifierAdditiveDelay(dna);
 
@@ -66,6 +72,11 @@ public class ModularProjectile : MonoBehaviour
         collidableTransform.localScale = Vector3.Lerp(collidableTransform.localScale, desiredScale, Time.deltaTime * 25f);
     }
 
+    private void LateUpdate()
+    {
+        collidedThisFrame = false;
+    }
+
     private IEnumerator ModifierApplicationRoutine()
     {
         foreach (ProjectileModifier m in chosenModifiers)
@@ -86,17 +97,26 @@ public class ModularProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (collidedThisFrame) return;
+
+        collidedThisFrame = true;
+
         if (IsGameObjectInLayerMask(other.gameObject, affectingLayers))
         {
             // Apply effect, destroy, return
             ExplodeEffect();
 
-            if (onDestroyed != null)
-                onDestroyed.Invoke();
+            lives--;
 
-            Destroy(gameObject);
+            if (lives <= 0)
+            {
+                if (onDestroyed != null)
+                    onDestroyed.Invoke();
 
-            return;
+                Destroy(gameObject);
+
+                return;
+            }
         }
 
         if (onCollided != null)
@@ -155,5 +175,26 @@ public class ModularProjectile : MonoBehaviour
     public void MultiplyTimeToLive(float multiplier)
     {
         timeToLive *= multiplier;
+    }
+
+    public void AddLives(int num)
+    {
+        lives += num;
+    }
+
+    public void DisableColliderForDuration(float delay)
+    {
+        StartCoroutine(DisableColliderRoutine(delay));
+    }
+
+    private IEnumerator DisableColliderRoutine(float delay)
+    {
+        foreach (Collider c in colliders)
+            c.enabled = false;
+
+        yield return new WaitForSeconds(delay);
+
+        foreach (Collider c in colliders)
+            c.enabled = true;
     }
 }

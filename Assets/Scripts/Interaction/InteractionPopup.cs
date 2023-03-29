@@ -58,7 +58,6 @@ public class InteractionPopup : MonoBehaviour
             weaponAmmoTxt.text = ((WeaponController)interactable).remainingAmmo.ToString();
 
             string modifierDescription = "";
-
             foreach (ProjectileModifier m in ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna))
             {
                 modifierDescription += m.ToString() + "\n";
