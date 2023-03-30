@@ -10,6 +10,11 @@ public class E_Knockback : BaseEffect
     private Vector3 accelDir = Vector3.zero;
     private Rigidbody rb;
 
+    public void SetMultiplier(float multiplier)
+    {
+        forceMultiplier = multiplier;
+    }
+
     public override void OnEffectApplied(HealthComponent hc, float damage, GameObject projectile)
     {
         base.OnEffectApplied(hc, damage, projectile);
@@ -18,11 +23,11 @@ public class E_Knockback : BaseEffect
         {
             float knockBackForce = damage * damageToForceScalar * forceMultiplier;
 
-            Vector3 pointOfReference = ServiceLocator.instance.GetService<PlayerCamera>().transform.position;
+            Vector3 pointOfReference = projectile.transform.position;//ServiceLocator.instance.GetService<PlayerCamera>().transform.position;
 
             Vector3 dirFromProjectileToTarget = (affectedCharacterHealth.transform.position - pointOfReference).normalized;
 
-            accelDir = dirFromProjectileToTarget * knockBackForce;
+            accelDir = (dirFromProjectileToTarget + Vector3.up * 0.1f) * knockBackForce;
 
             this.rb = rb;
 

@@ -54,7 +54,7 @@ public class RigidbodyAgent : MonoBehaviour
 
             MovementBehaviour();
 
-            if (target && Vector3.Distance(transform.position, target.position) < attackRange && timeSinceLastAttacked > attackDelay)
+            if (target && Vector3.Distance(transform.position, target.position) <= attackRange && timeSinceLastAttacked > attackDelay)
             {
                 ApplyEffectToTarget();
             }
@@ -88,11 +88,22 @@ public class RigidbodyAgent : MonoBehaviour
     {
         // Make sure the target is not obstructed by terrain
         if (Physics.Linecast(transform.position, target.position, groundLayer))
+        {
             return;
+        }
 
         if (target.TryGetComponent<HealthComponent>(out HealthComponent hc))
         {
             BaseEffect appliedEffect = Instantiate(effect.prefab, target).GetComponent<BaseEffect>();
+
+            Debug.Log(appliedEffect.GetType().ToString());
+
+            if (appliedEffect is E_Knockback)
+            {
+                ((E_Knockback)appliedEffect).SetMultiplier(50f);
+                Debug.Log("Enemy Knocking Player");
+            }
+
             appliedEffect.OnEffectApplied(hc, damage * damageMultiplier, gameObject);
         }
 
