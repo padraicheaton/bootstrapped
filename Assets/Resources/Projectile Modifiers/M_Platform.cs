@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class M_Platform : ProjectileModifier
 {
-    private float velocityMultiplier = 0.5f;
+    private float velocityMultiplier = 0.25f;
     private float horizontalModifier = 4f;
     private float verticalModifier = 0.2f;
 

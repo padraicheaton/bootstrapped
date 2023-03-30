@@ -37,19 +37,4 @@ public class E_Knockback : BaseEffect
     {
         return 0.5f;
     }
-
-    // private void Update()
-    // {
-    //     if (rb)
-    //     {
-    //         if (accelDir.magnitude > 0.1f)
-    //         {
-    //             rb.AddForce(accelDir, ForceMode.Acceleration);
-
-    //             accelDir = Vector3.Lerp(accelDir, Vector3.zero, Time.deltaTime);
-    //         }
-    //         else
-    //             Destroy(gameObject);
-    //     }
-    // }
 }
