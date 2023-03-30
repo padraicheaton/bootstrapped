@@ -27,6 +27,7 @@ public class RigidbodyAgent : MonoBehaviour
     private Transform target;
     private Allegiance currentAllegiance = Allegiance.Enemy;
     private float timeSinceLastAttacked;
+    private bool CanMove = true;
 
     private float damageMultiplier = 1f;
 
@@ -38,35 +39,36 @@ public class RigidbodyAgent : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, detectionRange, groundLayer))
+        if (CanMove)
         {
-            Jump();
-        }
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, detectionRange, groundLayer))
+            {
+                Jump();
+            }
 
-        if (target == null)
-            UpdateTarget();
+            if (target == null)
+                UpdateTarget();
 
-        Vector3 movementDirection = target.position - transform.position;
-        movementDirection.y = 0f;
+            Vector3 movementDirection = target.position - transform.position;
+            movementDirection.y = 0f;
 
-        if (movementDirection.magnitude > attackRange)
-        {
-            movementDirection.Normalize();
+            if (movementDirection.magnitude > attackRange)
+            {
+                movementDirection.Normalize();
 
-            rb.MovePosition(transform.position + movementDirection * moveSpeed * Time.deltaTime);
+                rb.MovePosition(transform.position + movementDirection * moveSpeed * Time.deltaTime);
 
-            transform.rotation = Quaternion.LookRotation(movementDirection);
-        }
-        else if (timeSinceLastAttacked > attackDelay)
-        {
-            // Close enough to target to apply effect
-            ApplyEffectToTarget();
+                transform.rotation = Quaternion.LookRotation(movementDirection);
+            }
+            else if (timeSinceLastAttacked > attackDelay)
+            {
+                // Close enough to target to apply effect
+                ApplyEffectToTarget();
+            }
         }
 
         timeSinceLastAttacked += Time.deltaTime;
-
-        UpdateTarget();
     }
 
     private void ApplyEffectToTarget()
@@ -125,5 +127,10 @@ public class RigidbodyAgent : MonoBehaviour
     public void ResetDamageMultiplier()
     {
         damageMultiplier = 1f;
+    }
+
+    public void SetCanMove(bool CanMove)
+    {
+        this.CanMove = CanMove;
     }
 }
