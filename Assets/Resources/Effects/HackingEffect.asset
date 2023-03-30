@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a42d3c7956994747a108542a4020d61, type: 3}
-  m_Name: JamEffect
+  m_Name: HackingEffect
   m_EditorClassIdentifier: 
-  displayName: Weapon Jam
-  prefab: {fileID: 7059207599760041301, guid: d0353300cd68d7b49a9a90b63eaaaded, type: 3}
-  icon: {fileID: 21300000, guid: c4cb20ce5f6c495439d2a049e52ff469, type: 3}
+  displayName: Hacking
+  prefab: {fileID: 5256955986577040266, guid: 62467de7f2fa2a54ebe99707eb84bac8, type: 3}
+  icon: {fileID: 21300000, guid: 5f1904ebf5c64824c9a49e656108b0a3, type: 3}

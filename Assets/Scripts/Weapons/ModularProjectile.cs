@@ -6,6 +6,9 @@ using UnityEngine.Events;
 
 public class ModularProjectile : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Collider physicalCollider;
+
     private Rigidbody rb;
 
     private List<ProjectileModifier> chosenModifiers = new List<ProjectileModifier>();
@@ -95,12 +98,8 @@ public class ModularProjectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collidedThisFrame) return;
-
-        collidedThisFrame = true;
-
         if (IsGameObjectInLayerMask(other.gameObject, affectingLayers))
         {
             // Apply effect, destroy, return
@@ -113,11 +112,24 @@ public class ModularProjectile : MonoBehaviour
                 if (onDestroyed != null)
                     onDestroyed.Invoke();
 
+                if (physicalCollider)
+                {
+                    Debug.Log("Disabled physical cllider");
+                    physicalCollider.enabled = false;
+                }
+
                 Destroy(gameObject);
 
                 return;
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (collidedThisFrame) return;
+
+        collidedThisFrame = true;
 
         if (onCollided != null)
             onCollided.Invoke(other);

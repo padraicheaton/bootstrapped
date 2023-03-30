@@ -30,6 +30,7 @@ public class RigidbodyAgent : MonoBehaviour
     private bool CanMove = true;
 
     private float damageMultiplier = 1f;
+    private float movementMultiplier = 1f;
 
     private void Start()
     {
@@ -57,7 +58,7 @@ public class RigidbodyAgent : MonoBehaviour
             {
                 movementDirection.Normalize();
 
-                rb.MovePosition(transform.position + movementDirection * moveSpeed * Time.deltaTime);
+                rb.MovePosition(transform.position + movementDirection * (moveSpeed * movementMultiplier) * Time.deltaTime);
 
                 transform.rotation = Quaternion.LookRotation(movementDirection);
             }
@@ -103,6 +104,8 @@ public class RigidbodyAgent : MonoBehaviour
 
             foreach (Collider coll in Physics.OverlapSphere(transform.position, targetSearchRadius, enemyLayer))
             {
+                if (coll.transform == transform) continue;
+
                 if (Vector3.Distance(transform.position, coll.transform.position) < minDist)
                 {
                     minDist = Vector3.Distance(transform.position, coll.transform.position);
@@ -132,5 +135,15 @@ public class RigidbodyAgent : MonoBehaviour
     public void SetCanMove(bool CanMove)
     {
         this.CanMove = CanMove;
+    }
+
+    public void MultiplyMovementSpeed(float modifier)
+    {
+        movementMultiplier *= modifier;
+    }
+
+    public void DivideMovementSpeed(float modifier)
+    {
+        movementMultiplier /= modifier;
     }
 }

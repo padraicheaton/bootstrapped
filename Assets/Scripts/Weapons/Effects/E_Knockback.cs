@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class E_Knockback : BaseEffect
 {
-    protected float damageToForceScalar = 0.1f;
+    protected float damageToForceScalar = 0.5f;
     protected float forceMultiplier = 1f;
 
     private Vector3 accelDir = Vector3.zero;
@@ -28,14 +28,23 @@ public class E_Knockback : BaseEffect
 
             // Cancel out existing forces
             rb.velocity = dirFromProjectileToTarget;
+
+            rb.AddForce(accelDir, ForceMode.Impulse);
         }
     }
 
-    private void Update()
-    {
-        if (rb)
-        {
-            rb.AddForce(accelDir, ForceMode.Acceleration);
-        }
-    }
+    // private void Update()
+    // {
+    //     if (rb)
+    //     {
+    //         if (accelDir.magnitude > 0.1f)
+    //         {
+    //             rb.AddForce(accelDir, ForceMode.Acceleration);
+
+    //             accelDir = Vector3.Lerp(accelDir, Vector3.zero, Time.deltaTime);
+    //         }
+    //         else
+    //             Destroy(gameObject);
+    //     }
+    // }
 }
