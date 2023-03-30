@@ -86,6 +86,10 @@ public class RigidbodyAgent : MonoBehaviour
 
     private void ApplyEffectToTarget()
     {
+        // Make sure the target is not obstructed by terrain
+        if (Physics.Linecast(transform.position, target.position, groundLayer))
+            return;
+
         if (target.TryGetComponent<HealthComponent>(out HealthComponent hc))
         {
             BaseEffect appliedEffect = Instantiate(effect.prefab, target).GetComponent<BaseEffect>();

@@ -321,7 +321,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  moveSpeed: 8
+  moveSpeed: 15
   detectionRange: 1
   targetSearchRadius: 30
   jumpForce: 0.25
@@ -330,8 +330,9 @@ MonoBehaviour:
   attackDelay: 1
   attackRange: 10
   weaponDropChance: 0.75
-  hoverHeight: 3
+  hoverHeight: 5
   hoverAccel: 0.1
+  pseudoFriction: 3
 --- !u!114 &4151637850107034218
 MonoBehaviour:
   m_ObjectHideFlags: 0
