@@ -33,6 +33,11 @@ public class E_Knockback : BaseEffect
         }
     }
 
+    protected override float GetApplicationDamageMultiplier()
+    {
+        return 0.5f;
+    }
+
     // private void Update()
     // {
     //     if (rb)

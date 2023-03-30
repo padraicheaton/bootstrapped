@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class WeaponGenerator : MonoBehaviour
 {
+    public GameObject GenerateWeapon(Vector3 spawnPoint)
+    {
+        return GenerateWeapon(ServiceLocator.instance.GetService<WeaponComponentProvider>().GetRandomDNA(), spawnPoint);
+    }
+
     public GameObject GenerateWeapon(int[] dna, Vector3 spawnPoint)
     {
         WeaponData weapon = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetWeaponObject(dna);

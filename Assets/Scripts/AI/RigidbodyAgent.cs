@@ -22,6 +22,7 @@ public class RigidbodyAgent : MonoBehaviour
     [SerializeField] private EffectData effect;
     [SerializeField] private float attackDelay;
     [SerializeField] private float attackRange;
+    [SerializeField] private float weaponDropChance;
 
     private Rigidbody rb;
     private Transform target;
@@ -32,10 +33,16 @@ public class RigidbodyAgent : MonoBehaviour
     private float damageMultiplier = 1f;
     private float movementMultiplier = 1f;
 
+    private HealthComponent hc;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         UpdateTarget();
+
+        hc = GetComponent<HealthComponent>();
+
+        hc.onDeath += OnDeath;
     }
 
     private void Update()
@@ -92,6 +99,14 @@ public class RigidbodyAgent : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, 1.5f);
+    }
+
+    private void OnDeath()
+    {
+        if (Random.value < weaponDropChance)
+            ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(transform.position + Vector3.up * 0.5f);
+
+        Destroy(gameObject);
     }
 
     private void UpdateTarget()

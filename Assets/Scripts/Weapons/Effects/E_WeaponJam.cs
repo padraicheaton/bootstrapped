@@ -19,6 +19,11 @@ public class E_WeaponJam : BaseEffect
         StartCoroutine(DelayedSetup());
     }
 
+    protected override float GetApplicationDamageMultiplier()
+    {
+        return 0.5f;
+    }
+
     private IEnumerator DelayedSetup()
     {
         // This is required as some effects may be applied at the same frame

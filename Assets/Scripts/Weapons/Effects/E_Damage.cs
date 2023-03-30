@@ -11,8 +11,11 @@ public class E_Damage : BaseEffect
     {
         base.OnEffectApplied(hc, damage, projectile);
 
-        affectedCharacterHealth.TakeDamage(damage * damageMultiplier);
-
         Destroy(gameObject, vfxDuration);
+    }
+
+    protected override float GetApplicationDamageMultiplier()
+    {
+        return damageMultiplier;
     }
 }

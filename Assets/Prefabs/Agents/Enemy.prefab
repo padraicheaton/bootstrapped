@@ -161,6 +161,7 @@ MonoBehaviour:
   effect: {fileID: 11400000, guid: 4c1813097d6c53e46a03ce3af0d17f6d, type: 2}
   attackDelay: 1
   attackRange: 1
+  weaponDropChance: 0.5
 --- !u!114 &4151637850107034218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0bc1eb7c73fc84598f63aafff9db0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyOnDeath: 1
+  destroyOnDeath: 0
   damageTakenMultiplier: 1
   maximumHealth: 100
   currentHealth: 0

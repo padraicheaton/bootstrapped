@@ -19,6 +19,11 @@ public class E_FireDOT : BaseEffect
         StartCoroutine(DamageOverTime(tickTimes));
     }
 
+    protected override float GetApplicationDamageMultiplier()
+    {
+        return 0f;
+    }
+
     private IEnumerator DamageOverTime(int tickTimes)
     {
         for (int i = 0; i < tickTimes; i++)

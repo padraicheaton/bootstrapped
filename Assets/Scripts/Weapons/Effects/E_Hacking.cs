@@ -44,6 +44,10 @@ public class E_Hacking : BaseEffect
             StartCoroutine(RevertAfterDelay());
         }
     }
+    protected override float GetApplicationDamageMultiplier()
+    {
+        return 0.5f;
+    }
 
     public void AddDuration(float amt)
     {

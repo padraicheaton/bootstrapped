@@ -112,11 +112,12 @@ public class ModularProjectile : MonoBehaviour
                 if (onDestroyed != null)
                     onDestroyed.Invoke();
 
-                if (physicalCollider)
-                {
-                    Debug.Log("Disabled physical cllider");
-                    physicalCollider.enabled = false;
-                }
+                // if (physicalCollider)
+                // {
+                //     Debug.Log("Disabled physical cllider");
+                //     physicalCollider.enabled = false;
+                // }
+                gameObject.layer = LayerMask.NameToLayer("NoClip");
 
                 Destroy(gameObject);
 

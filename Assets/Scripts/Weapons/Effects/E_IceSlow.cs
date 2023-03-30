@@ -23,6 +23,11 @@ public class E_IceSlow : BaseEffect
         StartCoroutine(RevertAfterDelay());
     }
 
+    protected override float GetApplicationDamageMultiplier()
+    {
+        return 0.5f;
+    }
+
     private IEnumerator RevertAfterDelay()
     {
         while (duration > 0)

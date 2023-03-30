@@ -12,7 +12,10 @@ public abstract class BaseEffect : MonoBehaviour
     public virtual void OnEffectApplied(HealthComponent hc, float damage, GameObject projectile)
     {
         affectedCharacterHealth = hc;
+        affectedCharacterHealth.TakeDamage(damage * GetApplicationDamageMultiplier());
     }
+
+    protected abstract float GetApplicationDamageMultiplier();
 
     protected List<T> GetEffectObjectsOnParent<T>()
     {

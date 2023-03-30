@@ -11,9 +11,7 @@ public class Cache : Interactable
 
     public override void OnInteracted()
     {
-        int[] dna = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetRandomDNA();
-
-        GameObject generatedWeapon = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(dna, transform.position + Vector3.up * 0.5f);
+        GameObject generatedWeapon = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(transform.position + Vector3.up * 0.5f);
 
         generatedWeapon.GetComponent<Rigidbody>().AddForce((Random.onUnitSphere + Vector3.up) * 5f, ForceMode.Impulse);
     }
