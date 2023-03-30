@@ -28,6 +28,8 @@ public class RigidbodyAgent : MonoBehaviour
     private Allegiance currentAllegiance = Allegiance.Enemy;
     private float timeSinceLastAttacked;
 
+    private float damageMultiplier = 1f;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -72,7 +74,7 @@ public class RigidbodyAgent : MonoBehaviour
         if (target.TryGetComponent<HealthComponent>(out HealthComponent hc))
         {
             BaseEffect appliedEffect = Instantiate(effect.prefab, target).GetComponent<BaseEffect>();
-            appliedEffect.OnEffectApplied(hc, damage, gameObject);
+            appliedEffect.OnEffectApplied(hc, damage * damageMultiplier, gameObject);
         }
 
         timeSinceLastAttacked = 0f;
@@ -113,5 +115,15 @@ public class RigidbodyAgent : MonoBehaviour
         currentAllegiance = newAllegiance;
 
         UpdateTarget();
+    }
+
+    public void AlterDamage(float multiplier)
+    {
+        damageMultiplier *= multiplier;
+    }
+
+    public void ResetDamageMultiplier()
+    {
+        damageMultiplier = 1f;
     }
 }

@@ -14,16 +14,16 @@ public abstract class BaseEffect : MonoBehaviour
         affectedCharacterHealth = hc;
     }
 
-    protected List<GameObject> GetEffectObjectsOnParent<T>()
+    protected List<T> GetEffectObjectsOnParent<T>()
     {
-        List<GameObject> effects = new List<GameObject>();
+        List<T> effects = new List<T>();
 
         for (int i = 0; i < transform.parent.childCount; i++)
         {
             Transform child = transform.parent.GetChild(i);
 
-            if (child.GetComponent<T>() != null)
-                effects.Add(child.gameObject);
+            if (child.TryGetComponent<T>(out T effect))
+                effects.Add(effect);
         }
 
         return effects;

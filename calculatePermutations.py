@@ -29,7 +29,17 @@ modifiers = [
 ]
 
 def get_discrete_gene_permutations():
-    return len(weapons) * len(effects) * len(additiveDelays) * len(modifierCounts) * len(rarities)
+    # Remove taking into account the modifier num, as there will never be an instance where the modifier count is different from the amount of modifiers,
+    # therefore, in that instance there is only ever one possibility for that slot based on the amount of modifiers selected
+    return len(weapons) * len(effects) * len(additiveDelays) * 1 * len(rarities)
+
+def get_distinct_discrete_gene_permutations():
+    # Factor out minor differences in the additive delays and rarities, as the most volatile differences are apparent at the ends of the spectrum,
+    # only factor in those possibilites. I.e. the diff between 0.1 and 0.2 seconds between stacking modifiers is minimal, whilst the diff between
+    # 0.1 and 1 is distinct. Same for rarities
+
+    # Essentially, only accounts for additive delays {0.1, 0.5, 1.0} and rarities {common, rare, legendary}
+    return len(weapons) * len(effects) * 3 * 1 * 3
 
 def get_modifier_permutations():
     permNum = 0
@@ -41,33 +51,17 @@ def get_modifier_permutations():
     return permNum
 
 def get_total_permutations():
-    print("Discrete Gene Permutations: " + format(get_discrete_gene_permutations(), ',d'))
-    print("Modifier Gene Permutations: " + format(get_modifier_permutations(), ',d'))
     return get_discrete_gene_permutations() * get_modifier_permutations()
-
-def get_example_dna():
-    dna = []
-
-    dna.append(random.randint(0,len(weapons))) # Weapon Type
-    dna.append(random.randint(0,len(effects))) # Effect Type
-    dna.append(random.randint(0, len(additiveDelays))) # Modifier Additive Delay
-    dna.append(random.randint(0, len(modifierCounts))) # Number of Modifiers
-
-    for i in range(int(dna[len(dna)-1])):
-        dna.append(random.randint(0,len(modifiers))) # Select Modifiers to Apply
-    
-    return dna
 
 totalConfigNum = get_total_permutations()
 
+distinctConfigNum = get_distinct_discrete_gene_permutations() * get_modifier_permutations()
 
-# Factor out minor differences in the additive delays and rarities, as the most volatile differences are apparent at the ends of the spectrum,
-# only factor in those possibilites. I.e. the diff between 0.1 and 0.2 seconds between stacking modifiers is minimal, whilst the diff between
-# 0.1 and 1 is distinct. Same for rarities
-
-print("Total Permutations: " + format(totalConfigNum, ',d'))
 print("\n")
-print("Example DNA:")
-for i in range(10):
-    print(get_example_dna())
+print("Discrete Gene Permutations: " + format(get_discrete_gene_permutations(), ',d'))
+print("Distinct Discrete Gene Permutations: " + format(get_distinct_discrete_gene_permutations(), ',d'))
+print("Modifier Gene Permutations: " + format(get_modifier_permutations(), ',d'))
+print("\n")
+print("Total Permutations: " + format(totalConfigNum, ',d'))
+print("Distinct Permutations: " + format(distinctConfigNum, ',d'))
 print("\n")
