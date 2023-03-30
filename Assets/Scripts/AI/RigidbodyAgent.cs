@@ -11,27 +11,27 @@ public class RigidbodyAgent : MonoBehaviour
     }
 
     [Header("Settings")]
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float detectionRange;
-    [SerializeField] private float targetSearchRadius;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float damage;
-    [SerializeField] private EffectData effect;
-    [SerializeField] private float attackDelay;
-    [SerializeField] private float attackRange;
-    [SerializeField] private float weaponDropChance;
+    [SerializeField] protected LayerMask groundLayer;
+    [SerializeField] protected LayerMask playerLayer;
+    [SerializeField] protected LayerMask enemyLayer;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float detectionRange;
+    [SerializeField] protected float targetSearchRadius;
+    [SerializeField] protected float jumpForce;
+    [SerializeField] protected float damage;
+    [SerializeField] protected EffectData effect;
+    [SerializeField] protected float attackDelay;
+    [SerializeField] protected float attackRange;
+    [SerializeField] protected float weaponDropChance;
 
-    private Rigidbody rb;
-    private Transform target;
-    private Allegiance currentAllegiance = Allegiance.Enemy;
-    private float timeSinceLastAttacked;
-    private bool CanMove = true;
+    protected Rigidbody rb;
+    protected Transform target;
+    protected Allegiance currentAllegiance = Allegiance.Enemy;
+    protected float timeSinceLastAttacked;
+    protected bool CanMove = true;
 
-    private float damageMultiplier = 1f;
-    private float movementMultiplier = 1f;
+    protected float damageMultiplier = 1f;
+    protected float movementMultiplier = 1f;
 
     private HealthComponent hc;
 
@@ -49,34 +49,39 @@ public class RigidbodyAgent : MonoBehaviour
     {
         if (CanMove)
         {
-            RaycastHit hitInfo;
-            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, detectionRange, groundLayer))
-            {
-                Jump();
-            }
-
             if (target == null)
                 UpdateTarget();
 
-            Vector3 movementDirection = target.position - transform.position;
-            movementDirection.y = 0f;
+            MovementBehaviour();
 
-            if (movementDirection.magnitude > attackRange)
+            if (target && Vector3.Distance(transform.position, target.position) < attackRange && timeSinceLastAttacked > attackDelay)
             {
-                movementDirection.Normalize();
-
-                rb.MovePosition(transform.position + movementDirection * (moveSpeed * movementMultiplier) * Time.deltaTime);
-
-                transform.rotation = Quaternion.LookRotation(movementDirection);
-            }
-            else if (timeSinceLastAttacked > attackDelay)
-            {
-                // Close enough to target to apply effect
                 ApplyEffectToTarget();
             }
         }
 
         timeSinceLastAttacked += Time.deltaTime;
+    }
+
+    protected virtual void MovementBehaviour()
+    {
+        RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, detectionRange, groundLayer))
+        {
+            Jump();
+        }
+
+        Vector3 movementDirection = target.position - transform.position;
+        movementDirection.y = 0f;
+
+        if (movementDirection.magnitude > attackRange)
+        {
+            movementDirection.Normalize();
+
+            rb.MovePosition(transform.position + movementDirection * (moveSpeed * movementMultiplier) * Time.deltaTime);
+
+            transform.rotation = Quaternion.LookRotation(movementDirection);
+        }
     }
 
     private void ApplyEffectToTarget()
