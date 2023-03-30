@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a42d3c7956994747a108542a4020d61, type: 3}
+  m_Name: FireEffect
+  m_EditorClassIdentifier: 
+  displayName: Fire
+  prefab: {fileID: 5958620469006161488, guid: 02d4f6d00dad37e4e9d38c61fcc26871, type: 3}
+  icon: {fileID: 21300000, guid: f5e07cbb5cda2db45897bbe110f4069f, type: 3}

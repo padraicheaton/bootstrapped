@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class M_Orbital : ProjectileModifier
 {
-    private float searchRadius = 15f;
     private float moveForce = 8f;
     private Transform target;
 
