@@ -492,7 +492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
   damageTakenMultiplier: 1
-  maximumHealth: 25
+  maximumHealth: 20
   currentHealth: 0
 --- !u!54 &4396231814901720781
 Rigidbody:
