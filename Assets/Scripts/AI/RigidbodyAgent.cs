@@ -85,8 +85,8 @@ public class RigidbodyAgent : MonoBehaviour
         RaycastHit hitInfo;
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, detectionRange, groundLayer))
         {
+            // Counteract the spring force pulling the agent down
             obstacleAvoidanceForce = Vector3.up * springStrenth * 2f;
-            Debug.Log("Should move up");
         }
 
         if (movementDirection.magnitude > attackRange)

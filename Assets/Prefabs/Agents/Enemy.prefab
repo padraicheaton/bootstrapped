@@ -462,7 +462,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  moveSpeed: 4.5
+  moveSpeed: 4
   detectionRange: 0.75
   targetSearchRadius: 30
   damage: 1
@@ -477,6 +477,7 @@ MonoBehaviour:
   gravityStrength: 10
   psuedoFriction: 1
   aviodanceRange: 2
+  knockMultiplier: 50
 --- !u!114 &4151637850107034218
 MonoBehaviour:
   m_ObjectHideFlags: 0
