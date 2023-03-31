@@ -20,16 +20,10 @@ public class M_Homing : ProjectileModifier
 
         if (target)
         {
-            try
-            {
-                projectileTransform.LookAt(target);
-            }
-            catch
-            {
-                SearchForTarget();
-            }
+            projectileRigidbody.AddForce((target.position - projectileTransform.position).normalized * moveForce, ForceMode.Acceleration);
 
-            projectileRigidbody.AddForce(projectileTransform.forward * moveForce, ForceMode.Acceleration);
+            // Slowly override other forces in favour of this one
+            projectileRigidbody.velocity = Vector3.Lerp(projectileRigidbody.velocity, (target.position - projectileTransform.position).normalized, Time.deltaTime);
         }
     }
 

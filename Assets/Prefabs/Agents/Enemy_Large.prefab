@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8652907560363760158
+--- !u!1001 &1341849054690521323
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -14,28 +14,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
-      propertyPath: jumpForce
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
       propertyPath: moveSpeed
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
-      propertyPath: attackDelay
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: attackRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: weaponDropChance
+      propertyPath: rayLength
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: springDamper
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: springStrenth
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: psuedoFriction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: gravityStrength
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: preferredHoverHeight
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071909462522237121, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071909462522237121, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071909462522237121, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151637850107034218, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: maximumHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396231814901720781, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: m_Mass
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032698560977096568, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7695279382755838191, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
@@ -46,21 +86,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8070686370073691889, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8070686370073691889, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8070686370073691889, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8070686370073691889, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}

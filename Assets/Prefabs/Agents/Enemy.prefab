@@ -294,7 +294,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7695279382755838191}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7b87df3f79dcbde4dbd60784f7dfa16e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -321,15 +321,21 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  moveSpeed: 6
-  detectionRange: 1
+  moveSpeed: 4.5
+  detectionRange: 0.75
   targetSearchRadius: 30
-  jumpForce: 0.25
   damage: 1
   effect: {fileID: 11400000, guid: 4c1813097d6c53e46a03ce3af0d17f6d, type: 2}
   attackDelay: 1
   attackRange: 1
   weaponDropChance: 0.75
+  springStrenth: 4
+  springDamper: 4
+  rayLength: 2
+  preferredHoverHeight: 0.25
+  gravityStrength: 10
+  psuedoFriction: 1
+  aviodanceRange: 2
 --- !u!114 &4151637850107034218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
   damageTakenMultiplier: 1
-  maximumHealth: 100
+  maximumHealth: 25
   currentHealth: 0
 --- !u!54 &4396231814901720781
 Rigidbody:
@@ -354,10 +360,10 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7695279382755838191}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112

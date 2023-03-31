@@ -17,12 +17,18 @@ public class RigidbodyAgent : MonoBehaviour
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float detectionRange;
     [SerializeField] protected float targetSearchRadius;
-    [SerializeField] protected float jumpForce;
     [SerializeField] protected float damage;
     [SerializeField] protected EffectData effect;
     [SerializeField] protected float attackDelay;
     [SerializeField] protected float attackRange;
     [SerializeField] protected float weaponDropChance;
+    [SerializeField] private float springStrenth = 2f;
+    [SerializeField] private float springDamper = 2f;
+    [SerializeField] private float rayLength = 5f;
+    [SerializeField] private float preferredHoverHeight = 2f;
+    [SerializeField] private float gravityStrength = 2f;
+    [SerializeField] private float psuedoFriction = 5f;
+    [SerializeField] private float aviodanceRange = 2f;
 
     protected Rigidbody rb;
     protected Transform target;
@@ -52,7 +58,13 @@ public class RigidbodyAgent : MonoBehaviour
             if (target == null)
                 UpdateTarget();
 
+            ApplyHoverForce();
+
             MovementBehaviour();
+
+            ApplyPseudoFriction();
+
+            AvoidNeighbours();
 
             if (target && Vector3.Distance(transform.position, target.position) <= attackRange && timeSinceLastAttacked > attackDelay)
             {
@@ -65,20 +77,26 @@ public class RigidbodyAgent : MonoBehaviour
 
     protected virtual void MovementBehaviour()
     {
+        Vector3 movementDirection = target.position - transform.position;
+        Vector3 obstacleAvoidanceForce = Vector3.zero;
+
         RaycastHit hitInfo;
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, detectionRange, groundLayer))
         {
-            Jump();
+            obstacleAvoidanceForce = Vector3.up * springStrenth * 2f;
+            Debug.Log("Should move up");
         }
-
-        Vector3 movementDirection = target.position - transform.position;
-        movementDirection.y = 0f;
 
         if (movementDirection.magnitude > attackRange)
         {
             movementDirection.Normalize();
 
-            rb.MovePosition(transform.position + movementDirection * (moveSpeed * movementMultiplier) * Time.deltaTime);
+            if (obstacleAvoidanceForce.y > 0)
+                movementDirection.y = obstacleAvoidanceForce.y;
+
+            //rb.MovePosition(transform.position + movementDirection * (moveSpeed * movementMultiplier) * Time.deltaTime);
+            if (rb.velocity.magnitude < moveSpeed)
+                rb.AddForce(movementDirection * (moveSpeed * movementMultiplier) + obstacleAvoidanceForce);
 
             transform.rotation = Quaternion.LookRotation(movementDirection);
         }
@@ -110,10 +128,44 @@ public class RigidbodyAgent : MonoBehaviour
         timeSinceLastAttacked = 0f;
     }
 
-    private void Jump()
+    private void ApplyHoverForce()
     {
-        if (IsGrounded())
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, rayLength, groundLayer))
+        {
+            // Trying to copy code from very very valet
+            Vector3 vel = rb.velocity;
+            Vector3 rayDir = transform.TransformDirection(Vector3.down);
+
+            float rayDirVel = Vector3.Dot(rayDir, vel);
+
+            float x = hit.distance - preferredHoverHeight;
+
+            float springForce = (x * springStrenth) - (rayDirVel * springDamper);
+
+            rb.AddForce(rayDir * springForce);
+        }
+        else
+        {
+            // Apply a downward force
+            rb.AddForce(Vector3.down * gravityStrength);
+        }
+    }
+
+    private void ApplyPseudoFriction()
+    {
+        rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * psuedoFriction);
+    }
+
+    private void AvoidNeighbours()
+    {
+        foreach (Collider coll in Physics.OverlapSphere(transform.position, aviodanceRange, enemyLayer))
+        {
+            Vector3 dirVector = transform.position - coll.transform.position;
+
+            float force = aviodanceRange - dirVector.magnitude;
+
+            rb.AddForce(dirVector * force * 0.25f, ForceMode.Acceleration);
+        }
     }
 
     private bool IsGrounded()

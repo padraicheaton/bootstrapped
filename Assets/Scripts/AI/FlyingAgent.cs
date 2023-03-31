@@ -8,6 +8,7 @@ public class FlyingAgent : RigidbodyAgent
     [SerializeField] private float hoverHeight;
     [SerializeField] private float hoverAccel;
     [SerializeField] private float pseudoFriction;
+    [SerializeField] private LineRenderer laserLine;
 
     protected override void MovementBehaviour()
     {
@@ -31,10 +32,23 @@ public class FlyingAgent : RigidbodyAgent
         rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * pseudoFriction);
 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movementDirection), Time.deltaTime);
+
+        UpdateLaser((target.position - transform.position).magnitude < attackRange);
     }
 
     private bool ShouldMoveUpwards()
     {
         return Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, hoverHeight, groundLayer) || target.position.y > transform.position.y;
+    }
+
+    private void UpdateLaser(bool isAttacking)
+    {
+        laserLine.enabled = isAttacking;
+
+        if (isAttacking && target)
+        {
+            laserLine.SetPosition(0, transform.position);
+            laserLine.SetPosition(1, target.position);
+        }
     }
 }
