@@ -29,6 +29,7 @@ public class RigidbodyAgent : MonoBehaviour
     [SerializeField] private float gravityStrength = 2f;
     [SerializeField] private float psuedoFriction = 5f;
     [SerializeField] private float aviodanceRange = 2f;
+    [SerializeField] private float knockMultiplier = 50f;
 
     protected Rigidbody rb;
     protected Transform target;
@@ -78,6 +79,7 @@ public class RigidbodyAgent : MonoBehaviour
     protected virtual void MovementBehaviour()
     {
         Vector3 movementDirection = target.position - transform.position;
+        movementDirection.y = 0f;
         Vector3 obstacleAvoidanceForce = Vector3.zero;
 
         RaycastHit hitInfo;
@@ -118,8 +120,7 @@ public class RigidbodyAgent : MonoBehaviour
 
             if (appliedEffect is E_Knockback)
             {
-                ((E_Knockback)appliedEffect).SetMultiplier(50f);
-                Debug.Log("Enemy Knocking Player");
+                ((E_Knockback)appliedEffect).SetMultiplier(knockMultiplier);
             }
 
             appliedEffect.OnEffectApplied(hc, damage * damageMultiplier, gameObject);
