@@ -2302,7 +2302,9 @@ MonoBehaviour:
   - {fileID: 8670602774582999044, guid: b072dfbc755b17d4cb3d2f57dbe50131, type: 3}
   - {fileID: 8670602774582999044, guid: 6c5e80034b8bd5147972a29c9897a782, type: 3}
   - {fileID: 5414178551845057452, guid: 46bcb87a80b6bd5489c04156821a12b2, type: 3}
-  delayBetweenSpawning: 1
+  - {fileID: 5414178551845057452, guid: 9efc633f123718d42a98a138e0604252, type: 3}
+  - {fileID: 8670602774582999044, guid: 13705f5ed33974840af39befaf1e6ef2, type: 3}
+  delayBetweenSpawning: 3
 --- !u!1 &1113033451
 GameObject:
   m_ObjectHideFlags: 0

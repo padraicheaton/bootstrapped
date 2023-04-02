@@ -6,13 +6,14 @@ public class E_Knockback : BaseEffect
 {
     protected float damageToForceScalar = 1.75f;
     protected float forceMultiplier = 1f;
+    protected float externalMultiplier = 1f;
 
     private Vector3 accelDir = Vector3.zero;
     private Rigidbody rb;
 
     public void SetMultiplier(float multiplier)
     {
-        forceMultiplier = multiplier;
+        externalMultiplier = multiplier;
     }
 
     public override void OnEffectApplied(HealthComponent hc, float damage, GameObject projectile)
@@ -27,7 +28,7 @@ public class E_Knockback : BaseEffect
 
             Vector3 dirFromProjectileToTarget = (affectedCharacterHealth.transform.position - pointOfReference).normalized;
 
-            accelDir = (dirFromProjectileToTarget + Vector3.up * 0.1f) * knockBackForce;
+            accelDir = (dirFromProjectileToTarget + Vector3.up * 0.1f) * knockBackForce * externalMultiplier;
 
             this.rb = rb;
 

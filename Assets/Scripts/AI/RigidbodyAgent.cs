@@ -89,7 +89,7 @@ public class RigidbodyAgent : MonoBehaviour
             obstacleAvoidanceForce = Vector3.up * springStrenth * 2f;
         }
 
-        if (movementDirection.magnitude > attackRange)
+        if (movementDirection.magnitude >= attackRange)
         {
             movementDirection.Normalize();
 
@@ -116,10 +116,9 @@ public class RigidbodyAgent : MonoBehaviour
         {
             BaseEffect appliedEffect = Instantiate(effect.prefab, target).GetComponent<BaseEffect>();
 
-            Debug.Log(appliedEffect.GetType().ToString());
-
-            if (appliedEffect is E_Knockback)
+            if (appliedEffect is E_Knockback || appliedEffect.GetType().IsSubclassOf(typeof(E_Knockback)))
             {
+                Debug.Log(appliedEffect.ToString());
                 ((E_Knockback)appliedEffect).SetMultiplier(knockMultiplier);
             }
 

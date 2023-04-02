@@ -9,9 +9,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
       propertyPath: effect
       value: 
-      objectReference: {fileID: 11400000, guid: 28493dabf82f03943a9d0b02a633f791,
+      objectReference: {fileID: 11400000, guid: e47fd3c3c02dd6049b0d1203e8670029,
         type: 2}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
@@ -21,7 +26,7 @@ PrefabInstance:
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
       propertyPath: attackDelay
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
@@ -35,12 +40,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
-      propertyPath: gravityStrength
-      value: 15
+      propertyPath: aviodanceRange
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
-      propertyPath: knockMultiplier
+      propertyPath: gravityStrength
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
@@ -52,11 +57,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f2a1b954806d8a14a952ca9647b4602e, type: 2}
+      objectReference: {fileID: 2100000, guid: 4e897ee809ab6954dbc7c87b235434f6, type: 2}
+    - target: {fileID: 2107326593336357221, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e5e870f84db20044a5230c4e2a35eb4, type: 2}
+    - target: {fileID: 2730867350951849631, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e5e870f84db20044a5230c4e2a35eb4, type: 2}
     - target: {fileID: 7695279382755838191, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
       propertyPath: m_Name
-      value: Enemy_Knock
+      value: Enemy_Fire
       objectReference: {fileID: 0}
     - target: {fileID: 8070686370073691889, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
@@ -112,6 +127,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8266808982584809563, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.2501691
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60ef30c03266e574ba1ecad3eba26a2e, type: 3}

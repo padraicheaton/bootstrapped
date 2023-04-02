@@ -468,7 +468,7 @@ MonoBehaviour:
   damage: 1
   effect: {fileID: 11400000, guid: 4c1813097d6c53e46a03ce3af0d17f6d, type: 2}
   attackDelay: 1
-  attackRange: 1
+  attackRange: 1.5
   weaponDropChance: 0.75
   springStrenth: 4
   springDamper: 4
