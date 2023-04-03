@@ -115,8 +115,10 @@ public class WeaponSwapHUDController : MonoBehaviour
 
             nameTxt = GetChildComponentOfName<TextMeshProUGUI>("Weapon Name");
             modifierTxt = GetChildComponentOfName<TextMeshProUGUI>("Modifiers List");
-            ammoTxt = GetChildComponentOfName<TextMeshProUGUI>("Ammo Count");
             effectIcon = GetChildComponentOfName<Image>("Effect Icon");
+
+            // This actually represents the additive delay instead
+            ammoTxt = GetChildComponentOfName<TextMeshProUGUI>("Delay Text");
 
             Populate(weapon);
         }
@@ -133,7 +135,9 @@ public class WeaponSwapHUDController : MonoBehaviour
 
                 nameTxt.text = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetWeaponObject(dna).displayName;
                 effectIcon.sprite = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna).icon;
-                ammoTxt.text = weapon.remainingAmmo.ToString();
+
+                // This actually represents the additive delay instead
+                ammoTxt.text = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetModifierAdditiveDelay(dna).ToString();
 
                 string modifierDescription = "";
                 foreach (ProjectileModifier m in ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna))

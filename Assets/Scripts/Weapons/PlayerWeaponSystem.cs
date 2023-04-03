@@ -15,8 +15,12 @@ public class PlayerWeaponSystem : MonoBehaviour
     private List<WeaponController> weaponSlots = new List<WeaponController>();
     private int activeWeaponIndex;
 
+    private HealthComponent playerHealth;
+
     private void Start()
     {
+        playerHealth = GetComponent<HealthComponent>();
+
         activeWeaponIndex = -1;
 
         GameObject wep = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(startingWeapon, Vector3.zero);
@@ -144,5 +148,18 @@ public class PlayerWeaponSystem : MonoBehaviour
     public List<WeaponController> GetEquippedWeapons()
     {
         return weaponSlots;
+    }
+
+    public float GetHealthPercentage()
+    {
+        return playerHealth.GetHealthPercentage();
+    }
+
+    public int GetEquippedWeaponAmmo()
+    {
+        if (GetActiveWeapon() == null)
+            return -1;
+        else
+            return GetActiveWeapon().remainingAmmo;
     }
 }
