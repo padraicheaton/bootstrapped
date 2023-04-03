@@ -11,7 +11,7 @@ public class PlayerWeaponSystem : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private int[] startingWeapon;
 
-    private int weaponSlotCount = 4;
+    public int weaponSlotCount { get; private set; } = 3;
     private List<WeaponController> weaponSlots = new List<WeaponController>();
     private int activeWeaponIndex;
 
@@ -79,6 +79,8 @@ public class PlayerWeaponSystem : MonoBehaviour
         // Show weapon
         weaponSlots[newWeaponIndex].ShowWeapon(true);
         activeWeaponIndex = newWeaponIndex;
+
+        ServiceLocator.instance.GetService<WeaponSwapHUDController>().RepopulateHUD(GetEquippedWeapons(), activeWeaponIndex);
     }
 
     private void DropActiveWeapon()
@@ -92,6 +94,8 @@ public class PlayerWeaponSystem : MonoBehaviour
 
         if (weaponSlots.Count > 0 && weaponSlots[0])
             SwitchToWeaponIndex(0);
+
+        ServiceLocator.instance.GetService<WeaponSwapHUDController>().RepopulateHUD(GetEquippedWeapons(), activeWeaponIndex);
     }
 
     public void AddWeapon(GameObject weapon)
@@ -117,6 +121,9 @@ public class PlayerWeaponSystem : MonoBehaviour
         // Switch to it if first weapon picked up
         if (weaponSlots.Count == 1)
             SwitchToWeaponIndex(0);
+
+        // Update UI
+        ServiceLocator.instance.GetService<WeaponSwapHUDController>().RepopulateHUD(GetEquippedWeapons(), activeWeaponIndex);
     }
 
     private WeaponController GetActiveWeapon()
@@ -132,5 +139,10 @@ public class PlayerWeaponSystem : MonoBehaviour
     private bool HasCapacity()
     {
         return weaponSlots.Count < weaponSlotCount;
+    }
+
+    public List<WeaponController> GetEquippedWeapons()
+    {
+        return weaponSlots;
     }
 }

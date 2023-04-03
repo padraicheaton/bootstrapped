@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
+    public bool IsInteractable = true;
+
     public virtual string GetName()
     {
         return this.ToString();

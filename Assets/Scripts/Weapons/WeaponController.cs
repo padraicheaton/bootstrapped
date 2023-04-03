@@ -85,7 +85,10 @@ public class WeaponController : Interactable
         rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
 
         if (remainingAmmo <= 0)
+        {
+            IsInteractable = false;
             Destroy(gameObject, 3f);
+        }
     }
 
     public void OnFireInput(bool performed)

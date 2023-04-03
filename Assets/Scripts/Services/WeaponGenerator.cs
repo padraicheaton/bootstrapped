@@ -20,12 +20,12 @@ public class WeaponGenerator : MonoBehaviour
         weaponController.Construct(dna);
 
         // Log Weapon Data
-        string debug = $"Weapon: {weapon.displayName}, {ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna)} - ";
+        // string debug = $"Weapon: {weapon.displayName}, {ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna)} - ";
 
-        foreach (ProjectileModifier m in ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna))
-            debug += m.ToString() + ", ";
+        // foreach (ProjectileModifier m in ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna))
+        //     debug += m.ToString() + ", ";
 
-        Debug.Log(debug);
+        // Debug.Log(debug);
 
         return createdWeapon;
     }

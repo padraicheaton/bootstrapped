@@ -35,6 +35,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (hit.collider.TryGetComponent<Interactable>(out Interactable interactable))
             {
+                if (!interactable.IsInteractable) return;
+
                 interactable.OnHighlighted();
 
                 highlightedInteractable = interactable;
