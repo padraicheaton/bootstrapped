@@ -16,9 +16,7 @@ public class M_Platform : ProjectileModifier
 
         projectileComponent.MultiplyProjectileScale(new Vector3(horizontalModifier, verticalModifier, horizontalModifier));
 
-        //projectileTransform.gameObject.layer = LayerMask.NameToLayer("Ground");
-
-        //projectileComponent.onDestroyed += OnDestroyed;
+        projectileComponent.onDestroyed += OnDestroyed;
     }
 
     public override void TickModifier(float deltaTime)
@@ -28,8 +26,6 @@ public class M_Platform : ProjectileModifier
 
     private void OnDestroyed()
     {
-        projectileTransform.SetParent(null);
-
-        UnityEngine.Object.Destroy(projectileTransform.gameObject, platformLifetime);
+        ServiceLocator.instance.GetService<ProjectileHelper>().OnPlatformProjectileDestroyed(projectileTransform.gameObject, platformLifetime);
     }
 }

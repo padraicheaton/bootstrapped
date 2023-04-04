@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class E_Knockback : BaseEffect
 {
-    protected float damageToForceScalar = 5f;
+    protected float damageToForceScalar = 10f;
     protected float forceMultiplier = 1f;
     protected float externalMultiplier = 1f;
 
@@ -28,7 +28,7 @@ public class E_Knockback : BaseEffect
 
             Vector3 dirFromProjectileToTarget = (affectedCharacterHealth.transform.position - pointOfReference).normalized;
 
-            accelDir = (dirFromProjectileToTarget + Vector3.up * 0.1f) * knockBackForce * externalMultiplier;
+            accelDir = dirFromProjectileToTarget * knockBackForce * externalMultiplier;
 
             this.rb = rb;
 
@@ -41,6 +41,6 @@ public class E_Knockback : BaseEffect
 
     protected override float GetApplicationDamageMultiplier()
     {
-        return 0.25f;
+        return 0.2f;
     }
 }

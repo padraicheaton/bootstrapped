@@ -95,6 +95,9 @@ public class ModularProjectile : MonoBehaviour
 
         ExplodeEffect();
 
+        if (onDestroyed != null)
+            onDestroyed.Invoke();
+
         Destroy(gameObject);
     }
 

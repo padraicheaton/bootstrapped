@@ -125,7 +125,6 @@ public class RigidbodyAgent : MonoBehaviour
 
             if (appliedEffect is E_Knockback || appliedEffect.GetType().IsSubclassOf(typeof(E_Knockback)))
             {
-                Debug.Log(appliedEffect.ToString());
                 ((E_Knockback)appliedEffect).SetMultiplier(knockMultiplier);
             }
 
