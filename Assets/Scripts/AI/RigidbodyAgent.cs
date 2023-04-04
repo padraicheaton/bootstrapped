@@ -41,6 +41,7 @@ public class RigidbodyAgent : MonoBehaviour
     protected float movementMultiplier = 1f;
 
     private HealthComponent hc;
+    Vector3 obstacleAvoidanceForce = Vector3.zero;
 
     private void Start()
     {
@@ -80,21 +81,25 @@ public class RigidbodyAgent : MonoBehaviour
     {
         Vector3 movementDirection = target.position - transform.position;
         movementDirection.y = 0f;
-        Vector3 obstacleAvoidanceForce = Vector3.zero;
 
         RaycastHit hitInfo;
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, detectionRange, groundLayer))
         {
             // Counteract the spring force pulling the agent down
-            obstacleAvoidanceForce = Vector3.up * springStrenth * 2f;
+            obstacleAvoidanceForce = Vector3.up * springStrenth * 4f;
         }
 
         if (movementDirection.magnitude >= attackRange)
         {
             movementDirection.Normalize();
 
-            if (obstacleAvoidanceForce.y > 0)
-                movementDirection.y = obstacleAvoidanceForce.y;
+            movementDirection += obstacleAvoidanceForce;
+
+            // if (obstacleAvoidanceForce.y > 0)
+            // {
+            //     movementDirection *= 0.25f;
+            //     movementDirection.y = obstacleAvoidanceForce.y;
+            // }
 
             //rb.MovePosition(transform.position + movementDirection * (moveSpeed * movementMultiplier) * Time.deltaTime);
             if (rb.velocity.magnitude < moveSpeed)
@@ -102,6 +107,8 @@ public class RigidbodyAgent : MonoBehaviour
 
             transform.rotation = Quaternion.LookRotation(movementDirection);
         }
+
+        obstacleAvoidanceForce = Vector3.Lerp(obstacleAvoidanceForce, Vector3.zero, Time.deltaTime * 5f);
     }
 
     private void ApplyEffectToTarget()

@@ -20,7 +20,7 @@ public class E_ElectroStun : BaseEffect
 
     protected override float GetApplicationDamageMultiplier()
     {
-        return 0.5f;
+        return 0.25f;
     }
 
     private IEnumerator DelayedSetup()

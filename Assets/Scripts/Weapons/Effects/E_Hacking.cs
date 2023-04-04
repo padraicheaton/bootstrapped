@@ -46,7 +46,7 @@ public class E_Hacking : BaseEffect
     }
     protected override float GetApplicationDamageMultiplier()
     {
-        return 0.5f;
+        return 0.25f;
     }
 
     public void AddDuration(float amt)

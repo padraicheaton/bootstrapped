@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class E_Knockback : BaseEffect
 {
-    protected float damageToForceScalar = 3f;
+    protected float damageToForceScalar = 5f;
     protected float forceMultiplier = 1f;
     protected float externalMultiplier = 1f;
 
@@ -41,6 +41,6 @@ public class E_Knockback : BaseEffect
 
     protected override float GetApplicationDamageMultiplier()
     {
-        return 0.5f;
+        return 0.25f;
     }
 }
