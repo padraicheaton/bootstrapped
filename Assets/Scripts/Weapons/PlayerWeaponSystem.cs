@@ -6,6 +6,7 @@ public class PlayerWeaponSystem : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform weaponContainer;
+    [SerializeField] private Transform aimHoldPoint;
     [SerializeField] private Transform weaponFirePoint;
 
     [Header("Settings")]
@@ -50,6 +51,7 @@ public class PlayerWeaponSystem : MonoBehaviour
     {
         ServiceLocator.instance.GetService<InputManager>().OnFireButton += OnFireInput;
         ServiceLocator.instance.GetService<InputManager>().OnDropWeapon += OnDropInput;
+        ServiceLocator.instance.GetService<InputManager>().OnAimButton += OnAimInput;
     }
 
     private void OnFireInput(bool performed)
@@ -57,6 +59,17 @@ public class PlayerWeaponSystem : MonoBehaviour
         if (weaponSlots.Count > 0 && GetActiveWeapon())
         {
             GetActiveWeapon().OnFireInput(performed);
+        }
+    }
+
+    private void OnAimInput(bool performed)
+    {
+        if (GetActiveWeapon())
+        {
+            GetActiveWeapon().transform.position = performed ? aimHoldPoint.position : weaponContainer.position;
+            GetActiveWeapon().transform.rotation = performed ? aimHoldPoint.rotation : weaponContainer.rotation;
+
+            ServiceLocator.instance.GetService<PlayerCamera>().SetFOV(performed);
         }
     }
 
@@ -175,5 +188,9 @@ public class PlayerWeaponSystem : MonoBehaviour
     public void IncreaseWeaponSpace(int amt)
     {
         weaponSlotCount += amt;
+
+        ServiceLocator.instance.GetService<WeaponSwapHUDController>().RepopulateHudObjects();
+
+        ServiceLocator.instance.GetService<WeaponSwapHUDController>().RepopulateHUD(GetEquippedWeapons(), activeWeaponIndex);
     }
 }

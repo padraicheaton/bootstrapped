@@ -16,4 +16,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 35a4788775cbcdd4289f2684d006f956, type: 3}
   description: Allows you to carry another weapon for extra mayhem
   cost: 15
-  maxStacks: 1
+  maxStacks: 2

@@ -89,6 +89,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""85d263e5-301d-40e6-a4d4-8661610b78ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -234,6 +243,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""CloseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e1c1723-6c8a-4045-9a09-06dc5e8045fa"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -249,6 +269,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         m_OnFoot_SwapWeapons = m_OnFoot.FindAction("SwapWeapons", throwIfNotFound: true);
         m_OnFoot_CloseMenu = m_OnFoot.FindAction("CloseMenu", throwIfNotFound: true);
+        m_OnFoot_Aim = m_OnFoot.FindAction("Aim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +336,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Interact;
     private readonly InputAction m_OnFoot_SwapWeapons;
     private readonly InputAction m_OnFoot_CloseMenu;
+    private readonly InputAction m_OnFoot_Aim;
     public struct OnFootActions
     {
         private @PlayerControls m_Wrapper;
@@ -326,6 +348,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_OnFoot_Interact;
         public InputAction @SwapWeapons => m_Wrapper.m_OnFoot_SwapWeapons;
         public InputAction @CloseMenu => m_Wrapper.m_OnFoot_CloseMenu;
+        public InputAction @Aim => m_Wrapper.m_OnFoot_Aim;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -356,6 +379,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @CloseMenu.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnCloseMenu;
                 @CloseMenu.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnCloseMenu;
                 @CloseMenu.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnCloseMenu;
+                @Aim.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnAim;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -381,6 +407,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @CloseMenu.started += instance.OnCloseMenu;
                 @CloseMenu.performed += instance.OnCloseMenu;
                 @CloseMenu.canceled += instance.OnCloseMenu;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
             }
         }
     }
@@ -394,5 +423,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnSwapWeapons(InputAction.CallbackContext context);
         void OnCloseMenu(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
 }

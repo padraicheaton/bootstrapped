@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     public UnityAction<bool> OnInteractButton;
     public UnityAction<bool> OnDropWeapon;
     public UnityAction<bool> OnCloseMenu;
+    public UnityAction<bool> OnAimButton;
 
     private void Awake()
     {
@@ -32,6 +33,9 @@ public class InputManager : MonoBehaviour
 
         inputActions.CloseMenu.performed += ctxt => OnCloseMenu?.Invoke(true);
         inputActions.CloseMenu.canceled += ctxt => OnCloseMenu?.Invoke(false);
+
+        inputActions.Aim.performed += ctxt => OnAimButton?.Invoke(true);
+        inputActions.Aim.canceled += ctxt => OnAimButton?.Invoke(false);
     }
 
     private void OnEnable() => inputActions.Enable();

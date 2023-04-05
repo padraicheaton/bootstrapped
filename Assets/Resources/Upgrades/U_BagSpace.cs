@@ -8,7 +8,5 @@ public class U_BagSpace : PlayerModifierUpgrade
     public override void ApplyModifierToPlayer(GameObject player)
     {
         player.GetComponent<PlayerWeaponSystem>().IncreaseWeaponSpace(1);
-
-        ServiceLocator.instance.GetService<WeaponSwapHUDController>().RepopulateHudObjects();
     }
 }

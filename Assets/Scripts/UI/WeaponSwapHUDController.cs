@@ -75,8 +75,8 @@ public class WeaponSwapHUDController : MonoBehaviour
 
     public void RepopulateHudObjects()
     {
-        for (int i = 0; i < transform.childCount; i++)
-            Destroy(transform.GetChild(0).gameObject);
+        for (int i = hudObjects.Count - 1; i >= 0; i--)
+            Destroy(hudObjects[i].instance);
 
         hudObjects.Clear();
 
