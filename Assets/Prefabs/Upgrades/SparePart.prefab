@@ -63,8 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
-  pickupRange: 8
-  moveSpeed: 15
+  pickupRange: 16
+  moveSpeed: 30
   rotateSpeed: 100
 --- !u!1 &5764548990053524948
 GameObject:

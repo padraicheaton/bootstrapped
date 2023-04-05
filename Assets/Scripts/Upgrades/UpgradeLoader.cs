@@ -24,9 +24,15 @@ public static class UpgradeLoader
         Debug.Log($"Added {upgrade.displayName}");
     }
 
-    public static bool PlayerModifiersContains(PlayerModifierUpgrade upgrade)
+    public static bool HasSpaceForModifier(PlayerModifierUpgrade upgrade, int maxAmount = 1)
     {
-        return playerModifiers.Contains(upgrade);
+        int count = 0;
+
+        foreach (PlayerModifierUpgrade pMU in playerModifiers)
+            if (pMU.GetType() == upgrade.GetType())
+                count++;
+
+        return count < maxAmount;
     }
 
     public static void ApplyUpgradesToPlayer()

@@ -24,4 +24,9 @@ public class LootController : MonoBehaviour
             }
         }
     }
+
+    public void AddItemDropChance(float additiveChance)
+    {
+        itemDropChance += additiveChance;
+    }
 }

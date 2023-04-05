@@ -37,9 +37,10 @@ public class UpgradeShopItemUIEditor : ButtonEditor
         item.nameTxt = EditorGUILayout.ObjectField("Name Txt", item.nameTxt, typeof(TextMeshProUGUI), true) as TextMeshProUGUI;
         item.costTxt = EditorGUILayout.ObjectField("Cost Txt", item.costTxt, typeof(TextMeshProUGUI), true) as TextMeshProUGUI;
 
-        EditorUtility.SetDirty(item.gameObject);
-
         base.OnInspectorGUI();
+
+        if (GUI.changed)
+            EditorUtility.SetDirty(item.gameObject);
     }
 }
 

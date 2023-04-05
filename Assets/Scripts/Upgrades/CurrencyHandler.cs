@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class CurrencyHandler
 {
-    private static int spareParts = 0;
+    private static int spareParts = 20;
 
     public static void IncreaseSparePartCount(int amt)
     {

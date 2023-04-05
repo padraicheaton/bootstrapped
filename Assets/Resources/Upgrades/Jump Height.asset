@@ -9,16 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 734f60ab57118ff429f5445b12a2a0e4, type: 3}
-  m_Name: MoveSpeed
+  m_Script: {fileID: 11500000, guid: afc6a7de9c09fbe4cbd8d16dfcff56eb, type: 3}
+  m_Name: Jump Height
   m_EditorClassIdentifier: 
-  displayName: Zoomies
+  displayName: Thicc Thighs
   icon: {fileID: 21300000, guid: 117730caa55718c49bd4d0f26b5df458, type: 3}
-  description: 'Increases Movement Speed
-
-
-    ... Zoo Wee Mama ...'
+  description: Increases the diameter, surface area, circumference, girth and volume
+    of your thighs allowing you to jump higher
   cost: 5
   maxStacks: 3
-  currentStacks: 1
-  maxStacksMovementSpeed: 10
+  additiveJumpHeightBuff: 120
