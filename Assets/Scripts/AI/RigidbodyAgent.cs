@@ -79,6 +79,8 @@ public class RigidbodyAgent : MonoBehaviour
 
     protected virtual void MovementBehaviour()
     {
+        if (target == null) return;
+
         Vector3 movementDirection = target.position - transform.position;
         movementDirection.y = 0f;
 

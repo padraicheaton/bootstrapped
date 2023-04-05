@@ -54,7 +54,6 @@ public class SparePart : MonoBehaviour
     {
         //! Collect
         CurrencyHandler.IncreaseSparePartCount(value);
-        Debug.Log(CurrencyHandler.GetSparePartCount());
 
         Destroy(gameObject);
     }

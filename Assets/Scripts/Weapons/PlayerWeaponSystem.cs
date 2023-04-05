@@ -159,6 +159,11 @@ public class PlayerWeaponSystem : MonoBehaviour
         return playerHealth.GetHealthPercentage();
     }
 
+    public HealthComponent GetHealth()
+    {
+        return playerHealth;
+    }
+
     public int GetEquippedWeaponAmmo()
     {
         if (GetActiveWeapon() == null)

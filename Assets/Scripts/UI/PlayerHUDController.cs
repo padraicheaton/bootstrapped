@@ -10,6 +10,7 @@ public class PlayerHUDController : MonoBehaviour
     [SerializeField] private Image healthBarFill;
     [SerializeField] private TextMeshProUGUI remainingAmmoTxt;
     [SerializeField] private CanvasGroup remainingAmmoCG;
+    [SerializeField] private TextMeshProUGUI sparePartCountTxt;
 
     [Header("Settings")]
     [SerializeField] private float healthBarLerpSpeed;
@@ -28,5 +29,7 @@ public class PlayerHUDController : MonoBehaviour
             remainingAmmoTxt.text = remainingAmmo.ToString();
             remainingAmmoCG.alpha = Mathf.Lerp(remainingAmmoCG.alpha, 1f, Time.deltaTime * ammoAlphaSpeed);
         }
+
+        sparePartCountTxt.text = CurrencyHandler.GetSparePartCount().ToString();
     }
 }

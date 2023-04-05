@@ -20,4 +20,9 @@ public static class CurrencyHandler
     {
         return spareParts;
     }
+
+    public static bool CanAfford(int cost)
+    {
+        return cost <= spareParts;
+    }
 }
