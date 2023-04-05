@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour
 {
     private void Start()
     {
+        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == LoadedScenes.Sandbox)
+        {
+            UpgradeLoader.ApplyUpgradesToPlayer();
+        }
+
         StartCoroutine(DelayedStart());
     }
 
@@ -14,11 +19,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetHealth().onDeath += OnGameOver;
-
-        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == LoadedScenes.Sandbox)
-        {
-            UpgradeLoader.ApplyUpgradesToPlayer();
-        }
     }
 
     private void OnGameOver()

@@ -8,10 +8,21 @@ public abstract class UpgradePurchase : ScriptableObject
     public Sprite icon;
     [TextArea] public string description;
     public int cost;
+    public int maxStacks;
 
-    public abstract void OnUnlocked();
+    public bool HasCapacity()
+    {
+        return UpgradeLoader.HasSpaceForModifier(this, maxStacks);
+    }
+
+    public virtual void OnUnlocked()
+    {
+        UpgradeLoader.AddPlayerUpgrade(this);
+    }
     public virtual bool CanAfford()
     {
-        return CurrencyHandler.CanAfford(cost);
+        return CurrencyHandler.CanAfford(cost) && HasCapacity();
     }
+
+    public abstract void ApplyUpgrade();
 }

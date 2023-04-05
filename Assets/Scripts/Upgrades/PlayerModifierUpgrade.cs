@@ -4,21 +4,9 @@ using UnityEngine;
 
 public abstract class PlayerModifierUpgrade : UpgradePurchase
 {
-    public int maxStacks;
-
-    public override void OnUnlocked()
+    public override void ApplyUpgrade()
     {
-        UpgradeLoader.AddPlayerUpgrade(this);
-    }
-
-    public bool HasCapacity()
-    {
-        return UpgradeLoader.HasSpaceForModifier(this, maxStacks);
-    }
-
-    public override bool CanAfford()
-    {
-        return base.CanAfford() && HasCapacity();
+        ApplyModifierToPlayer(ServiceLocator.instance.GetService<PlayerMovement>().gameObject);
     }
 
     public abstract void ApplyModifierToPlayer(GameObject player);

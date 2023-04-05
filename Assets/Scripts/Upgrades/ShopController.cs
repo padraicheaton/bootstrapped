@@ -67,8 +67,7 @@ public class ShopController : Interactable
         {
             CurrencyHandler.DecreaseSparePartCount(focusedUpgrade.cost);
 
-            if (focusedUpgrade is PlayerModifierUpgrade || focusedUpgrade.GetType().IsSubclassOf(typeof(PlayerModifierUpgrade)))
-                UpgradeLoader.AddPlayerUpgrade(focusedUpgrade as PlayerModifierUpgrade);
+            focusedUpgrade.OnUnlocked();
 
             ShowUpgradeDetails(focusedUpgrade);
         }

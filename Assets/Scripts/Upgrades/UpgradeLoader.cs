@@ -7,7 +7,7 @@ public static class UpgradeLoader
     private static UpgradePurchase[] availableUpgrades;
 
     private static GameObject playerRef;
-    private static List<PlayerModifierUpgrade> playerModifiers = new List<PlayerModifierUpgrade>();
+    private static List<UpgradePurchase> loadedUpgrades = new List<UpgradePurchase>();
 
     public static UpgradePurchase[] GetAvailableUpgrades()
     {
@@ -17,18 +17,18 @@ public static class UpgradeLoader
         return availableUpgrades;
     }
 
-    public static void AddPlayerUpgrade(PlayerModifierUpgrade upgrade)
+    public static void AddPlayerUpgrade(UpgradePurchase upgrade)
     {
-        playerModifiers.Add(upgrade);
+        loadedUpgrades.Add(upgrade);
 
         Debug.Log($"Added {upgrade.displayName}");
     }
 
-    public static bool HasSpaceForModifier(PlayerModifierUpgrade upgrade, int maxAmount = 1)
+    public static bool HasSpaceForModifier(UpgradePurchase upgrade, int maxAmount = 1)
     {
         int count = 0;
 
-        foreach (PlayerModifierUpgrade pMU in playerModifiers)
+        foreach (UpgradePurchase pMU in loadedUpgrades)
             if (pMU.GetType() == upgrade.GetType())
                 count++;
 
@@ -40,8 +40,8 @@ public static class UpgradeLoader
         if (!playerRef)
             playerRef = ServiceLocator.instance.GetService<PlayerMovement>().gameObject;
 
-        foreach (PlayerModifierUpgrade upgrade in playerModifiers)
-            upgrade.ApplyModifierToPlayer(playerRef);
+        foreach (UpgradePurchase upgrade in loadedUpgrades)
+            upgrade.ApplyUpgrade();
     }
 
     private static T[] GetAllScriptableObjects<T>() where T : ScriptableObject

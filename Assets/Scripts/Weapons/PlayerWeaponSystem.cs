@@ -12,7 +12,7 @@ public class PlayerWeaponSystem : MonoBehaviour
     [SerializeField] private bool useStartingWeapon = true;
     [SerializeField] private int[] startingWeapon;
 
-    public int weaponSlotCount { get; private set; } = 3;
+    public int weaponSlotCount { get; private set; } = 2;
     private List<WeaponController> weaponSlots = new List<WeaponController>();
     private int activeWeaponIndex;
 
@@ -170,5 +170,10 @@ public class PlayerWeaponSystem : MonoBehaviour
             return -1;
         else
             return GetActiveWeapon().remainingAmmo;
+    }
+
+    public void IncreaseWeaponSpace(int amt)
+    {
+        weaponSlotCount += amt;
     }
 }

@@ -15,10 +15,7 @@ public class WeaponSwapHUDController : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < ServiceLocator.instance.GetService<PlayerWeaponSystem>().weaponSlotCount; i++)
-        {
-            hudObjects.Add(new WeaponHUDObject(weaponInfoPrefab, transform, null));
-        }
+        RepopulateHudObjects();
 
         cg = GetComponent<CanvasGroup>();
     }
@@ -73,6 +70,19 @@ public class WeaponSwapHUDController : MonoBehaviour
 
             if (parent)
                 hudObjects[i].SetTargetPos(parent);
+        }
+    }
+
+    public void RepopulateHudObjects()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+            Destroy(transform.GetChild(0).gameObject);
+
+        hudObjects.Clear();
+
+        for (int i = 0; i < ServiceLocator.instance.GetService<PlayerWeaponSystem>().weaponSlotCount; i++)
+        {
+            hudObjects.Add(new WeaponHUDObject(weaponInfoPrefab, transform, null));
         }
     }
 
