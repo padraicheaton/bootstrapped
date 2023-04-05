@@ -21,7 +21,7 @@ public class RigidbodyAgent : MonoBehaviour
     [SerializeField] protected EffectData effect;
     [SerializeField] protected float attackDelay;
     [SerializeField] protected float attackRange;
-    [SerializeField] protected float weaponDropChance;
+    [SerializeField] protected int itemsToDrop;
     [SerializeField] private float springStrenth = 2f;
     [SerializeField] private float springDamper = 2f;
     [SerializeField] private float rayLength = 5f;
@@ -181,8 +181,7 @@ public class RigidbodyAgent : MonoBehaviour
 
     private void OnDeath()
     {
-        if (Random.value < weaponDropChance)
-            ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(transform.position + Vector3.up * 0.5f);
+        ServiceLocator.instance.GetService<LootController>().OnEnemyDefeated(transform.position + Vector3.up, itemsToDrop);
 
         Destroy(gameObject);
     }

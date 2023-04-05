@@ -80,6 +80,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CloseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e583a8a-36cc-4253-82d7-f912304ce38a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -214,6 +223,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""SwapWeapons"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de783786-4886-4999-9482-4c72c4418f63"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -228,6 +248,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_OnFoot_Drop = m_OnFoot.FindAction("Drop", throwIfNotFound: true);
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         m_OnFoot_SwapWeapons = m_OnFoot.FindAction("SwapWeapons", throwIfNotFound: true);
+        m_OnFoot_CloseMenu = m_OnFoot.FindAction("CloseMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -293,6 +314,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Drop;
     private readonly InputAction m_OnFoot_Interact;
     private readonly InputAction m_OnFoot_SwapWeapons;
+    private readonly InputAction m_OnFoot_CloseMenu;
     public struct OnFootActions
     {
         private @PlayerControls m_Wrapper;
@@ -303,6 +325,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Drop => m_Wrapper.m_OnFoot_Drop;
         public InputAction @Interact => m_Wrapper.m_OnFoot_Interact;
         public InputAction @SwapWeapons => m_Wrapper.m_OnFoot_SwapWeapons;
+        public InputAction @CloseMenu => m_Wrapper.m_OnFoot_CloseMenu;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,6 +353,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SwapWeapons.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnSwapWeapons;
                 @SwapWeapons.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnSwapWeapons;
                 @SwapWeapons.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnSwapWeapons;
+                @CloseMenu.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnCloseMenu;
+                @CloseMenu.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnCloseMenu;
+                @CloseMenu.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnCloseMenu;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -352,6 +378,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SwapWeapons.started += instance.OnSwapWeapons;
                 @SwapWeapons.performed += instance.OnSwapWeapons;
                 @SwapWeapons.canceled += instance.OnSwapWeapons;
+                @CloseMenu.started += instance.OnCloseMenu;
+                @CloseMenu.performed += instance.OnCloseMenu;
+                @CloseMenu.canceled += instance.OnCloseMenu;
             }
         }
     }
@@ -364,5 +393,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnDrop(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnSwapWeapons(InputAction.CallbackContext context);
+        void OnCloseMenu(InputAction.CallbackContext context);
     }
 }

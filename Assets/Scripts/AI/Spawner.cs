@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
+
     [Header("Settings")]
     [SerializeField] private List<GameObject> objsToSpawn = new List<GameObject>();
     [SerializeField] private float delayBetweenSpawning;
@@ -19,7 +22,20 @@ public class Spawner : MonoBehaviour
         {
             yield return new WaitForSeconds(delayBetweenSpawning);
 
-            Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Count)], transform.position, Quaternion.identity);
+            Vector3 spawnPoint = transform.position;
+
+            if (spawnPoints.Count > 0)
+                spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
+
+            Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Count)], spawnPoint, Quaternion.identity);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        foreach (Transform p in spawnPoints)
+            Gizmos.DrawSphere(p.position, 1f);
     }
 }

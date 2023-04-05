@@ -9,6 +9,7 @@ public class PlayerWeaponSystem : MonoBehaviour
     [SerializeField] private Transform weaponFirePoint;
 
     [Header("Settings")]
+    [SerializeField] private bool useStartingWeapon = true;
     [SerializeField] private int[] startingWeapon;
 
     public int weaponSlotCount { get; private set; } = 3;
@@ -23,11 +24,14 @@ public class PlayerWeaponSystem : MonoBehaviour
 
         activeWeaponIndex = -1;
 
-        GameObject wep = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(startingWeapon, Vector3.zero);
+        if (useStartingWeapon)
+        {
+            GameObject wep = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(startingWeapon, Vector3.zero);
 
-        AddWeapon(wep);
+            AddWeapon(wep);
 
-        SwitchToWeaponIndex(0);
+            SwitchToWeaponIndex(0);
+        }
 
         SetupControls();
     }

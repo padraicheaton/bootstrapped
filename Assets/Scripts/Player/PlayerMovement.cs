@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // Feature Switches
+    public bool CanMove = true;
 
     //Assingables
     public Transform playerCam;
@@ -64,13 +66,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Movement();
+        if (CanMove)
+            Movement();
     }
 
     private void Update()
     {
-        MyInput();
-        Look();
+        if (CanMove)
+        {
+            MyInput();
+            Look();
+        }
     }
 
     /// <summary>
