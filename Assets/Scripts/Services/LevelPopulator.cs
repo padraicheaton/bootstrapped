@@ -55,7 +55,11 @@ public class LevelPopulator : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            Instantiate(obj, points[Random.Range(0, points.Count)], Quaternion.identity);
+            int choice = Random.Range(0, points.Count);
+
+            Instantiate(obj, points[choice], Quaternion.identity);
+
+            points.RemoveAt(choice);
         }
     }
 
