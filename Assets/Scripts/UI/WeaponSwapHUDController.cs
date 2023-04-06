@@ -15,8 +15,6 @@ public class WeaponSwapHUDController : MonoBehaviour
 
     private void Start()
     {
-        RepopulateHudObjects();
-
         cg = GetComponent<CanvasGroup>();
     }
 
@@ -28,6 +26,9 @@ public class WeaponSwapHUDController : MonoBehaviour
 
     public void RepopulateHUD(List<WeaponController> weapons, int activeWeaponIndex)
     {
+        if (hudObjects.Count < weapons.Count)
+            RepopulateHudObjects();
+
         foreach (WeaponHUDObject hudObj in hudObjects)
             hudObj.Populate(null);
 
@@ -75,6 +76,8 @@ public class WeaponSwapHUDController : MonoBehaviour
 
     public void RepopulateHudObjects()
     {
+        Debug.Log("Repopulating!s");
+
         for (int i = hudObjects.Count - 1; i >= 0; i--)
             Destroy(hudObjects[i].instance);
 

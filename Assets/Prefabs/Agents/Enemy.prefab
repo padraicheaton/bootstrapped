@@ -462,10 +462,10 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  moveSpeed: 4
+  moveSpeed: 6
   detectionRange: 0.75
   targetSearchRadius: 30
-  damage: 5
+  damage: 8
   effect: {fileID: 11400000, guid: 4c1813097d6c53e46a03ce3af0d17f6d, type: 2}
   attackDelay: 1
   attackRange: 1.5
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
   damageTakenMultiplier: 1
-  maximumHealth: 20
+  maximumHealth: 40
   currentHealth: 0
 --- !u!54 &4396231814901720781
 Rigidbody:

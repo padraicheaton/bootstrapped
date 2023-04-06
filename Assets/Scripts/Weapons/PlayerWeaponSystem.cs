@@ -194,9 +194,5 @@ public class PlayerWeaponSystem : MonoBehaviour
     public void IncreaseWeaponSpace(int amt)
     {
         weaponSlotCount += amt;
-
-        ServiceLocator.instance.GetService<WeaponSwapHUDController>().RepopulateHudObjects();
-
-        ServiceLocator.instance.GetService<WeaponSwapHUDController>().RepopulateHUD(GetEquippedWeapons(), activeWeaponIndex);
     }
 }
