@@ -167,6 +167,12 @@ public class PlayerWeaponSystem : MonoBehaviour
         return weaponSlots;
     }
 
+    public void ReloadEquippedWeapon()
+    {
+        if (GetActiveWeapon())
+            GetActiveWeapon().ReloadWeapon();
+    }
+
     public float GetHealthPercentage()
     {
         return playerHealth.GetHealthPercentage();

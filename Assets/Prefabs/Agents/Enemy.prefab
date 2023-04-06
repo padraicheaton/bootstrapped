@@ -465,7 +465,7 @@ MonoBehaviour:
   moveSpeed: 4
   detectionRange: 0.75
   targetSearchRadius: 30
-  damage: 1
+  damage: 5
   effect: {fileID: 11400000, guid: 4c1813097d6c53e46a03ce3af0d17f6d, type: 2}
   attackDelay: 1
   attackRange: 1.5

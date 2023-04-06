@@ -128,4 +128,9 @@ public class WeaponController : Interactable
 
         visuals.gameObject.SetActive(shown);
     }
+
+    public void ReloadWeapon()
+    {
+        remainingAmmo = clipSize;
+    }
 }
