@@ -9,6 +9,7 @@ public class ShopController : Interactable
     [Header("References")]
     [SerializeField] private ModalWindow shopModal;
     [SerializeField] private Transform upgradeListContainer;
+    [SerializeField] private Transform stackPipContainer;
     [SerializeField] private GameObject upgradeShopItemPrefab;
 
     [Header("Item Details Panel Refs")]
@@ -58,6 +59,27 @@ public class ShopController : Interactable
             costTxt.text = upgrade.cost.ToString();
 
             purchaseBtn.interactable = upgrade.CanAfford();
+
+            // Show Stack Pips
+            if (stackPipContainer.childCount != upgrade.maxStacks)
+            {
+                for (int i = stackPipContainer.childCount - 1; i > 0; i--)
+                {
+                    Destroy(stackPipContainer.GetChild(i).gameObject);
+                }
+
+                for (int i = 1; i < upgrade.maxStacks; i++)
+                {
+                    Instantiate(stackPipContainer.GetChild(0).gameObject, stackPipContainer);
+                }
+            }
+
+            for (int i = 0; i < stackPipContainer.childCount; i++)
+            {
+                Image img = stackPipContainer.GetChild(i).GetComponent<Image>();
+
+                img.color = UpgradeLoader.GetAmountOfUpgrades(upgrade) > i ? Color.yellow : Color.grey;
+            }
         }
     }
 

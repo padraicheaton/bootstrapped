@@ -940,7 +940,7 @@ Transform:
   - {fileID: 307454243}
   - {fileID: 1194206278}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &357561358
 GameObject:
@@ -2115,7 +2115,8 @@ MonoBehaviour:
   - {fileID: 5414178551845057452, guid: 46bcb87a80b6bd5489c04156821a12b2, type: 3}
   - {fileID: 5414178551845057452, guid: 9efc633f123718d42a98a138e0604252, type: 3}
   - {fileID: 8670602774582999044, guid: 13705f5ed33974840af39befaf1e6ef2, type: 3}
-  delayBetweenSpawning: 3.5
+  delayBetweenSpawning: 8
+  delayDecayRate: 0.15
 --- !u!114 &1075283875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4154,7 +4155,7 @@ PrefabInstance:
     - target: {fileID: 6256144006217171361, guid: 1203fc341c28d724da60354db8b11748,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6256144006217171361, guid: 1203fc341c28d724da60354db8b11748,
         type: 3}

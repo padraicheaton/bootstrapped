@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private List<GameObject> objsToSpawn = new List<GameObject>();
     [SerializeField] private float delayBetweenSpawning;
+    [SerializeField] private float delayDecayRate;
 
     private void Start()
     {
@@ -28,6 +29,11 @@ public class Spawner : MonoBehaviour
                 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
 
             Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Count)], spawnPoint, Quaternion.identity);
+
+            if (delayBetweenSpawning > 1)
+            {
+                delayBetweenSpawning -= 0.01f * delayDecayRate;
+            }
         }
     }
 

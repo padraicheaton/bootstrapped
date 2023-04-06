@@ -26,13 +26,18 @@ public static class UpgradeLoader
 
     public static bool HasSpaceForModifier(UpgradePurchase upgrade, int maxAmount = 1)
     {
+        return GetAmountOfUpgrades(upgrade) < maxAmount;
+    }
+
+    public static int GetAmountOfUpgrades(UpgradePurchase upgrade)
+    {
         int count = 0;
 
         foreach (UpgradePurchase pMU in loadedUpgrades)
             if (pMU.GetType() == upgrade.GetType())
                 count++;
 
-        return count < maxAmount;
+        return count;
     }
 
     public static void ApplyUpgradesToPlayer()
