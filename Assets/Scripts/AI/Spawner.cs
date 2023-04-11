@@ -9,32 +9,58 @@ public class Spawner : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private List<GameObject> objsToSpawn = new List<GameObject>();
-    [SerializeField] private float delayBetweenSpawning;
-    [SerializeField] private float delayDecayRate;
+    [SerializeField] private float trickleSpawnDelay;
+    [SerializeField] private float swarmSpawnDelay;
+    [SerializeField] private int swarmEnemyCount;
+    [SerializeField] private float delayBetweenSwarms;
+
+    [Header("Difficulty Settings")]
+    [SerializeField] private float swarmDelayAdditiveReduction;
+    [SerializeField] private int swarmCountAdditiveIncrease;
 
     private void Start()
     {
-        StartCoroutine(SpawnRoutine());
+        StartCoroutine(TrickleSpawnRoutine());
+        StartCoroutine(SwarmSpawnRoutine());
     }
 
-    private IEnumerator SpawnRoutine()
+    private IEnumerator TrickleSpawnRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(delayBetweenSpawning);
+            yield return new WaitForSeconds(trickleSpawnDelay);
 
-            Vector3 spawnPoint = transform.position;
-
-            if (spawnPoints.Count > 0)
-                spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
-
-            Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Count)], spawnPoint, Quaternion.identity);
-
-            if (delayBetweenSpawning > 1)
-            {
-                delayBetweenSpawning -= 0.01f * delayDecayRate;
-            }
+            SpawnEnemy();
         }
+    }
+
+    private IEnumerator SwarmSpawnRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(delayBetweenSwarms);
+
+            for (int i = 0; i < swarmEnemyCount; i++)
+            {
+                yield return new WaitForSeconds(swarmSpawnDelay);
+
+                SpawnEnemy();
+            }
+
+            // Increase difficulty each swarm
+            swarmEnemyCount += swarmCountAdditiveIncrease;
+            delayBetweenSwarms -= swarmDelayAdditiveReduction;
+        }
+    }
+
+    private void SpawnEnemy()
+    {
+        Vector3 spawnPoint = transform.position;
+
+        if (spawnPoints.Count > 0)
+            spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
+
+        Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Count)], spawnPoint, Quaternion.identity);
     }
 
     private void OnDrawGizmos()

@@ -44,7 +44,8 @@ public class E_ElectroStun : BaseEffect
         {
             agentController = affectedCharacterHealth.GetComponent<RigidbodyAgent>();
 
-            agentController.SetCanMove(false);
+            if (agentController)
+                agentController.SetCanMove(false);
 
             StartCoroutine(RevertAfterDelay());
         }
@@ -64,7 +65,8 @@ public class E_ElectroStun : BaseEffect
             yield return null;
         }
 
-        agentController.SetCanMove(true);
+        if (agentController)
+            agentController.SetCanMove(true);
 
         Destroy(gameObject);
     }

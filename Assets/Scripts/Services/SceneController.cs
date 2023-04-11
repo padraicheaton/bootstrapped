@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public enum LoadedScenes
 {
+    MainMenu,
     Lab,
-    Sandbox
+    Sandbox,
+    Tutorial
 }
 
 public class SceneController : MonoBehaviour

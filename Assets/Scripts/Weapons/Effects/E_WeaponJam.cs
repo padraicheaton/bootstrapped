@@ -45,7 +45,8 @@ public class E_WeaponJam : BaseEffect
         {
             agentController = affectedCharacterHealth.GetComponent<RigidbodyAgent>();
 
-            agentController.AlterDamage(agentDamageMultiplier);
+            if (agentController)
+                agentController.AlterDamage(agentDamageMultiplier);
 
             StartCoroutine(RevertAfterDelay());
         }
@@ -67,7 +68,8 @@ public class E_WeaponJam : BaseEffect
             yield return null;
         }
 
-        agentController.ResetDamageMultiplier();
+        if (agentController)
+            agentController.ResetDamageMultiplier();
 
         Destroy(gameObject);
     }

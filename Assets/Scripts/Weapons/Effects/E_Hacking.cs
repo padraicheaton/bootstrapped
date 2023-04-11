@@ -39,7 +39,8 @@ public class E_Hacking : BaseEffect
         {
             agentController = affectedCharacterHealth.GetComponent<RigidbodyAgent>();
 
-            agentController.SetAllegiance(RigidbodyAgent.Allegiance.Player);
+            if (agentController)
+                agentController.SetAllegiance(RigidbodyAgent.Allegiance.Player);
 
             StartCoroutine(RevertAfterDelay());
         }
@@ -63,7 +64,8 @@ public class E_Hacking : BaseEffect
             yield return null;
         }
 
-        agentController.SetAllegiance(RigidbodyAgent.Allegiance.Enemy);
+        if (agentController)
+            agentController.SetAllegiance(RigidbodyAgent.Allegiance.Enemy);
 
         Destroy(gameObject);
     }

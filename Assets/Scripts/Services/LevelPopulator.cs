@@ -26,15 +26,18 @@ public class LevelPopulator : MonoBehaviour
 
     private void CalculatePoints()
     {
-        for (int x = -levelDimensions.x / 2 + pointIncrement; x < levelDimensions.x / 2; x += pointIncrement)
+        float offset = (float)pointIncrement / 2f;
+
+        for (float x = -levelDimensions.x / 2 + offset; x < levelDimensions.x / 2 - offset; x += pointIncrement)
         {
-            for (int z = -levelDimensions.y / 2 + pointIncrement; z < levelDimensions.y / 2; z += pointIncrement)
+            for (float z = -levelDimensions.y / 2 + offset; z < levelDimensions.y / 2 - offset; z += pointIncrement)
             {
                 Vector3 rayOrigin = new Vector3(x, 1000, z);
 
                 if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit))
                 {
-                    points.Add(hit.point);
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                        points.Add(hit.point);
                 }
             }
         }
@@ -71,6 +74,6 @@ public class LevelPopulator : MonoBehaviour
         }
 
         foreach (Vector3 p in points)
-            Gizmos.DrawSphere(p, 0.25f);
+            Gizmos.DrawSphere(p, 0.51f);
     }
 }

@@ -18,7 +18,8 @@ public class E_IceSlow : BaseEffect
 
         agentController = affectedCharacterHealth.GetComponent<RigidbodyAgent>();
 
-        agentController.MultiplyMovementSpeed(movementSpeedMultiplier);
+        if (agentController)
+            agentController.MultiplyMovementSpeed(movementSpeedMultiplier);
 
         StartCoroutine(RevertAfterDelay());
     }
@@ -37,7 +38,8 @@ public class E_IceSlow : BaseEffect
             yield return null;
         }
 
-        agentController.DivideMovementSpeed(movementSpeedMultiplier);
+        if (agentController)
+            agentController.DivideMovementSpeed(movementSpeedMultiplier);
 
         Destroy(gameObject);
     }
