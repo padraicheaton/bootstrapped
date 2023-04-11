@@ -17,5 +17,5 @@ MonoBehaviour:
   description: Increases the diameter, surface area, circumference, girth and volume
     of your thighs allowing you to jump higher
   cost: 5
-  maxStacks: 3
-  additiveJumpHeightBuff: 120
+  maxStacks: 5
+  additiveJumpHeightBuff: 65

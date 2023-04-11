@@ -19,5 +19,5 @@ MonoBehaviour:
 
     ... Zoo Wee Mama ...'
   cost: 5
-  maxStacks: 3
-  additiveSpeedBuff: 5
+  maxStacks: 5
+  additiveSpeedBuff: 3

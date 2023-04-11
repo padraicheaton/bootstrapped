@@ -2762,7 +2762,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCounterMovement: 0.175
   airCounterMovement: 0.01
-  maxSlopeAngle: 35
+  maxSlopeAngle: 55
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 450
