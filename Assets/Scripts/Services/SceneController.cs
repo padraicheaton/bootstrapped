@@ -13,13 +13,41 @@ public enum LoadedScenes
 
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] private CanvasGroup loadingScreen;
+
+    private void Start()
+    {
+        loadingScreen.alpha = 0f;
+    }
+
     public void SwitchSceneTo(LoadedScenes scene)
     {
-        SceneManager.LoadScene((int)scene);
+        StartCoroutine(BloatLoadScene(scene));
     }
 
     public LoadedScenes GetActiveScene()
     {
         return (LoadedScenes)SceneManager.GetActiveScene().buildIndex;
+    }
+
+    private IEnumerator BloatLoadScene(LoadedScenes scene)
+    {
+        while (loadingScreen.alpha < 1f)
+        {
+            loadingScreen.alpha += Time.deltaTime * 2f;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene((int)scene);
+
+        yield return new WaitForSeconds(0.5f);
+
+        while (loadingScreen.alpha > 0f)
+        {
+            loadingScreen.alpha -= Time.deltaTime * 2f;
+            yield return null;
+        }
     }
 }

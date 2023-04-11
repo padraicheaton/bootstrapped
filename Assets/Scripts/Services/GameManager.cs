@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetHealth().onDeath += OnGameOver;
+        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.MainMenu)
+            ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetHealth().onDeath += OnGameOver;
     }
 
     private void OnGameOver()

@@ -30,12 +30,13 @@ public class ModalWindow : MonoBehaviour
         cg.alpha = visible ? 1f : 0f;
         cg.interactable = cg.blocksRaycasts = visible;
 
-        if (ServiceLocator.instance.GetService<PlayerMovement>())
-        {
-            ServiceLocator.instance.GetService<PlayerMovement>().CanMove = !restrictPlayerMovement;
+        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.MainMenu)
+            if (ServiceLocator.instance.GetService<PlayerMovement>())
+            {
+                ServiceLocator.instance.GetService<PlayerMovement>().CanMove = !restrictPlayerMovement;
 
-            Cursor.visible = restrictPlayerMovement;
-            Cursor.lockState = restrictPlayerMovement ? CursorLockMode.None : CursorLockMode.Locked;
-        }
+                Cursor.visible = restrictPlayerMovement;
+                Cursor.lockState = restrictPlayerMovement ? CursorLockMode.None : CursorLockMode.Locked;
+            }
     }
 }
