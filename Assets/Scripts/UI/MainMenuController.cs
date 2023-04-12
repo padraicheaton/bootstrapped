@@ -32,7 +32,9 @@ public class MainMenuController : MonoBehaviour
     public void PlayBtnPressed()
     {
         // ! Implement a switch here so that it only loads the tutorial when its incomplete
-        ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(LoadedScenes.Tutorial);
+        bool hasCompletedTutorial = SaveStateController.GetData<bool>(SaveStateController.tutorialCompleteSaveKey);
+
+        ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(hasCompletedTutorial ? LoadedScenes.Lab : LoadedScenes.Tutorial);
     }
 
     public void SettingsBtnPressed()

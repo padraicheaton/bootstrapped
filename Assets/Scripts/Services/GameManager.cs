@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private void Awake()
+    {
+        // Load the currency
+        SaveStateController.LoadSaveData();
+
+        CurrencyHandler.Setup();
+    }
+
     private void Start()
     {
         if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == LoadedScenes.Sandbox)
