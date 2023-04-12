@@ -39284,9 +39284,9 @@ MonoBehaviour:
   - {fileID: 5414178551845057452, guid: 9efc633f123718d42a98a138e0604252, type: 3}
   - {fileID: 8670602774582999044, guid: 13705f5ed33974840af39befaf1e6ef2, type: 3}
   - {fileID: 8670602774582999044, guid: 356709c1319201e4486789d735bef56d, type: 3}
-  trickleSpawnDelay: 5
-  swarmSpawnDelay: 0.5
-  swarmEnemyCount: 5
+  trickleSpawnDelay: 12
+  swarmSpawnDelay: 1
+  swarmEnemyCount: 10
   delayBetweenSwarms: 120
   swarmDelayAdditiveReduction: 5
   swarmCountAdditiveIncrease: 2
@@ -73827,6 +73827,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256144007111590488, guid: 1203fc341c28d724da60354db8b11748,
+        type: 3}
+      propertyPath: damageTakenMultiplier
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1203fc341c28d724da60354db8b11748, type: 3}

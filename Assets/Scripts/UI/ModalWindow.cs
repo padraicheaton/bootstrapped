@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class ModalWindow : MonoBehaviour
 {
     private CanvasGroup cg;
+    private float destAlpha;
 
     private void Start()
     {
         cg = GetComponent<CanvasGroup>();
 
-        ServiceLocator.instance.GetService<InputManager>().OnCloseMenu += performed => SetVisibility(false);
+        ServiceLocator.instance.GetService<InputManager>().OnCloseMenu += OnCloseMenuInput;
 
         foreach (Button btn in GetComponentsInChildren<Button>())
         {
@@ -25,9 +26,24 @@ public class ModalWindow : MonoBehaviour
         SetVisibility(false);
     }
 
+    private void OnCloseMenuInput(bool performed)
+    {
+        SetVisibility(false);
+    }
+
+    private void Update()
+    {
+        cg.alpha = Mathf.Lerp(cg.alpha, destAlpha, Time.deltaTime * 20f);
+    }
+
+    private void OnDestroy()
+    {
+        ServiceLocator.instance.GetService<InputManager>().OnCloseMenu -= OnCloseMenuInput;
+    }
+
     public void SetVisibility(bool visible, bool restrictPlayerMovement = false)
     {
-        cg.alpha = visible ? 1f : 0f;
+        destAlpha = visible ? 1f : 0f;
         cg.interactable = cg.blocksRaycasts = visible;
 
         if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.MainMenu)

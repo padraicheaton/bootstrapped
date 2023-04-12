@@ -11,6 +11,9 @@ public class ServiceLocator : Singleton<ServiceLocator>
     {
         SingletonBuilder(this);
         serviceReferences = new Dictionary<Type, MonoBehaviour>();
+
+        foreach (MonoBehaviour component in GetComponents<MonoBehaviour>())
+            serviceReferences.Add(component.GetType(), component);
     }
 
     public T GetService<T>() where T : MonoBehaviour, new()
@@ -25,6 +28,15 @@ public class ServiceLocator : Singleton<ServiceLocator>
 
         UnityEngine.Assertions.Assert.IsTrue(serviceReferences.ContainsKey(typeof(T)), "Could not find service: " + typeof(T));
         var service = (T)serviceReferences[typeof(T)];
+
+        if (service == null)
+        {
+            serviceReferences.Remove(typeof(T));
+            serviceReferences.Add(typeof(T), FindObjectOfType<T>());
+
+            service = (T)serviceReferences[typeof(T)];
+        }
+
         UnityEngine.Assertions.Assert.IsNotNull(service, typeof(T).ToString() + " could not be found.");
         return service;
     }

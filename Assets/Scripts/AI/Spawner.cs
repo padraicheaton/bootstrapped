@@ -18,6 +18,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float swarmDelayAdditiveReduction;
     [SerializeField] private int swarmCountAdditiveIncrease;
 
+    private List<GameObject> swarmEnemies = new List<GameObject>();
+
     private void Start()
     {
         StartCoroutine(TrickleSpawnRoutine());
@@ -40,12 +42,24 @@ public class Spawner : MonoBehaviour
         {
             yield return new WaitForSeconds(delayBetweenSwarms);
 
+            ServiceLocator.instance.GetService<SoundController>().SetSwarmBackgroundMusic(true);
+
             for (int i = 0; i < swarmEnemyCount; i++)
             {
                 yield return new WaitForSeconds(swarmSpawnDelay);
 
-                SpawnEnemy();
+                swarmEnemies.Add(SpawnEnemy());
             }
+
+            // Wait while there are still remaining swarm enemies
+            while (swarmEnemies.Count > 0)
+            {
+                yield return null;
+
+                swarmEnemies.RemoveAll(enemy => enemy == null);
+            }
+
+            ServiceLocator.instance.GetService<SoundController>().SetSwarmBackgroundMusic(false);
 
             // Increase difficulty each swarm
             swarmEnemyCount += swarmCountAdditiveIncrease;
@@ -53,14 +67,14 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy()
+    private GameObject SpawnEnemy()
     {
         Vector3 spawnPoint = transform.position;
 
         if (spawnPoints.Count > 0)
             spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
 
-        Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Count)], spawnPoint, Quaternion.identity);
+        return Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Count)], spawnPoint, Quaternion.identity);
     }
 
     private void OnDrawGizmos()

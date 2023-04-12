@@ -18,6 +18,16 @@ public class SceneController : MonoBehaviour
     private void Start()
     {
         loadingScreen.alpha = 0f;
+
+        ServiceLocator.instance.GetService<SoundController>().SwitchBackgroundMusic(GetActiveScene());
+
+        if (ServiceLocator.instance.GetService<SceneController>() != this)
+        {
+            // Already exists
+            Destroy(gameObject);
+        }
+        else
+            DontDestroyOnLoad(gameObject);
     }
 
     public void SwitchSceneTo(LoadedScenes scene)
@@ -41,6 +51,8 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene((int)scene);
+
+        ServiceLocator.instance.GetService<SoundController>().SwitchBackgroundMusic(scene);
 
         yield return new WaitForSeconds(0.5f);
 
