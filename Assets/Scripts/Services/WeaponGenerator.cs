@@ -4,9 +4,36 @@ using UnityEngine;
 
 public class WeaponGenerator : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField][Range(0f, 1f)] private float noveltyChance;
+    [SerializeField] private bool shouldIncrementNovelty;
+    [SerializeField] private float noveltyChanceIncrement;
+    [SerializeField][Range(0f, 1f)] private float mutationChance;
+
+    private float cachedNoveltyChance;
+
+    private void Start()
+    {
+        cachedNoveltyChance = noveltyChance;
+    }
+
     public GameObject GenerateWeapon(Vector3 spawnPoint)
     {
-        return GenerateWeapon(ServiceLocator.instance.GetService<WeaponComponentProvider>().GetRandomDNA(), spawnPoint);
+        if (Random.value < noveltyChance)
+        {
+            // Reset the novelty chance back to default
+            noveltyChance = cachedNoveltyChance;
+
+            return GenerateWeapon(EvolutionAlgorithms.Randomised(), spawnPoint);
+        }
+        else
+        {
+            // Increment the novelty chance if switched on
+            if (shouldIncrementNovelty)
+                noveltyChance += noveltyChanceIncrement;
+
+            return GenerateWeapon(EvolutionAlgorithms.Crossover(mutationChance), spawnPoint);
+        }
     }
 
     public GameObject GenerateWeapon(int[] dna, Vector3 spawnPoint)
@@ -18,14 +45,6 @@ public class WeaponGenerator : MonoBehaviour
         WeaponController weaponController = createdWeapon.GetComponent<WeaponController>();
 
         weaponController.Construct(dna);
-
-        // Log Weapon Data
-        // string debug = $"Weapon: {weapon.displayName}, {ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna)} - ";
-
-        // foreach (ProjectileModifier m in ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna))
-        //     debug += m.ToString() + ", ";
-
-        // Debug.Log(debug);
 
         return createdWeapon;
     }

@@ -655,6 +655,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38995cd1a50930e42bf4f25a57db6a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noveltyChance: 0
+  shouldIncrementNovelty: 0
+  noveltyChanceIncrement: 0
+  mutationChance: 0.2
 --- !u!114 &1529408714943121493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,7 +717,7 @@ MonoBehaviour:
     volume: 0.1
   - clip: {fileID: 8300000, guid: dde6e2622eaedd3428d1d42aeacb2426, type: 3}
     scene: 0
-    volume: 0.1
+    volume: 0.5
   - clip: {fileID: 8300000, guid: 2429be08c6314dd45919ff8bad85ea94, type: 3}
     scene: 3
     volume: 0.5

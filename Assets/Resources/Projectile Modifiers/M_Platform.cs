@@ -8,7 +8,7 @@ public class M_Platform : ProjectileModifier
     private float horizontalModifier = 4f;
     private float verticalModifier = 0.2f;
 
-    private float platformLifetime = 30f;
+    private float platformLifetime = 15f;
 
     public override void OnModifierApplied()
     {

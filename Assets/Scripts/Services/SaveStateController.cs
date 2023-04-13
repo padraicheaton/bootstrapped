@@ -14,6 +14,11 @@ public static class SaveStateController
         return Path.Combine(Application.persistentDataPath, "config.json");
     }
 
+    private static string GetWeaponDataFilePath()
+    {
+        return Path.Combine(Application.persistentDataPath, "data.json");
+    }
+
     public static void LoadSaveData()
     {
         if (File.Exists(GetFilePath()))
@@ -21,6 +26,12 @@ public static class SaveStateController
             string jsonString = File.ReadAllText(GetFilePath());
             saveData = FromJsonToDictionary(jsonString);
         }
+        else
+            Debug.Log("File does not exist");
+
+        Debug.Log(saveData);
+
+        LoadEvolutionaryData();
     }
 
     public static void ClearSaveData()
@@ -33,6 +44,25 @@ public static class SaveStateController
     {
         string jsonString = ToJson(saveData);
         File.WriteAllText(GetFilePath(), jsonString);
+
+        SaveEvolutionaryDataToFile();
+
+        Debug.LogWarning("Saved Data");
+    }
+
+    public static void SaveEvolutionaryDataToFile()
+    {
+        string jsonString = JsonHelper.ToJson(WeaponDataCollector.GetEvolutionaryData());
+        File.WriteAllText(GetWeaponDataFilePath(), jsonString);
+    }
+
+    private static void LoadEvolutionaryData()
+    {
+        if (File.Exists(GetWeaponDataFilePath()))
+        {
+            string jsonString = File.ReadAllText(GetWeaponDataFilePath());
+            WeaponDataCollector.LoadEvolutionaryData(JsonHelper.FromJson<EvolutionaryData>(jsonString));
+        }
     }
 
     public static void SetData(string key, object value)
@@ -47,8 +77,6 @@ public static class SaveStateController
         {
             try
             {
-                Debug.Log(key);
-                Debug.Log(saveData[key]);
                 return (T)System.Convert.ChangeType(saveData[key], typeof(T));
             }
             catch
@@ -57,11 +85,6 @@ public static class SaveStateController
             }
         }
         return default(T);
-    }
-
-    private static void OnApplicationQuit()
-    {
-        SaveDataToFile();
     }
 
     private static void OnApplicationPause(bool pauseStatus)
@@ -89,12 +112,10 @@ public static class SaveStateController
 
     private static Dictionary<string, string> FromJsonToDictionary(string jsonString)
     {
-        Debug.Log(jsonString);
         jsonString = jsonString.Substring(1, jsonString.Length - 2);
-        Debug.Log(jsonString);
 
         // This is the case if there is no save data
-        if (jsonString.Length == 0) return null;
+        if (jsonString.Length == 0) return new Dictionary<string, string>();
 
         Dictionary<string, string> temp = new Dictionary<string, string>();
 

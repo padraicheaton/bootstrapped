@@ -94,14 +94,41 @@ public class WeaponComponentProvider : MonoBehaviour
     {
         List<int> randomGenome = new List<int>();
 
-        randomGenome.Add(Random.Range(0, weapons.Length));
-        randomGenome.Add(Random.Range(0, effects.Length));
-        randomGenome.Add(Random.Range(0, modifierAdditiveDelays.Length));
-        randomGenome.Add(Random.Range(0, modifierCountOptions.Length));
+        // randomGenome.Add(Random.Range(0, weapons.Length));
+        // randomGenome.Add(Random.Range(0, effects.Length));
+        // randomGenome.Add(Random.Range(0, modifierAdditiveDelays.Length));
+        // randomGenome.Add(Random.Range(0, modifierCountOptions.Length));
+
+        for (int i = 0; i < 4; i++)
+        {
+            randomGenome.Add(GetRandomDiscreteAllele(i));
+        }
 
         for (int i = 0; i < GetModiferCountOption(randomGenome.ToArray()); i++)
-            randomGenome.Add(Random.Range(0, modifiers.Length));
+            randomGenome.Add(GetRandomModifier());
 
         return randomGenome.ToArray();
+    }
+
+    public int GetRandomDiscreteAllele(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return Random.Range(0, weapons.Length);
+            case 1:
+                return Random.Range(0, effects.Length);
+            case 2:
+                return Random.Range(0, modifierAdditiveDelays.Length);
+            case 3:
+                return Random.Range(0, modifierCountOptions.Length);
+            default:
+                return 0;
+        }
+    }
+
+    public int GetRandomModifier()
+    {
+        return Random.Range(0, modifiers.Length);
     }
 }

@@ -75,6 +75,9 @@ public class WeaponController : Interactable
 
         rb.isKinematic = true;
         coll.enabled = false;
+
+        if (WeaponDataCollector.onWeaponEquipped != null)
+            WeaponDataCollector.onWeaponEquipped.Invoke(dna);
     }
 
     public void OnDropped()
@@ -109,6 +112,9 @@ public class WeaponController : Interactable
         }
 
         remainingAmmo--;
+
+        if (remainingAmmo <= 0 && WeaponDataCollector.onWeaponClipEmptied != null)
+            WeaponDataCollector.onWeaponClipEmptied.Invoke(dna);
     }
 
     private Vector3 GetSpreadOffset()
@@ -132,5 +138,8 @@ public class WeaponController : Interactable
     public void ReloadWeapon()
     {
         remainingAmmo = clipSize;
+
+        if (WeaponDataCollector.onWeaponReloaded != null)
+            WeaponDataCollector.onWeaponReloaded.Invoke(dna);
     }
 }

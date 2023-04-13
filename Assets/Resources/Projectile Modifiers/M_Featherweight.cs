@@ -5,7 +5,7 @@ using UnityEngine;
 public class M_Featherweight : ProjectileModifier
 {
     private float massMultiplier = 0.5f;
-    private float gravityCounterForce = 1f;
+    private float gravityCounterForce = 3f;
 
     public override void OnModifierApplied()
     {

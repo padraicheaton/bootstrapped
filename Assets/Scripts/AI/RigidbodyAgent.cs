@@ -186,6 +186,9 @@ public class RigidbodyAgent : MonoBehaviour
         if (itemsToDrop > 0)
             ServiceLocator.instance.GetService<LootController>().OnEnemyDefeated(transform.position + Vector3.up, itemsToDrop);
 
+        if (WeaponDataCollector.onEnemyKilled != null)
+            WeaponDataCollector.onEnemyKilled.Invoke(ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetActiveWeaponGenotype());
+
         Destroy(gameObject);
     }
 

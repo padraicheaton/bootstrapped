@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
         SaveStateController.LoadSaveData();
 
         CurrencyHandler.Setup();
+        WeaponDataCollector.RegisterEventListeners();
     }
 
     private void Start()
@@ -33,5 +34,10 @@ public class GameManager : MonoBehaviour
     private void OnGameOver()
     {
         ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(LoadedScenes.Lab);
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveStateController.SaveDataToFile();
     }
 }

@@ -37,6 +37,6 @@ public class M_Rebound : ProjectileModifier
                 return (coll.transform.position - projectileTransform.position).normalized * storedVelocity.magnitude;
         }
 
-        return -storedVelocity * 0.75f;
+        return storedVelocity;
     }
 }

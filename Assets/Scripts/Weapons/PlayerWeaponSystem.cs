@@ -167,6 +167,11 @@ public class PlayerWeaponSystem : MonoBehaviour
         return weaponSlots;
     }
 
+    public int[] GetActiveWeaponGenotype()
+    {
+        return GetActiveWeapon().dna;
+    }
+
     public void ReloadEquippedWeapon()
     {
         if (GetActiveWeapon())
