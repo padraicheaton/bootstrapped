@@ -183,7 +183,8 @@ public class RigidbodyAgent : MonoBehaviour
 
     private void OnDeath()
     {
-        ServiceLocator.instance.GetService<LootController>().OnEnemyDefeated(transform.position + Vector3.up, itemsToDrop);
+        if (itemsToDrop > 0)
+            ServiceLocator.instance.GetService<LootController>().OnEnemyDefeated(transform.position + Vector3.up, itemsToDrop);
 
         Destroy(gameObject);
     }

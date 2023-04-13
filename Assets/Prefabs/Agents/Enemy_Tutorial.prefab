@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1341849054690521323
+--- !u!1001 &7616316630307683563
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,87 +10,37 @@ PrefabInstance:
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
       propertyPath: damage
-      value: 20
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
       propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: rayLength
-      value: 2.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
       propertyPath: attackDelay
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
       propertyPath: itemsToDrop
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+    - target: {fileID: 1269831680803641669, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
-      propertyPath: springDamper
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: springStrenth
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: psuedoFriction
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: gravityStrength
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: preferredHoverHeight
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071909462522237121, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071909462522237121, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3071909462522237121, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ed2da527dd6fbf14ba6cc9de4e44773a, type: 2}
     - target: {fileID: 4151637850107034218, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
       propertyPath: maximumHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396231814901720781, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: m_Mass
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7032698560977096568, guid: 60ef30c03266e574ba1ecad3eba26a2e,
-        type: 3}
-      propertyPath: m_Radius
-      value: 1.5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7695279382755838191, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
       propertyPath: m_Name
-      value: Enemy_Boss
+      value: Enemy_Tutorial
       objectReference: {fileID: 0}
     - target: {fileID: 8070686370073691889, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}

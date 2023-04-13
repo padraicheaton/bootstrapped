@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsInteractable: 1
   charges: 5
+  infinite: 0
 --- !u!1 &5893412090422369129
 GameObject:
   m_ObjectHideFlags: 0

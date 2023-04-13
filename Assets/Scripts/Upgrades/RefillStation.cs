@@ -5,10 +5,14 @@ using UnityEngine;
 public class RefillStation : Interactable
 {
     [SerializeField] private int charges;
+    [SerializeField] private bool infinite = false;
 
     public override string GetName()
     {
-        return $"Ammo Refill Station ({charges})";
+        if (!infinite)
+            return $"Reload Station ({charges})";
+        else
+            return "Reload Station (∞)";
     }
 
     public override void OnInteracted()
@@ -17,7 +21,7 @@ public class RefillStation : Interactable
 
         ServiceLocator.instance.GetService<PlayerWeaponSystem>().ReloadEquippedWeapon();
 
-        if (charges <= 0)
+        if (charges <= 0 && !infinite)
             Destroy(gameObject);
     }
 }

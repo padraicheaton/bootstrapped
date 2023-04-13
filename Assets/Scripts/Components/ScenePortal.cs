@@ -8,7 +8,7 @@ public class ScenePortal : Interactable
 
     public override string GetName()
     {
-        return $"To: {destination.ToString()}";
+        return $"To: The {destination.ToString()}";
     }
 
     public override void OnInteracted()

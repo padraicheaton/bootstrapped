@@ -38,7 +38,8 @@ public class ModalWindow : MonoBehaviour
 
     private void OnDestroy()
     {
-        ServiceLocator.instance.GetService<InputManager>().OnCloseMenu -= OnCloseMenuInput;
+        if (ServiceLocator.instance && ServiceLocator.instance.GetService<InputManager>())
+            ServiceLocator.instance.GetService<InputManager>().OnCloseMenu -= OnCloseMenuInput;
     }
 
     public void SetVisibility(bool visible, bool restrictPlayerMovement = false)
