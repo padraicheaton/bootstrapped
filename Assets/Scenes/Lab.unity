@@ -639,16 +639,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1529408714943121492, guid: df02c5ac659421746a769151474961ab,
-        type: 3}
-      propertyPath: noveltyChanceIncrement
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1529408714943121492, guid: df02c5ac659421746a769151474961ab,
-        type: 3}
-      propertyPath: shouldIncrementNovelty
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1529408714943121496, guid: df02c5ac659421746a769151474961ab,
         type: 3}
       propertyPath: m_RootOrder
@@ -987,6 +977,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cache
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216433886123998540, guid: 5b3cb5455ece7d24ea67742367bdab96,
+        type: 3}
+      propertyPath: forceRandom
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7216433886123998540, guid: 5b3cb5455ece7d24ea67742367bdab96,
         type: 3}

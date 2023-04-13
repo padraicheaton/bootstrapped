@@ -6,7 +6,7 @@ public class E_IceSlow : BaseEffect
 {
     private float damageToDurationScalar = 0.5f;
     private float movementSpeedMultiplier = 0.75f;
-    private RigidbodyAgent agentController;
+    private Rigidbody rb;
 
     private float duration;
 
@@ -16,12 +16,17 @@ public class E_IceSlow : BaseEffect
 
         duration = damage * damageToDurationScalar;
 
-        agentController = affectedCharacterHealth.GetComponent<RigidbodyAgent>();
-
-        if (agentController)
-            agentController.MultiplyMovementSpeed(movementSpeedMultiplier);
+        rb = affectedCharacterHealth.GetComponent<Rigidbody>();
 
         StartCoroutine(RevertAfterDelay());
+    }
+
+    private void Update()
+    {
+        if (rb)
+        {
+            rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * movementSpeedMultiplier);
+        }
     }
 
     protected override float GetApplicationDamageMultiplier()
@@ -37,9 +42,6 @@ public class E_IceSlow : BaseEffect
 
             yield return null;
         }
-
-        if (agentController)
-            agentController.DivideMovementSpeed(movementSpeedMultiplier);
 
         Destroy(gameObject);
     }

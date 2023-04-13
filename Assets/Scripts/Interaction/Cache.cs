@@ -7,6 +7,7 @@ public class Cache : Interactable
     [Header("Settings")]
     [SerializeField] private int weaponsToDrop;
     [SerializeField] private bool destroyOnOpen;
+    [SerializeField] private bool forceRandom = false;
 
     public override string GetName()
     {
@@ -17,7 +18,7 @@ public class Cache : Interactable
     {
         for (int i = 0; i < weaponsToDrop; i++)
         {
-            GameObject generatedWeapon = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(transform.position + Vector3.up);
+            GameObject generatedWeapon = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(transform.position + Vector3.up, forceRandom);
 
             generatedWeapon.GetComponent<Rigidbody>().AddForce((Random.insideUnitSphere + Vector3.up) * 5f, ForceMode.Impulse);
         }

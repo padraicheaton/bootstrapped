@@ -17,9 +17,9 @@ public class WeaponGenerator : MonoBehaviour
         cachedNoveltyChance = noveltyChance;
     }
 
-    public GameObject GenerateWeapon(Vector3 spawnPoint)
+    public GameObject GenerateWeapon(Vector3 spawnPoint, bool forceRandom = false)
     {
-        if (Random.value < noveltyChance)
+        if (Random.value < noveltyChance || forceRandom)
         {
             // Reset the novelty chance back to default
             noveltyChance = cachedNoveltyChance;

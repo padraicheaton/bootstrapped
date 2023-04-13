@@ -656,8 +656,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noveltyChance: 0
-  shouldIncrementNovelty: 0
-  noveltyChanceIncrement: 0
+  shouldIncrementNovelty: 1
+  noveltyChanceIncrement: 0.1
   mutationChance: 0.2
 --- !u!114 &1529408714943121493
 MonoBehaviour:

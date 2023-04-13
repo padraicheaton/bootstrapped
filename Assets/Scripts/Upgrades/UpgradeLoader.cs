@@ -12,7 +12,14 @@ public static class UpgradeLoader
     public static UpgradePurchase[] GetAvailableUpgrades()
     {
         if (availableUpgrades == null || availableUpgrades.Length == 0)
+        {
             availableUpgrades = GetAllScriptableObjects<UpgradePurchase>();
+
+            foreach (UpgradePurchase upgrade in availableUpgrades)
+            {
+                upgrade.LoadState();
+            }
+        }
 
         return availableUpgrades;
     }

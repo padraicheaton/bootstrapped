@@ -10,6 +10,26 @@ public abstract class UpgradePurchase : ScriptableObject
     public int cost;
     public int maxStacks;
 
+    private string GetSaveKey()
+    {
+        return $"upgrade_{displayName}";
+    }
+
+    public void LoadState()
+    {
+        int purchasedStacks = SaveStateController.GetData<int>(GetSaveKey());
+
+        // Prevent limit breaking by altering the save data
+        if (purchasedStacks > maxStacks)
+        {
+            purchasedStacks = maxStacks;
+            SaveStateController.SetData(GetSaveKey(), maxStacks);
+        }
+
+        for (int i = 0; i < purchasedStacks; i++)
+            UpgradeLoader.AddPlayerUpgrade(this); ;
+    }
+
     public bool HasCapacity()
     {
         return UpgradeLoader.HasSpaceForModifier(this, maxStacks);
@@ -18,6 +38,8 @@ public abstract class UpgradePurchase : ScriptableObject
     public virtual void OnUnlocked()
     {
         UpgradeLoader.AddPlayerUpgrade(this);
+
+        SaveStateController.SetData(GetSaveKey(), SaveStateController.GetData<int>(GetSaveKey()) + 1);
     }
     public virtual bool CanAfford()
     {

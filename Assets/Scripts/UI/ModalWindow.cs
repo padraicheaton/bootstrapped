@@ -24,6 +24,8 @@ public class ModalWindow : MonoBehaviour
         }
 
         SetVisibility(false);
+
+        ServiceLocator.instance.GetService<SceneController>().onSceneChanged += Unregister;
     }
 
     private void OnCloseMenuInput(bool performed)
@@ -36,7 +38,7 @@ public class ModalWindow : MonoBehaviour
         cg.alpha = Mathf.Lerp(cg.alpha, destAlpha, Time.deltaTime * 20f);
     }
 
-    private void OnDestroy()
+    private void Unregister()
     {
         if (ServiceLocator.instance && ServiceLocator.instance.GetService<InputManager>())
             ServiceLocator.instance.GetService<InputManager>().OnCloseMenu -= OnCloseMenuInput;

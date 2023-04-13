@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponController : Interactable
 {
@@ -76,8 +77,7 @@ public class WeaponController : Interactable
         rb.isKinematic = true;
         coll.enabled = false;
 
-        if (WeaponDataCollector.onWeaponEquipped != null)
-            WeaponDataCollector.onWeaponEquipped.Invoke(dna);
+        InvokeEvent(WeaponDataCollector.onWeaponEquipped);
     }
 
     public void OnDropped()
@@ -113,8 +113,8 @@ public class WeaponController : Interactable
 
         remainingAmmo--;
 
-        if (remainingAmmo <= 0 && WeaponDataCollector.onWeaponClipEmptied != null)
-            WeaponDataCollector.onWeaponClipEmptied.Invoke(dna);
+        if (remainingAmmo <= 0)
+            InvokeEvent(WeaponDataCollector.onWeaponClipEmptied);
     }
 
     private Vector3 GetSpreadOffset()
@@ -139,7 +139,13 @@ public class WeaponController : Interactable
     {
         remainingAmmo = clipSize;
 
-        if (WeaponDataCollector.onWeaponReloaded != null)
-            WeaponDataCollector.onWeaponReloaded.Invoke(dna);
+        InvokeEvent(WeaponDataCollector.onWeaponReloaded);
+    }
+
+    private void InvokeEvent(UnityAction<int[]> action)
+    {
+        // Make this distinction so that weapons used on the shooting range have no bearing on the preference selection
+        if (action != null && ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == LoadedScenes.Sandbox)
+            action.Invoke(dna);
     }
 }

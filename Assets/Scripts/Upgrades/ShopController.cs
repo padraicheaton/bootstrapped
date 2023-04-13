@@ -74,12 +74,28 @@ public class ShopController : Interactable
                 }
             }
 
-            for (int i = 0; i < stackPipContainer.childCount; i++)
-            {
-                Image img = stackPipContainer.GetChild(i).GetComponent<Image>();
+            StopAllCoroutines();
+            StartCoroutine(UpdateStackPips());
+        }
+    }
 
-                img.color = UpgradeLoader.GetAmountOfUpgrades(upgrade) > i ? Color.yellow : Color.grey;
-            }
+    private IEnumerator UpdateStackPips()
+    {
+        yield return new WaitForEndOfFrame();
+
+        Image[] pipImgs = stackPipContainer.GetComponentsInChildren<Image>();
+
+        for (int i = 0; i < pipImgs.Length; i++)
+        {
+            pipImgs[i].color = Color.grey;
+        }
+
+        for (int i = 0; i < pipImgs.Length; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            if (i < UpgradeLoader.GetAmountOfUpgrades(focusedUpgrade))
+                pipImgs[i].color = Color.yellow;
         }
     }
 

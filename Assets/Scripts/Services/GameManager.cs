@@ -15,20 +15,27 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(DelayedStart());
+    }
+
+    private void RegisterEventListeners()
+    {
         if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == LoadedScenes.Sandbox)
         {
             UpgradeLoader.ApplyUpgradesToPlayer();
         }
 
-        StartCoroutine(DelayedStart());
+        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.MainMenu)
+            ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetHealth().onDeath += OnGameOver;
     }
 
     private IEnumerator DelayedStart()
     {
         yield return new WaitForEndOfFrame();
 
-        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.MainMenu)
-            ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetHealth().onDeath += OnGameOver;
+        RegisterEventListeners();
+
+        ServiceLocator.instance.GetService<SceneController>().onSceneChanged += RegisterEventListeners;
     }
 
     private void OnGameOver()

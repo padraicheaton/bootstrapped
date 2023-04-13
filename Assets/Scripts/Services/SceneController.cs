@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public enum LoadedScenes
 {
@@ -14,6 +15,8 @@ public enum LoadedScenes
 public class SceneController : MonoBehaviour
 {
     [SerializeField] private CanvasGroup loadingScreen;
+
+    public UnityAction onSceneChanged;
 
     private void Start()
     {
@@ -55,6 +58,9 @@ public class SceneController : MonoBehaviour
         ServiceLocator.instance.GetService<SoundController>().SwitchBackgroundMusic(scene);
 
         yield return new WaitForSeconds(0.5f);
+
+        if (onSceneChanged != null)
+            onSceneChanged.Invoke();
 
         while (loadingScreen.alpha > 0f)
         {
