@@ -6,6 +6,7 @@ public static class SaveStateController
 {
     // * Multi-Class Keys
     public static readonly string tutorialCompleteSaveKey = "tutorialComplete";
+    public static string masterVolumeValueKey = "setting_masterVolume";
 
     private static Dictionary<string, string> saveData = new Dictionary<string, string>();
 

@@ -31,7 +31,7 @@ public class SoundController : MonoBehaviour
 
         foregroundAudioSource.Play();
 
-        StartCoroutine(FadeAudioSource(foregroundAudioSource, enabled ? 1f : 0f));
+        StartCoroutine(FadeAudioSource(foregroundAudioSource, enabled ? GetMaxVolumeMultiplier() : 0f));
 
         if (enabled)
             StartCoroutine(FadeAudioSource(backgroundAudioSource, 0f));
@@ -45,7 +45,7 @@ public class SoundController : MonoBehaviour
         {
             yield return null;
 
-            source.volume = Mathf.Lerp(source.volume, destinationVolume, Time.deltaTime * audioFadeSpeed);
+            source.volume = Mathf.Lerp(source.volume, destinationVolume, Time.unscaledDeltaTime * audioFadeSpeed);
         }
 
         source.volume = destinationVolume;
@@ -58,7 +58,12 @@ public class SoundController : MonoBehaviour
         source.clip = musicData.clip;
         source.Play();
 
-        yield return StartCoroutine(FadeAudioSource(source, musicData.volume));
+        yield return StartCoroutine(FadeAudioSource(source, musicData.volume * GetMaxVolumeMultiplier()));
+    }
+
+    private float GetMaxVolumeMultiplier()
+    {
+        return SaveStateController.GetData<float>(SaveStateController.masterVolumeValueKey) / 100f;
     }
 
 

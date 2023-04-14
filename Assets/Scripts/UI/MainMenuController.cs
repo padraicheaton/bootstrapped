@@ -39,7 +39,7 @@ public class MainMenuController : MonoBehaviour
 
     public void SettingsBtnPressed()
     {
-
+        ServiceLocator.instance.GetService<SettingsMenuController>().Show();
     }
 
     public void CreditsBtnPressed()

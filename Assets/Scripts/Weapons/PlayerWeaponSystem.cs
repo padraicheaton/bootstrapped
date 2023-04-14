@@ -56,7 +56,7 @@ public class PlayerWeaponSystem : MonoBehaviour
 
     private void OnFireInput(bool performed)
     {
-        if (weaponSlots.Count > 0 && GetActiveWeapon())
+        if (ServiceLocator.instance.GetService<PlayerMovement>().CanMove && weaponSlots.Count > 0 && GetActiveWeapon())
         {
             GetActiveWeapon().OnFireInput(performed);
         }
