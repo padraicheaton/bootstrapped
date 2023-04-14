@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Refill Stations", menuName = "Bootstrapped/Upgrades/Refill Stations")]
 public class U_RefillStations : UpgradePurchase
 {
-    public override void ApplyUpgrade()
+    protected override void OnUpgradeApplied()
     {
         ServiceLocator.instance.GetService<LevelPopulator>().SpawnRefillStations();
     }

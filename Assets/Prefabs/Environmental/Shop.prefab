@@ -890,9 +890,8 @@ RectTransform:
   m_Children:
   - {fileID: 2810992747451350022}
   - {fileID: 7881114874779213650}
-  - {fileID: 2887425359921385205}
   m_Father: {fileID: 2114285192820201812}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1205,18 +1204,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722036650737440723}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8786890615378759204}
-  m_Father: {fileID: 4689390068764670162}
-  m_RootOrder: 2
+  m_Father: {fileID: 2114285192820201812}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 30, y: -30}
+  m_AnchoredPosition: {x: -130.00006, y: -220.83266}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3852016107693982543
@@ -1631,6 +1630,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2887425359921385205}
   - {fileID: 4689390068764670162}
   m_Father: {fileID: 8735601625653846889}
   m_RootOrder: 1
@@ -2725,6 +2725,7 @@ MonoBehaviour:
   IsInteractable: 1
   shopModal: {fileID: 1357520959800367382}
   upgradeListContainer: {fileID: 2810992747451350022}
+  stackPipContainer: {fileID: 0}
   upgradeShopItemPrefab: {fileID: 2082259039508714279, guid: f1f36e2c3b69e5444ac46fd0c7697074,
     type: 3}
   itemDetailsCG: {fileID: 1617853183}

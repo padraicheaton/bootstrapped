@@ -245,7 +245,7 @@ MonoBehaviour:
   pickupRange: 20
   moveSpeed: 15
   rotateSpeed: 200
-  healthValue: 10
+  healthValue: 5
 --- !u!1 &9026665321887073719
 GameObject:
   m_ObjectHideFlags: 0

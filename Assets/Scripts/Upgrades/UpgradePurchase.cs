@@ -10,6 +10,8 @@ public abstract class UpgradePurchase : ScriptableObject
     public int cost;
     public int maxStacks;
 
+    private LoadedScenes applicableScene = LoadedScenes.Sandbox;
+
     private string GetSaveKey()
     {
         return $"upgrade_{displayName}";
@@ -46,5 +48,11 @@ public abstract class UpgradePurchase : ScriptableObject
         return CurrencyHandler.CanAfford(cost) && HasCapacity();
     }
 
-    public abstract void ApplyUpgrade();
+    public void ApplyUpgrade()
+    {
+        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == applicableScene)
+            OnUpgradeApplied();
+    }
+
+    protected abstract void OnUpgradeApplied();
 }

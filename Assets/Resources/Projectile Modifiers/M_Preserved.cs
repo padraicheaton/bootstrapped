@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class M_Preserved : ProjectileModifier
 {
-    private float timeMultiplier = 8f;
+    private float timeMultiplier = 3f;
 
     public override void OnModifierApplied()
     {

@@ -7,7 +7,7 @@ public class U_Luck : UpgradePurchase
 {
     public float additiveChance;
 
-    public override void ApplyUpgrade()
+    protected override void OnUpgradeApplied()
     {
         ServiceLocator.instance.GetService<LootController>().AddItemDropChance(additiveChance);
     }

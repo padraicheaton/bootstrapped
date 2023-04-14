@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class M_Volatile : ProjectileModifier
+public class M_BuildUp : ProjectileModifier
 {
-    private float damageDecayMultiplier = 0.9f;
-    private float damageDecayInterval = 0.5f;
-    private float damageMultiplier = 2f;
+    private float damageIncreaseMultiplier = 1.1f;
+    private float damageIncreaseInterval = 0.5f;
+    private float damageMultiplier = 0.5f;
 
     private float timer = 0f;
 
@@ -19,9 +19,9 @@ public class M_Volatile : ProjectileModifier
     {
         timer += deltaTime;
 
-        if (timer >= damageDecayInterval)
+        if (timer >= damageIncreaseInterval)
         {
-            projectileComponent.MultiplyDamageAmount(damageDecayMultiplier);
+            projectileComponent.MultiplyDamageAmount(damageIncreaseMultiplier);
         }
     }
 }

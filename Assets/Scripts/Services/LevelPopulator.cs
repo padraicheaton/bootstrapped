@@ -32,7 +32,7 @@ public class LevelPopulator : MonoBehaviour
         {
             for (float z = -levelDimensions.y / 2 + offset; z < levelDimensions.y / 2 - offset; z += pointIncrement)
             {
-                Vector3 rayOrigin = new Vector3(x, 1000, z);
+                Vector3 rayOrigin = new Vector3(x, 45, z);
 
                 if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit))
                 {

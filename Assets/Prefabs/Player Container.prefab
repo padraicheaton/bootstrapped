@@ -3787,7 +3787,7 @@ MonoBehaviour:
   aimHoldPoint: {fileID: 783670810}
   weaponFirePoint: {fileID: 6256144006685328626}
   useStartingWeapon: 1
-  startingWeapon: 000000000000000000000000030000000000000002000000090000000c000000
+  startingWeapon: 0100000000000000000000000000000000000000
 --- !u!114 &6256144007111590488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4338,7 +4338,22 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 275713511439720148, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 275713511439720148, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 275713511439720148, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242072070775515382, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1242072070775515382, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
@@ -4455,6 +4470,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SettingsWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116083915646540173, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116083915646540173, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116083915646540173, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116083915646540173, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116083915646540173, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d1be5cd79fd69d4f8f35026a76deae4, type: 3}

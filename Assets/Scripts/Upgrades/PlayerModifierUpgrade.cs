@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class PlayerModifierUpgrade : UpgradePurchase
 {
-    public override void ApplyUpgrade()
+    protected override void OnUpgradeApplied()
     {
         ApplyModifierToPlayer(ServiceLocator.instance.GetService<PlayerMovement>().gameObject);
     }
