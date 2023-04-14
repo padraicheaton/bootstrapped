@@ -10,7 +10,7 @@ public abstract class UpgradePurchase : ScriptableObject
     public int cost;
     public int maxStacks;
 
-    private LoadedScenes applicableScene = LoadedScenes.Sandbox;
+    protected virtual LoadedScenes applicableScene { get { return LoadedScenes.Sandbox; } }
 
     private string GetSaveKey()
     {
@@ -42,6 +42,9 @@ public abstract class UpgradePurchase : ScriptableObject
         UpgradeLoader.AddPlayerUpgrade(this);
 
         SaveStateController.SetData(GetSaveKey(), SaveStateController.GetData<int>(GetSaveKey()) + 1);
+
+        // This will only really affect upgrades that affect the Lab level
+        ApplyUpgrade();
     }
     public virtual bool CanAfford()
     {

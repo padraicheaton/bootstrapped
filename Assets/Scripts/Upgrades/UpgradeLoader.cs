@@ -27,8 +27,6 @@ public static class UpgradeLoader
     public static void AddPlayerUpgrade(UpgradePurchase upgrade)
     {
         loadedUpgrades.Add(upgrade);
-
-        Debug.Log($"Added {upgrade.displayName}");
     }
 
     public static bool HasSpaceForModifier(UpgradePurchase upgrade, int maxAmount = 1)

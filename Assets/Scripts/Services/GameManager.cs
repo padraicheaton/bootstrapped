@@ -20,10 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void RegisterEventListeners()
     {
-        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == LoadedScenes.Sandbox)
-        {
-            UpgradeLoader.ApplyUpgradesToPlayer();
-        }
+        UpgradeLoader.ApplyUpgradesToPlayer();
 
         if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.MainMenu)
             ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetHealth().onDeath += OnGameOver;

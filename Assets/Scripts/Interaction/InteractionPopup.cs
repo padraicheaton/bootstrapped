@@ -70,7 +70,7 @@ public class InteractionPopup : MonoBehaviour
             generalCG.alpha = 1f;
             weaponCG.alpha = 0f;
 
-            displayNameTxt.text = interactable.GetName();
+            displayNameTxt.text = "(E)\n" + interactable.GetName();
         }
     }
 

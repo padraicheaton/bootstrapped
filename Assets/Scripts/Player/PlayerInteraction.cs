@@ -42,7 +42,8 @@ public class PlayerInteraction : MonoBehaviour
                 highlightedInteractable = interactable;
 
                 popup.SetVisibleState(true);
-                popup.SetData(hit.collider.transform.position + Vector3.up, interactable);
+                //popup.SetData(hit.collider.transform.position + Vector3.up, interactable);
+                popup.SetData(hit.point - transform.forward * 0.25f, interactable);
             }
         }
     }

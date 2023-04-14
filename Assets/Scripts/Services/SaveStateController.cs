@@ -7,6 +7,7 @@ public static class SaveStateController
     // * Multi-Class Keys
     public static readonly string tutorialCompleteSaveKey = "tutorialComplete";
     public static string masterVolumeValueKey = "setting_masterVolume";
+    public static string startingWeaponGenotypeKey = "startingWeaponGenotype";
 
     private static Dictionary<string, string> saveData = new Dictionary<string, string>();
 
@@ -30,8 +31,6 @@ public static class SaveStateController
         else
             Debug.Log("File does not exist");
 
-        Debug.Log(saveData);
-
         LoadEvolutionaryData();
     }
 
@@ -47,8 +46,6 @@ public static class SaveStateController
         File.WriteAllText(GetFilePath(), jsonString);
 
         SaveEvolutionaryDataToFile();
-
-        Debug.LogWarning("Saved Data");
     }
 
     public static void SaveEvolutionaryDataToFile()
@@ -86,6 +83,11 @@ public static class SaveStateController
             }
         }
         return default(T);
+    }
+
+    public static bool DatabaseContains(string key)
+    {
+        return saveData.ContainsKey(key);
     }
 
     private static void OnApplicationPause(bool pauseStatus)

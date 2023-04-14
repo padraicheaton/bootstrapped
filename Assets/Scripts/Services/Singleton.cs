@@ -12,6 +12,7 @@ public abstract class Singleton<T> : MonoBehaviour
             if (Equals(_instance, null) || _instance == null || _instance.Equals(null))
             {
                 var instanceGO = FindObjectOfType<Singleton<T>>();
+                if (instanceGO == null) return default(T);
                 _instance = instanceGO.GetComponent<T>();
                 return _instance;
             }
