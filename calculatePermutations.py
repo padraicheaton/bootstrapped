@@ -8,6 +8,7 @@ rarities = ["Common", "Uncommon", "Rare", "Exotic", "Legendary"]
 modifiers = [
     "Anti Grav",
     "Bouncy",
+    "Build Up",
     "Condense",
     "Curve",
     "Expand",
