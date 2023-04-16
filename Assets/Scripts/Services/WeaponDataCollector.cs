@@ -67,6 +67,28 @@ public static class WeaponDataCollector
         return evolutionaryData.ToArray();
     }
 
+    public static int[] GetStartingWeaponGenotype()
+    {
+        foreach (EvolutionaryData data in evolutionaryData)
+        {
+            if (data.isStartingWeapon)
+                return data.dna;
+        }
+
+        return null;
+    }
+
+    public static void SetStartingWeapon(int[] dna)
+    {
+        // Creates the data if not exists
+        GetEvolutionaryData(dna);
+
+        foreach (EvolutionaryData data in evolutionaryData)
+        {
+            data.isStartingWeapon = data.dna == dna;
+        }
+    }
+
     public static int[][] GetFittestParents(int numParents = 2)
     {
         int[][] parentsPopulation = new int[numParents][];
@@ -118,6 +140,7 @@ public class EvolutionaryData
     public int timesClipEmptied;
     public int killsDealt;
     public int timesReloaded;
+    public bool isStartingWeapon;
 
     public EvolutionaryData(int[] dna)
     {
@@ -126,10 +149,11 @@ public class EvolutionaryData
         timesClipEmptied = 0;
         killsDealt = 0;
         timesReloaded = 0;
+        isStartingWeapon = false;
     }
 
     public float GetFitness()
     {
-        return timesClipEmptied + killsDealt + timesReloaded;
+        return timesClipEmptied + killsDealt + timesReloaded + (isStartingWeapon ? 1 : 0);
     }
 }

@@ -47,9 +47,6 @@ public static class UpgradeLoader
 
     public static void ApplyUpgradesToPlayer()
     {
-        if (!playerRef)
-            playerRef = ServiceLocator.instance.GetService<PlayerMovement>().gameObject;
-
         foreach (UpgradePurchase upgrade in loadedUpgrades)
             upgrade.ApplyUpgrade();
     }

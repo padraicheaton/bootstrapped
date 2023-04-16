@@ -11,7 +11,6 @@ public class PlayerWeaponSystem : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private bool useStartingWeapon = true;
-    [SerializeField] private int[] startingWeapon;
 
     public int weaponSlotCount { get; private set; } = 2;
     private List<WeaponController> weaponSlots = new List<WeaponController>();
@@ -27,6 +26,8 @@ public class PlayerWeaponSystem : MonoBehaviour
 
         if (useStartingWeapon)
         {
+            int[] startingWeapon = SaveStateController.GetData<int[]>(SaveStateController.startingWeaponGenotypeKey);
+
             GameObject wep = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(startingWeapon, Vector3.zero);
 
             AddWeapon(wep);
