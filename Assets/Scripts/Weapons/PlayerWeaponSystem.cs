@@ -26,16 +26,23 @@ public class PlayerWeaponSystem : MonoBehaviour
 
         if (useStartingWeapon)
         {
-            int[] startingWeapon = SaveStateController.GetData<int[]>(SaveStateController.startingWeaponGenotypeKey);
-
-            GameObject wep = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(startingWeapon, Vector3.zero);
-
-            AddWeapon(wep);
-
-            SwitchToWeaponIndex(0);
+            StartCoroutine(EquipStartingWeaponAfterDelay());
         }
 
         SetupControls();
+    }
+
+    private IEnumerator EquipStartingWeaponAfterDelay()
+    {
+        yield return new WaitForSeconds(1f);
+
+        int[] startingWeapon = WeaponDataCollector.GetStartingWeaponGenotype();
+
+        GameObject wep = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(startingWeapon, Vector3.zero);
+
+        AddWeapon(wep);
+
+        SwitchToWeaponIndex(0);
     }
 
     private void Update()

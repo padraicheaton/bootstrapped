@@ -38,6 +38,8 @@ public class WeaponGenerator : MonoBehaviour
 
     public GameObject GenerateWeapon(int[] dna, Vector3 spawnPoint)
     {
+        Debug.Log(dna);
+
         WeaponData weapon = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetWeaponObject(dna);
 
         GameObject createdWeapon = Instantiate(weapon.prefab, spawnPoint, Quaternion.identity);
