@@ -32,6 +32,8 @@ public class WeaponController : Interactable
     private Rigidbody rb;
     private BoxCollider coll;
 
+    private float despawnDelay = 120f;
+
     // ! The Important Stuff
     public int[] dna { get; private set; }
 
@@ -43,6 +45,8 @@ public class WeaponController : Interactable
 
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<BoxCollider>();
+
+        InitiateDespawnTimer();
     }
 
     private void Update()
@@ -77,6 +81,9 @@ public class WeaponController : Interactable
         rb.isKinematic = true;
         coll.enabled = false;
 
+        // Stop despawn timer
+        StopAllCoroutines();
+
         InvokeEvent(WeaponDataCollector.onWeaponEquipped);
     }
 
@@ -93,6 +100,8 @@ public class WeaponController : Interactable
             IsInteractable = false;
             Destroy(gameObject, 3f);
         }
+        else
+            InitiateDespawnTimer();
     }
 
     public void OnFireInput(bool performed)
@@ -126,6 +135,19 @@ public class WeaponController : Interactable
         rotationOffset.z = Random.Range(-1f, 1f) * spread;
 
         return rotationOffset;
+    }
+
+    private void InitiateDespawnTimer()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DespawnTimer());
+    }
+
+    private IEnumerator DespawnTimer()
+    {
+        yield return new WaitForSeconds(despawnDelay);
+
+        Destroy(gameObject);
     }
 
     public void ShowWeapon(bool shown)

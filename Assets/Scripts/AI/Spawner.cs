@@ -4,67 +4,56 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
 
     [Header("Settings")]
     [SerializeField] private List<GameObject> objsToSpawn = new List<GameObject>();
-    [SerializeField] private float trickleSpawnDelay;
+    [SerializeField] private int spawnPointCount;
     [SerializeField] private float swarmSpawnDelay;
     [SerializeField] private int swarmEnemyCount;
-    [SerializeField] private float delayBetweenSwarms;
 
     [Header("Difficulty Settings")]
-    [SerializeField] private float swarmDelayAdditiveReduction;
     [SerializeField] private int swarmCountAdditiveIncrease;
 
     private List<GameObject> swarmEnemies = new List<GameObject>();
+    private List<Vector3> spawnPoints;
 
-    private void Start()
+    public bool swarmInProgress { get; private set; } = false;
+
+    public void BeginSwarm()
     {
-        StartCoroutine(TrickleSpawnRoutine());
-        StartCoroutine(SwarmSpawnRoutine());
-    }
-
-    private IEnumerator TrickleSpawnRoutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(trickleSpawnDelay);
-
-            SpawnEnemy();
-        }
+        if (!swarmInProgress)
+            StartCoroutine(SwarmSpawnRoutine());
     }
 
     private IEnumerator SwarmSpawnRoutine()
     {
-        while (true)
+        swarmInProgress = true;
+
+        spawnPoints = ServiceLocator.instance.GetService<LevelPopulator>().PopPoints(spawnPointCount);
+
+        ServiceLocator.instance.GetService<SoundController>().SetSwarmBackgroundMusic(true);
+
+        for (int i = 0; i < swarmEnemyCount; i++)
         {
-            yield return new WaitForSeconds(delayBetweenSwarms);
+            yield return new WaitForSeconds(swarmSpawnDelay);
 
-            ServiceLocator.instance.GetService<SoundController>().SetSwarmBackgroundMusic(true);
-
-            for (int i = 0; i < swarmEnemyCount; i++)
-            {
-                yield return new WaitForSeconds(swarmSpawnDelay);
-
-                swarmEnemies.Add(SpawnEnemy());
-            }
-
-            // Wait while there are still remaining swarm enemies
-            while (swarmEnemies.Count > 0)
-            {
-                yield return null;
-
-                swarmEnemies.RemoveAll(enemy => enemy == null);
-            }
-
-            ServiceLocator.instance.GetService<SoundController>().SetSwarmBackgroundMusic(false);
-
-            // Increase difficulty each swarm
-            swarmEnemyCount += swarmCountAdditiveIncrease;
-            delayBetweenSwarms -= swarmDelayAdditiveReduction;
+            swarmEnemies.Add(SpawnEnemy());
         }
+
+        // Wait while there are still remaining swarm enemies
+        while (swarmEnemies.Count > 0)
+        {
+            yield return new WaitForEndOfFrame();
+
+            swarmEnemies.RemoveAll(enemy => enemy == null);
+        }
+
+        ServiceLocator.instance.GetService<SoundController>().SetSwarmBackgroundMusic(false);
+
+        // Increase difficulty each swarm
+        swarmEnemyCount += swarmCountAdditiveIncrease;
+
+        swarmInProgress = false;
     }
 
     private GameObject SpawnEnemy()
@@ -72,16 +61,8 @@ public class Spawner : MonoBehaviour
         Vector3 spawnPoint = transform.position;
 
         if (spawnPoints.Count > 0)
-            spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
+            spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
 
         return Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Count)], spawnPoint, Quaternion.identity);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        foreach (Transform p in spawnPoints)
-            Gizmos.DrawSphere(p.position, 1f);
     }
 }

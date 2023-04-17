@@ -9,11 +9,19 @@ public class LevelTimerUI : MonoBehaviour
 
     private float timeSinceStart = 0f;
 
+    private void Start()
+    {
+        timerTxt.text = ConvertTimerToString(timeSinceStart);
+    }
+
     private void Update()
     {
-        timeSinceStart += Time.deltaTime;
+        if (ServiceLocator.instance.GetService<Spawner>().swarmInProgress)
+        {
+            timeSinceStart += Time.deltaTime;
 
-        timerTxt.text = ConvertTimerToString(timeSinceStart);
+            timerTxt.text = ConvertTimerToString(timeSinceStart);
+        }
     }
 
     private string ConvertTimerToString(float timerValue)

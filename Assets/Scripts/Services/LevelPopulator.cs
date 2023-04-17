@@ -49,6 +49,20 @@ public class LevelPopulator : MonoBehaviour
         SpawnObject(cachePrefab, numCaches);
     }
 
+    public List<Vector3> PopPoints(int count)
+    {
+        List<Vector3> p = new List<Vector3>();
+
+        for (int i = 0; i < count; i++)
+        {
+            int choice = Random.Range(0, points.Count);
+
+            p.Add(points[choice]);
+        }
+
+        return p;
+    }
+
     public void SpawnRefillStations()
     {
         SpawnObject(refillStationPrefab, numRefillStations);
