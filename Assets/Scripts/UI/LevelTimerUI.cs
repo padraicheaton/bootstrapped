@@ -9,14 +9,26 @@ public class LevelTimerUI : MonoBehaviour
 
     private float timeSinceStart = 0f;
 
+    private bool shouldIncrement;
+
     private void Start()
     {
         timerTxt.text = ConvertTimerToString(timeSinceStart);
+
+        ServiceLocator.instance.GetService<Spawner>().onSwarmBegin += () =>
+        {
+            shouldIncrement = true;
+        };
+
+        ServiceLocator.instance.GetService<Spawner>().onSwarmEnd += () =>
+        {
+            shouldIncrement = false;
+        };
     }
 
     private void Update()
     {
-        if (ServiceLocator.instance.GetService<Spawner>().swarmInProgress)
+        if (shouldIncrement)
         {
             timeSinceStart += Time.deltaTime;
 

@@ -14,7 +14,6 @@ public class StartingWeaponSelectionShop : Interactable
     [SerializeField] private TextMeshProUGUI costTxt;
     [SerializeField] private Button buyBtn;
 
-    private readonly int[] defaultStartingWeapon = new int[] { 1, 0, 0, 0, 0 };
     private readonly int cost = 20;
 
     private int[] chosenStartingWeapon;
@@ -43,7 +42,7 @@ public class StartingWeaponSelectionShop : Interactable
 
         if (chosenStartingWeapon == null)
         {
-            chosenStartingWeapon = defaultStartingWeapon;
+            chosenStartingWeapon = WeaponDataCollector.defaultStartingWeapon;
             WeaponDataCollector.SetStartingWeapon(chosenStartingWeapon);
         }
 

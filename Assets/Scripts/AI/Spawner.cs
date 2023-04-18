@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Spawner : MonoBehaviour
 {
@@ -17,7 +18,23 @@ public class Spawner : MonoBehaviour
     private List<GameObject> swarmEnemies = new List<GameObject>();
     private List<Vector3> spawnPoints;
 
-    public bool swarmInProgress { get; private set; } = false;
+    public UnityAction onSwarmBegin;
+    public UnityAction onSwarmEnd;
+
+    private bool swarmInProgress = false;
+
+    private void Start()
+    {
+        onSwarmBegin += () =>
+        {
+            swarmInProgress = true;
+        };
+
+        onSwarmEnd += () =>
+        {
+            swarmInProgress = false;
+        };
+    }
 
     public void BeginSwarm()
     {
@@ -27,7 +44,8 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SwarmSpawnRoutine()
     {
-        swarmInProgress = true;
+        if (onSwarmBegin != null)
+            onSwarmBegin.Invoke();
 
         spawnPoints = ServiceLocator.instance.GetService<LevelPopulator>().PopPoints(spawnPointCount);
 
@@ -53,7 +71,8 @@ public class Spawner : MonoBehaviour
         // Increase difficulty each swarm
         swarmEnemyCount += swarmCountAdditiveIncrease;
 
-        swarmInProgress = false;
+        if (onSwarmEnd != null)
+            onSwarmEnd.Invoke();
     }
 
     private GameObject SpawnEnemy()

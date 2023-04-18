@@ -12,6 +12,8 @@ public static class WeaponDataCollector
     public static UnityAction<int[]> onWeaponReloaded;
     public static UnityAction<int[]> onEnemyKilled;
 
+    public static readonly int[] defaultStartingWeapon = new int[] { 1, 0, 0, 0, 0 };
+
     public static void RegisterEventListeners()
     {
         onWeaponEquipped += dna =>
@@ -75,7 +77,7 @@ public static class WeaponDataCollector
                 return data.dna;
         }
 
-        return null;
+        return defaultStartingWeapon;
     }
 
     public static void SetStartingWeapon(int[] dna)

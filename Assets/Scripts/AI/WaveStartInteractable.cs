@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveStartInteractable : Interactable
+public class WaveStartInteractable : PhaseBasedInteractable
 {
     public override string GetName()
     {

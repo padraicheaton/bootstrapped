@@ -15,12 +15,9 @@ public class LootController : MonoBehaviour
         {
             if (Random.value < itemDropChance)
             {
-                int choice = Random.Range(-1, items.Count);
+                int choice = Random.Range(0, items.Count);
 
-                if (choice == -1)
-                    ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(position);
-                else
-                    Instantiate(items[choice], position, Quaternion.identity);
+                Instantiate(items[choice], position, Quaternion.identity);
             }
         }
     }
