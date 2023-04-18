@@ -49,7 +49,15 @@ public class SettingsMenuController : ModalWindow
 
     private void LoadSettings()
     {
-        masterVolumeSlider.value = SaveStateController.GetData<float>(SaveStateController.masterVolumeValueKey);
+        if (SaveStateController.DatabaseContains(SaveStateController.masterVolumeValueKey))
+            masterVolumeSlider.value = SaveStateController.GetData<float>(SaveStateController.masterVolumeValueKey);
+        else
+            masterVolumeSlider.value = 100f;
         masterVolumeSlider.onValueChanged.Invoke(masterVolumeSlider.value);
+    }
+
+    public void OnClearSaveDataBtnPressed()
+    {
+        SaveStateController.ClearSaveData();
     }
 }

@@ -62,6 +62,13 @@ public class PlayerWeaponSystem : MonoBehaviour
         ServiceLocator.instance.GetService<InputManager>().OnAimButton += OnAimInput;
     }
 
+    private void OnDestroy()
+    {
+        ServiceLocator.instance.GetService<InputManager>().OnFireButton -= OnFireInput;
+        ServiceLocator.instance.GetService<InputManager>().OnDropWeapon -= OnDropInput;
+        ServiceLocator.instance.GetService<InputManager>().OnAimButton -= OnAimInput;
+    }
+
     private void OnFireInput(bool performed)
     {
         if (ServiceLocator.instance.GetService<PlayerMovement>().CanMove && weaponSlots.Count > 0 && GetActiveWeapon())

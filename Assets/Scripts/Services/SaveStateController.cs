@@ -36,8 +36,17 @@ public static class SaveStateController
 
     public static void ClearSaveData()
     {
+        if (File.Exists(GetFilePath()))
+            File.Delete(GetFilePath());
+
+        if (File.Exists(GetWeaponDataFilePath()))
+            File.Delete(GetWeaponDataFilePath());
+
         saveData = new Dictionary<string, string>();
-        SaveDataToFile();
+
+        EvolutionaryData[] emptyData = { };
+
+        WeaponDataCollector.LoadEvolutionaryData(emptyData);
     }
 
     public static void SaveDataToFile()

@@ -51,7 +51,7 @@ public class Foundry : PhaseBasedInteractable
 
             remainingWeaponsToGenerate--;
 
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.2f);
         }
 
         currentlySpawningWeapons = false;
