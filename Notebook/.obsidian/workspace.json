@@ -1,0 +1,160 @@
+{
+  "main": {
+    "id": "7364050469ee2853",
+    "type": "split",
+    "children": [
+      {
+        "id": "b6dbf5714cd30027",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "118534fd77b0c860",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Masters/Concepts/Efficient Communication of Complex Game Mechanics.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "eb93ae2a032de943",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6f8bb3cd0812d441",
+    "type": "split",
+    "children": [
+      {
+        "id": "abef66ab82c8f9c4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "405e340a5785896b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "1978f1438cd58629",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "e0f301d376b4ec3c",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c1e5672194f4ff26",
+    "type": "split",
+    "children": [
+      {
+        "id": "7de8d4d7ef233468",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0713f4625d7aa6b0",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "c643ec1a747b5c2e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "def0e861f2d8296c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "c581d59d4051ea4c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Masters/Concepts/Epsilon Greedy Path Optimisation.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "eb93ae2a032de943",
+  "lastOpenFiles": [
+    "Masters/Concepts/Efficient Communication of Complex Game Mechanics.md",
+    "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
+    "Masters/Papers/Knowledge Encoding in Game Mechanics.md",
+    "Masters/Dev/Algorithm Design.md",
+    "Masters/Dev/Major Design Choices.md"
+  ]
+}

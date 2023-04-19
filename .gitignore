@@ -61,3 +61,5 @@ crashlytics-build.properties
 # The User Settings
 UserSettings/
 
+# The Obsidian Vault Workspace folder
+Notebook/.obsidian/workspace
