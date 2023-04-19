@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private void Awake()
     {
-        // Load the currency
+        // Load the data
         SaveStateController.LoadSaveData();
 
         CurrencyHandler.Setup();

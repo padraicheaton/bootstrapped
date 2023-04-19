@@ -18,6 +18,8 @@ public class PlayerWeaponSystem : MonoBehaviour
 
     private HealthComponent playerHealth;
 
+    private int[] lastEquippedWeaponDNA;
+
     private void Start()
     {
         playerHealth = GetComponent<HealthComponent>();
@@ -115,6 +117,7 @@ public class PlayerWeaponSystem : MonoBehaviour
         // Show weapon
         weaponSlots[newWeaponIndex].ShowWeapon(true);
         activeWeaponIndex = newWeaponIndex;
+        lastEquippedWeaponDNA = weaponSlots[newWeaponIndex].dna;
 
         ServiceLocator.instance.GetService<WeaponSwapHUDController>().RepopulateHUD(GetEquippedWeapons(), activeWeaponIndex);
     }
@@ -184,7 +187,7 @@ public class PlayerWeaponSystem : MonoBehaviour
 
     public int[] GetActiveWeaponGenotype()
     {
-        return GetActiveWeapon().dna;
+        return lastEquippedWeaponDNA;
     }
 
     public void ReloadEquippedWeapon()

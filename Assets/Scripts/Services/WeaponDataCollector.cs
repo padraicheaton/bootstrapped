@@ -62,6 +62,9 @@ public static class WeaponDataCollector
         evolutionaryData = new List<EvolutionaryData>();
 
         evolutionaryData.AddRange(serialisedData);
+
+        foreach (EvolutionaryData d in evolutionaryData)
+            Debug.Log($"Loaded weapon with {d.timesClipEmptied} times clip emptied");
     }
 
     public static EvolutionaryData[] GetEvolutionaryData()
@@ -101,8 +104,6 @@ public static class WeaponDataCollector
                 parentsPopulation[i] = EvolutionAlgorithms.Randomised();
             else
                 parentsPopulation[i] = GetMaxFitParent(parentsPopulation);
-
-            Debug.Log($"Selected Parent {string.Join(", ", parentsPopulation[i])}");
         }
 
         return parentsPopulation;
@@ -118,9 +119,11 @@ public static class WeaponDataCollector
 
         foreach (EvolutionaryData data in evolutionaryData)
         {
-            if (!selectedParents.Contains(data.dna) && data.GetFitness() > maxFitness)
+            Debug.Log($"Calculated Fitness of {string.Join(", ", data.dna)} = {data.GetFitness(evolutionaryData)}");
+
+            if (!selectedParents.Contains(data.dna) && data.GetFitness(evolutionaryData) > maxFitness)
             {
-                maxFitness = data.GetFitness();
+                maxFitness = data.GetFitness(evolutionaryData);
                 dna = data.dna;
             }
         }
@@ -139,9 +142,11 @@ public static class WeaponDataCollector
 public class EvolutionaryData
 {
     public int[] dna;
+
     public int timesClipEmptied;
     public int killsDealt;
     public int timesReloaded;
+
     public bool isStartingWeapon;
 
     public EvolutionaryData(int[] dna)
@@ -154,8 +159,39 @@ public class EvolutionaryData
         isStartingWeapon = false;
     }
 
-    public float GetFitness()
+    public float GetFitness(List<EvolutionaryData> populationPool)
     {
-        return timesClipEmptied + killsDealt + timesReloaded + (isStartingWeapon ? 1 : 0);
+        float normalised_timesClipEmptied = GetNormalisedFieldValue(populationPool, "timesClipEmptied", timesClipEmptied);
+        float normalised_killsDealt = GetNormalisedFieldValue(populationPool, "killsDealt", killsDealt);
+        float normalised_timesReloaded = GetNormalisedFieldValue(populationPool, "timesReloaded", timesReloaded);
+
+        float normalised_isStartingWeapon = isStartingWeapon ? 1f : 0f;
+
+        //Debug.Log($"Fitness: {timesClipEmptied} + {killsDealt} + {timesReloaded} + {isStartingWeapon}");
+        //Debug.Log($"Fitness: {normalised_timesClipEmptied} + {normalised_killsDealt} + {normalised_timesReloaded} + {normalised_isStartingWeapon}");
+
+        return normalised_timesClipEmptied +
+                normalised_killsDealt +
+                normalised_timesReloaded +
+                normalised_isStartingWeapon;
+    }
+
+    private float GetNormalisedFieldValue(List<EvolutionaryData> classList, string attributeName, int value)
+    {
+        int maxAttributeValue = int.MinValue; // Initialize to smallest possible integer value
+        foreach (EvolutionaryData c in classList)
+        {
+            int attributeValue = (int)c.GetType().GetField(attributeName).GetValue(c);
+            //int attributeValue = (int)c.GetType().GetProperty(attributeName).GetValue(c, null);
+            if (attributeValue > maxAttributeValue)
+            {
+                maxAttributeValue = attributeValue;
+            }
+        }
+
+        if (maxAttributeValue == 0)
+            return 0;
+        else
+            return (float)value / (float)maxAttributeValue;
     }
 }
