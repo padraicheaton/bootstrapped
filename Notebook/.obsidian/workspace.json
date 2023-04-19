@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
+                "file": "Masters/Dev/Major Design Choices.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
+                "file": "Masters/Dev/Major Design Choices.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
+                "file": "Masters/Dev/Major Design Choices.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Masters/Concepts/Epsilon Greedy Path Optimisation.md"
+                "file": "Masters/Dev/Major Design Choices.md"
               }
             }
           }
@@ -149,12 +149,22 @@
     "width": 300,
     "collapsed": true
   },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
   "active": "eb93ae2a032de943",
   "lastOpenFiles": [
-    "Masters/Concepts/Efficient Communication of Complex Game Mechanics.md",
-    "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
-    "Masters/Papers/Knowledge Encoding in Game Mechanics.md",
     "Masters/Dev/Algorithm Design.md",
+    "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
+    "Masters/Concepts/Efficient Communication of Complex Game Mechanics.md",
+    "Masters/Papers/Knowledge Encoding in Game Mechanics.md",
     "Masters/Dev/Major Design Choices.md"
   ]
 }
