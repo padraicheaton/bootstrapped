@@ -8,43 +8,21 @@
         "type": "tabs",
         "children": [
           {
-            "id": "118534fd77b0c860",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Masters/Concepts/Efficient Communication of Complex Game Mechanics.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "eb93ae2a032de943",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "Masters/Concepts/Efficient Communication of Complex Game Mechanics.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "81dbc22c5f6a21ae",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Masters/Dev/Algorithm Design.md",
-                "mode": "source",
-                "source": false
+                "file": "Masters/Dev/Tutorial Level Design.canvas",
+                "viewState": {
+                  "x": -181.35132324025437,
+                  "y": 1347.9540343937397,
+                  "zoom": -0.1670560496028588
+                }
               }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -110,7 +88,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Masters/Dev/Algorithm Design.md",
+                "file": "Masters/Dev/Tutorial Level Design.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +105,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Masters/Dev/Algorithm Design.md",
+                "file": "Masters/Dev/Tutorial Level Design.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +128,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Masters/Dev/Algorithm Design.md"
+                "file": "Masters/Dev/Tutorial Level Design.canvas"
               }
             }
           }
@@ -171,14 +149,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "81dbc22c5f6a21ae",
+  "active": "eb93ae2a032de943",
   "lastOpenFiles": [
-    "Masters/Concepts/Efficient Communication of Complex Game Mechanics.md",
-    "GDS1/Group Notes.md",
-    "GDS1",
-    "Masters/Papers/Knowledge Encoding in Game Mechanics.md",
-    "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
     "Masters/Dev/Major Design Choices.md",
-    "Masters/Dev/Algorithm Design.md"
+    "Masters/Dev/Tutorial Level Design.canvas",
+    "Masters/Concepts/Efficient Communication of Complex Game Mechanics.md",
+    "Masters/Dev/Algorithm Design.md",
+    "GDS1/Group Notes.md",
+    "GDS1/Feedback/Team 2 - 5pm.md",
+    "GDS1/Feedback",
+    "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
+    "GDS1",
+    "Masters/Papers/Knowledge Encoding in Game Mechanics.md"
   ]
 }

@@ -1,35 +1,7 @@
-# 10am Class
-
-## Luigamin | 10am
-- 
-
-## Super Jerome Bros | 10am
-- 
-
-## Team 2 | 10am
-- 
-
-## Team 4 | 10am
-- 
-
-## Team 7 | 10am
-- 
-
-## Team 8 | 10am
-- 
-
-## We Still Don't Know (Yet) | 10am
-- 
-
-# 12pm Class
-
-## Team 1 | 12pm
-- 
-
-## Team 2 | 12pm
-- 
-
 # 5pm Class
+
+## Team 2 | 5pm
+- Has asked for more hands-on feedback on the game as it progresses through the sprint, as detailed here: [[Team 2 - 5pm]]
 
 ## Fried Chicken | 5pm
 - (20/4)
@@ -39,9 +11,5 @@
 		- Splitting the two problem members out into their own group and provisioning revised assignment of reduced scope
 		- Moving Andrew back to **Team Crunch | 5pm**
 		- Splitting Andrew and Pei-Shan into their own group of 2 and provisioning revised assignment of reduced scope
-
-## Team 2 | 5pm
-- 
-
-## Team Crunch | 5pm
-- 
+	- (4pm) Meeting w/ Jaime Outcomes:
+		- If creating an additional smaller group, both groups retain copies of the source code as it stands currently with each group being required to build on top of it and make it their own. Scopes will be adjusted according to group size

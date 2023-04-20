@@ -1,1 +1,9 @@
-{}
+{
+  "spellcheck": true,
+  "spellcheckLanguages": [
+    "en-AU"
+  ],
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "attachmentFolderPath": "./"
+}
