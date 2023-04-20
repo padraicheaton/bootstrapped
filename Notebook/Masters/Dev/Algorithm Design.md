@@ -22,3 +22,21 @@ For a given genotype:
 - The amount of kills that weapon has done
 - The amount of times the weapon has been reloaded
 - If this weapon is the chosen starting weapon or not
+
+# Adaptation of Traditional Genetic Algorithm
+The traditional features of a genetic algorithm are the following, including how they are planned to be adapted to this context:
+- Initial population
+	- This is the initial range of weapons offered to the player during the tutorial process, that are used as the basis for further generation. This can also include the starting weapon selected and used by the player each level.
+- Fitness calculation
+	- As defined above ([[Algorithm Design#Stored Metrics]]), this is calculated for each weapon based on its recorded performance metrics, which are normalised and artificially weighted.
+- Selection criteria
+	- For this context, the selection criteria is the player. They are the ones who pick and choose which weapons enter the population pool, and they are the ones that directly inform the performance metrics
+- Crossover
+	- Standard
+- Mutation
+	- Standard
+- Population generation
+	- Generated in batches of increasing size each game loop iteration.
+
+==!! Cumulative Genetic Algorithm?? As the population pool is not replaced each generation...?? is this a problem?
+Might need to explore only storing the most recently generated population, with retaining a fixed number of the fittest individuals in the pool==
