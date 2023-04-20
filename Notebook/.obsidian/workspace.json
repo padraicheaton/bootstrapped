@@ -11,14 +11,11 @@
             "id": "eb93ae2a032de943",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "Masters/Dev/Tutorial Level Design.canvas",
-                "viewState": {
-                  "x": -181.35132324025437,
-                  "y": 1347.9540343937397,
-                  "zoom": -0.1670560496028588
-                }
+                "file": "GDS1/Group Notes.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -88,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Masters/Dev/Tutorial Level Design.canvas",
+                "file": "GDS1/Group Notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Masters/Dev/Tutorial Level Design.canvas",
+                "file": "GDS1/Group Notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -128,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Masters/Dev/Tutorial Level Design.canvas"
+                "file": "GDS1/Group Notes.md"
               }
             }
           }
@@ -151,12 +148,12 @@
   },
   "active": "eb93ae2a032de943",
   "lastOpenFiles": [
-    "Masters/Dev/Major Design Choices.md",
+    "GDS1/Feedback/Team 2 - 5pm.md",
     "Masters/Dev/Tutorial Level Design.canvas",
+    "Masters/Dev/Major Design Choices.md",
     "Masters/Concepts/Efficient Communication of Complex Game Mechanics.md",
     "Masters/Dev/Algorithm Design.md",
     "GDS1/Group Notes.md",
-    "GDS1/Feedback/Team 2 - 5pm.md",
     "GDS1/Feedback",
     "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
     "GDS1",
