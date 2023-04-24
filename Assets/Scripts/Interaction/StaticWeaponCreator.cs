@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class StaticWeaponCreator : MonoBehaviour
 {
-    public int[] dna;
+    [SerializeField] public List<StaticWeapon> weapons = new List<StaticWeapon>();
 
     private void Start()
     {
-        ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(dna, transform.position);
+        foreach (StaticWeapon dna in weapons)
+            ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(dna.genotype, transform.position);
+    }
+
+    [System.Serializable]
+    public class StaticWeapon
+    {
+        public int[] genotype;
+
+        public StaticWeapon()
+        {
+            genotype = new int[] { 1, 0, 0, 0, 0 };
+        }
     }
 }
