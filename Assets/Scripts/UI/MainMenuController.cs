@@ -25,7 +25,7 @@ public class MainMenuController : MonoBehaviour
         while (cg.alpha < 1f)
         {
             yield return null;
-            cg.alpha += Time.deltaTime;
+            cg.alpha += Time.deltaTime / 2f;
         }
     }
 
