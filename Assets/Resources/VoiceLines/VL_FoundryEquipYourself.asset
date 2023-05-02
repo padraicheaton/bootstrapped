@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Equip yourself with as many weapons as you can. Once you're ready head over
     to the antenna behind the foundry to inject a virus into the robot network.
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 0e17d1a239c6f8b4b9af96cdea490088, type: 3}

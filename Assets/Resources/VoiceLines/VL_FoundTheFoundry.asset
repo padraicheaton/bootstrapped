@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: There's the Foundry! Interact with it to generate some weapons. We will use
     this opportunity to strike back at the robots!
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 731808bb6cc52a049bbba4d248b5571e, type: 3}

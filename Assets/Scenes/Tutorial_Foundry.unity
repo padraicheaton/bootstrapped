@@ -2483,9 +2483,9 @@ MonoBehaviour:
   exitPortal: {fileID: 1121902865}
   VL_mutationBegun: {fileID: 11400000, guid: bb99348b207343a4fa89fd36c6d968d8, type: 2}
   VL_wavesCompleted: {fileID: 11400000, guid: 70e848d88bb38b9409a48cc41f94899c, type: 2}
-  requiredWaveNum: 10
+  requiredWaveNum: 5
   mutationChanceWaveThreshold: 2
-  introductoryMutationChance: 0.1
+  introductoryMutationChance: 0.2
 --- !u!1 &1586861867
 GameObject:
   m_ObjectHideFlags: 0

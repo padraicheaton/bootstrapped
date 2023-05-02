@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffcf4335cc8bdc4184b9bd5bbb28072, type: 3}
   m_Name: VL_OtherSideOfPortal
   m_EditorClassIdentifier: 
-  text: The foundry should be just on the other side of that portal
-  clip: {fileID: 0}
+  text: You're close! The foundry should be just on the other side of that portal
+  clip: {fileID: 8300000, guid: d10e3ae6237ce3044a051962253a295d, type: 3}

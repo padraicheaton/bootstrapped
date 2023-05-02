@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Make sure to equip yourself with as many weapons as you can hold, we are
     reading signs of robots up ahead.
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: d32ad11359eb07241b6d169063ccb805, type: 3}

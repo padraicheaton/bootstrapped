@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffcf4335cc8bdc4184b9bd5bbb28072, type: 3}
   m_Name: VL_MutationIntroduced
   m_EditorClassIdentifier: 
-  text: We've taken the liberty to upload new generation parameters to the Foundry.
+  text: We've taken the liberty of uploading new generation parameters to the Foundry.
     See what new weapons it gives you.
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 9ec9402c464a5a84ebf65b98896ee805, type: 3}

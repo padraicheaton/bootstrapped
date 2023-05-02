@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Welcome agent, we've received intelligence of a foundry near your location.
     Retrieve it at all costs, more information to follow.
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 58c71ce83a260b3428bfa1d3063fd4dd, type: 3}

@@ -70,8 +70,11 @@ public class Foundry : PhaseBasedInteractable
     {
         foreach (WeaponController wep in spawnedWeapons)
         {
-            Destroy(wep.gameObject);
+            if (wep != null)
+                Destroy(wep.gameObject);
         }
+
+        spawnedWeapons.Clear();
     }
 
     private void UntrackSpawnedWeapon(int[] dna)
@@ -81,6 +84,8 @@ public class Foundry : PhaseBasedInteractable
         foreach (WeaponController wep in spawnedWeapons)
         {
             //! BANDAID FIX - Only equipped weapons are parented to the weapon container
+            if (wep == null) continue;
+
             if (wep.isEquipped || wep.transform.parent != null)
             {
                 toRemove.Add(wep);

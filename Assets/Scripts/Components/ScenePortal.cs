@@ -18,7 +18,7 @@ public class ScenePortal : Interactable
 
     public override void OnInteracted()
     {
-        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == LoadedScenes.Tutorial)
+        if (destination == LoadedScenes.Lab)
             SaveStateController.SetData(SaveStateController.tutorialCompleteSaveKey, true);
 
         ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(destination);
