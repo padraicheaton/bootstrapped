@@ -23,6 +23,9 @@ public class SoundController : MonoBehaviour
                 StartCoroutine(FadeSwitchAudioClip(backgroundAudioSource, sm));
                 break;
             }
+
+        // Regardless of anything, if the background music is switching - the scene is changing and therefore the swarm music should fade
+        StartCoroutine(FadeAudioSource(foregroundAudioSource, 0f));
     }
 
     public void SetSwarmBackgroundMusic(bool enabled)

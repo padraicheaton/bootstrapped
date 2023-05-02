@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEditor;
-using UnityEditor.UI;
 
 public class UpgradeShopItemUI : Button
 {
@@ -27,7 +26,7 @@ public class UpgradeShopItemUI : Button
 #if UNITY_EDITOR
 
 [CustomEditor(typeof(UpgradeShopItemUI))]
-public class UpgradeShopItemUIEditor : ButtonEditor
+public class UpgradeShopItemUIEditor : UnityEditor.UI.ButtonEditor
 {
     public override void OnInspectorGUI()
     {

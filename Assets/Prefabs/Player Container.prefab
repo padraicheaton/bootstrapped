@@ -1542,8 +1542,10 @@ MonoBehaviour:
   remainingAmmoTxt: {fileID: 6256144005988213489}
   remainingAmmoCG: {fileID: 6256144005326897298}
   sparePartCountTxt: {fileID: 559432667}
+  crosshairCG: {fileID: 5767823245347020122}
   healthBarLerpSpeed: 5
   ammoAlphaSpeed: 5
+  shouldShowCrosshair: 1
 --- !u!1 &6256144005326897326
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,7 +3085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 0.8}
+  m_Color: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 0.88235295}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3123,6 +3125,7 @@ GameObject:
   - component: {fileID: 6256144006365798620}
   - component: {fileID: 6256144006365798594}
   - component: {fileID: 6256144006365798621}
+  - component: {fileID: 5767823245347020122}
   m_Layer: 8
   m_Name: CrossHair
   m_TagString: Untagged
@@ -3188,6 +3191,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &5767823245347020122
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6256144006365798623}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &6256144006429017450
 GameObject:
   m_ObjectHideFlags: 0
@@ -3787,7 +3802,6 @@ MonoBehaviour:
   aimHoldPoint: {fileID: 783670810}
   weaponFirePoint: {fileID: 6256144006685328626}
   useStartingWeapon: 1
-  startingWeapon: 0100000000000000000000000000000000000000
 --- !u!114 &6256144007111590488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4359,6 +4373,31 @@ PrefabInstance:
     - target: {fileID: 1242072070775515382, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477673682434174374, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477673682434174374, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477673682434174374, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477673682434174374, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477673682434174374, guid: 7d1be5cd79fd69d4f8f35026a76deae4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7000261078588509523, guid: 7d1be5cd79fd69d4f8f35026a76deae4,

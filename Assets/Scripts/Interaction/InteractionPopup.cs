@@ -39,6 +39,8 @@ public class InteractionPopup : MonoBehaviour
 
         if (!shown)
             rayCastPos += Vector3.down * 5f;
+
+        ServiceLocator.instance.GetService<PlayerHUDController>().shouldShowCrosshair = !shown;
     }
 
     public void SetData(Vector3 pos, Interactable interactable)

@@ -37,7 +37,12 @@ public class GameManager : MonoBehaviour
 
     private void OnGameOver()
     {
-        ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(LoadedScenes.Lab);
+        // If in the sandbox, go back to the lab
+        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == LoadedScenes.Sandbox)
+            ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(LoadedScenes.Lab);
+        // Else, reload the current scene
+        else
+            ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(ServiceLocator.instance.GetService<SceneController>().GetActiveScene());
     }
 
     private void OnApplicationQuit()
