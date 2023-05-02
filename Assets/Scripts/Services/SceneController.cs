@@ -9,7 +9,8 @@ public enum LoadedScenes
     MainMenu,
     Lab,
     Sandbox,
-    Tutorial
+    Tutorial,
+    Tutorial_Foundry
 }
 
 public class SceneController : MonoBehaviour

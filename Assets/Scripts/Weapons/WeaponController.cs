@@ -32,7 +32,7 @@ public class WeaponController : Interactable
     private Rigidbody rb;
     private BoxCollider coll;
 
-    private float despawnDelay = 120f;
+    private float despawnDelay = 90f;
 
     // ! The Important Stuff
     public int[] dna { get; private set; }
@@ -167,7 +167,7 @@ public class WeaponController : Interactable
     private void InvokeEvent(UnityAction<int[]> action)
     {
         // Make this distinction so that weapons used on the shooting range have no bearing on the preference selection
-        if (action != null && ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == LoadedScenes.Sandbox)
+        if (action != null && ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.Lab)
             action.Invoke(dna);
     }
 }

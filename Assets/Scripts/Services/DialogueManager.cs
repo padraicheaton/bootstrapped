@@ -21,6 +21,11 @@ public class DialogueManager : MonoBehaviour
         dialogueBoxCG.alpha = 0f;
     }
 
+    public void DisplayDialogue(VoiceLine vl)
+    {
+        DisplayDialogue(vl.text, vl.clip);
+    }
+
     public void DisplayDialogue(string text, AudioClip clip = null)
     {
         StopAllCoroutines();

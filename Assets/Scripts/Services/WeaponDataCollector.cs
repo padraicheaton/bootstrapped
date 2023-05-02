@@ -96,6 +96,8 @@ public static class WeaponDataCollector
 
     public static int[][] GetFittestParents(int numParents = 2)
     {
+        Debug.Log($"Population Count {evolutionaryData.Count}");
+
         int[][] parentsPopulation = new int[numParents][];
 
         for (int i = 0; i < numParents; i++)

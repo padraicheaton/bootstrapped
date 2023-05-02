@@ -14,6 +14,7 @@ public class LevelPopulator : MonoBehaviour
     [SerializeField] private int pointIncrement;
     [SerializeField] private int numCaches;
     [SerializeField] private int numRefillStations;
+    [SerializeField] private float rayOriginHeight = 45f;
 
     private List<Vector3> points = new List<Vector3>();
 
@@ -32,7 +33,7 @@ public class LevelPopulator : MonoBehaviour
         {
             for (float z = -levelDimensions.y / 2 + offset; z < levelDimensions.y / 2 - offset; z += pointIncrement)
             {
-                Vector3 rayOrigin = new Vector3(x, 45, z);
+                Vector3 rayOrigin = new Vector3(x, rayOriginHeight, z);
 
                 if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit))
                 {
@@ -89,5 +90,7 @@ public class LevelPopulator : MonoBehaviour
 
         foreach (Vector3 p in points)
             Gizmos.DrawSphere(p, 0.51f);
+
+        Gizmos.DrawWireSphere(transform.position + Vector3.up * rayOriginHeight, 0.5f);
     }
 }

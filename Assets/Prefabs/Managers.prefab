@@ -1147,6 +1147,8 @@ MonoBehaviour:
     config: {fileID: 11400000, guid: cc088e23dca68dc45808203a3f49a23c, type: 2}
   - scene: 3
     config: {fileID: 11400000, guid: 8275bf186fe59f248b6e8c675b6c84da, type: 2}
+  - scene: 4
+    config: {fileID: 11400000, guid: 8275bf186fe59f248b6e8c675b6c84da, type: 2}
 --- !u!114 &1529408714943121493
 MonoBehaviour:
   m_ObjectHideFlags: 0

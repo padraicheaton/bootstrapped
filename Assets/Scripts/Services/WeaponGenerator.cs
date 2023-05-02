@@ -11,6 +11,13 @@ public class WeaponGenerator : MonoBehaviour
     private void Start()
     {
         cachedNoveltyChance = GetSettings().noveltyChance;
+
+        ServiceLocator.instance.GetService<SceneController>().onSceneChanged += OnSceneChanged;
+    }
+
+    private void OnSceneChanged()
+    {
+        cachedNoveltyChance = GetSettings().noveltyChance;
     }
 
     public GameObject GenerateWeapon(Vector3 spawnPoint, bool forceRandom = false)
