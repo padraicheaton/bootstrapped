@@ -84,11 +84,11 @@ public class ModularProjectile : MonoBehaviour
     {
         foreach (ProjectileModifier m in chosenModifiers)
         {
+            yield return new WaitForSeconds(modifierAdditiveDelay);
+
             m.SetupModifier(rb, collidableTransform, this);
 
             activeModifiers.Add(m);
-
-            yield return new WaitForSeconds(modifierAdditiveDelay);
         }
 
         yield return new WaitForSeconds(timeToLive);
