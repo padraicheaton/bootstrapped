@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public static class WeaponDataCollector
 {
@@ -46,7 +47,7 @@ public static class WeaponDataCollector
     {
         foreach (EvolutionaryData data in evolutionaryData)
         {
-            if (data.dna == dna)
+            if (data.dna.SequenceEqual(dna))
                 return data;
         }
 

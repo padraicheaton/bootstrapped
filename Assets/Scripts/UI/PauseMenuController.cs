@@ -33,10 +33,19 @@ public class PauseMenuController : ModalWindow
     {
         OnResumeBtnPressed();
 
-        ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(
-            ServiceLocator.instance.GetService<SceneController>().GetActiveScene() == LoadedScenes.Sandbox ?
-                LoadedScenes.Lab :
-                LoadedScenes.MainMenu
-        );
+        LoadedScenes backScene = LoadedScenes.MainMenu;
+
+        switch (ServiceLocator.instance.GetService<SceneController>().GetActiveScene())
+        {
+            case LoadedScenes.Lab:
+            default:
+                backScene = LoadedScenes.MainMenu;
+                break;
+            case LoadedScenes.Sandbox:
+                backScene = LoadedScenes.Lab;
+                break;
+        }
+
+        ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(backScene);
     }
 }

@@ -42,8 +42,11 @@ public class PlayerInteraction : MonoBehaviour
                 highlightedInteractable = interactable;
 
                 popup.SetVisibleState(true);
-                //popup.SetData(hit.collider.transform.position + Vector3.up, interactable);
-                popup.SetData(hit.point - transform.forward * 0.25f + Vector3.up, interactable);
+
+                // Point should be halfway between interactable and the camera (this transform)
+                Vector3 pos = Vector3.Lerp(hit.point, transform.position, 0.25f);
+
+                popup.SetData(pos, interactable);
             }
         }
     }
