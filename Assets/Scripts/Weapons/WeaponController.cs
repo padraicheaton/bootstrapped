@@ -37,6 +37,8 @@ public class WeaponController : Interactable
     // ! The Important Stuff
     public int[] dna { get; private set; }
 
+    public bool isEquipped { get; private set; } = false;
+
     public void Construct(int[] dna)
     {
         this.dna = dna;
@@ -85,6 +87,8 @@ public class WeaponController : Interactable
         StopAllCoroutines();
 
         InvokeEvent(WeaponDataCollector.onWeaponEquipped);
+
+        isEquipped = true;
     }
 
     public void OnDropped()
@@ -102,6 +106,8 @@ public class WeaponController : Interactable
         }
         else
             InitiateDespawnTimer();
+
+        isEquipped = false;
     }
 
     public void OnFireInput(bool performed)

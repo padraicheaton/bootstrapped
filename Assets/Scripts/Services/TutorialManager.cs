@@ -21,6 +21,8 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
+        exitPortal.SetActive(false);
+
         tutorialFoundryConfig.mutationChance = 0f;
 
         ServiceLocator.instance.GetService<Spawner>().onSwarmEnd += OnWaveEnded;

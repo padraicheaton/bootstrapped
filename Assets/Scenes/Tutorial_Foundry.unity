@@ -2481,8 +2481,8 @@ MonoBehaviour:
   tutorialFoundryConfig: {fileID: 11400000, guid: 8275bf186fe59f248b6e8c675b6c84da,
     type: 2}
   exitPortal: {fileID: 1121902865}
-  VL_mutationBegun: {fileID: 0}
-  VL_wavesCompleted: {fileID: 0}
+  VL_mutationBegun: {fileID: 11400000, guid: bb99348b207343a4fa89fd36c6d968d8, type: 2}
+  VL_wavesCompleted: {fileID: 11400000, guid: 70e848d88bb38b9409a48cc41f94899c, type: 2}
   requiredWaveNum: 10
   mutationChanceWaveThreshold: 2
   introductoryMutationChance: 0.1

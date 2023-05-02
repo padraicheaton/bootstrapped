@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Foundry : PhaseBasedInteractable
 {
@@ -11,6 +12,8 @@ public class Foundry : PhaseBasedInteractable
     private int remainingWeaponsToGenerate;
 
     private bool currentlySpawningWeapons = false;
+
+    private List<WeaponController> spawnedWeapons = new List<WeaponController>();
 
     public override string GetName()
     {
@@ -29,6 +32,10 @@ public class Foundry : PhaseBasedInteractable
 
             numWeaponsToGenerateEachWave += additiveIncrease;
         };
+
+        WeaponDataCollector.onWeaponEquipped += UntrackSpawnedWeapon;
+
+        ServiceLocator.instance.GetService<Spawner>().onSwarmBegin += DestroyUnusedWeapons;
     }
 
     public override void OnInteracted()
@@ -51,9 +58,36 @@ public class Foundry : PhaseBasedInteractable
 
             remainingWeaponsToGenerate--;
 
+            spawnedWeapons.Add(generatedWeapon.GetComponent<WeaponController>());
+
             yield return new WaitForSeconds(0.2f);
         }
 
         currentlySpawningWeapons = false;
+    }
+
+    private void DestroyUnusedWeapons()
+    {
+        foreach (WeaponController wep in spawnedWeapons)
+        {
+            Destroy(wep.gameObject);
+        }
+    }
+
+    private void UntrackSpawnedWeapon(int[] dna)
+    {
+        List<WeaponController> toRemove = new List<WeaponController>();
+
+        foreach (WeaponController wep in spawnedWeapons)
+        {
+            //! BANDAID FIX - Only equipped weapons are parented to the weapon container
+            if (wep.isEquipped || wep.transform.parent != null)
+            {
+                toRemove.Add(wep);
+            }
+        }
+
+        foreach (WeaponController rem in toRemove)
+            spawnedWeapons.Remove(rem);
     }
 }
