@@ -19,6 +19,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}
+      propertyPath: rayLength
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
       propertyPath: attackDelay
       value: 5
       objectReference: {fileID: 0}
@@ -26,6 +31,11 @@ PrefabInstance:
         type: 3}
       propertyPath: itemsToDrop
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44596827361024160, guid: 60ef30c03266e574ba1ecad3eba26a2e,
+        type: 3}
+      propertyPath: preferredHoverHeight
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1269831680803641669, guid: 60ef30c03266e574ba1ecad3eba26a2e,
         type: 3}

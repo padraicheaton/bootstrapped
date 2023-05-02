@@ -9,14 +9,39 @@ public class AreaSpawner : MonoBehaviour
     [SerializeField] private bool oneshot;
     [SerializeField] private Vector3 spawnPos;
 
+    private bool isSpawning = false;
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
 
+        if (!isSpawning)
+            StartCoroutine(PsuedoSwarmRoutine());
+    }
+
+    private IEnumerator PsuedoSwarmRoutine()
+    {
+        isSpawning = true;
+
+        ServiceLocator.instance.GetService<SoundController>().SetSwarmBackgroundMusic(true);
+
+        List<GameObject> swarmEnemies = new List<GameObject>();
+
         for (int i = 0; i < numObjsToSpawn; i++)
         {
-            Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Length)], transform.position + spawnPos + Random.onUnitSphere * 2f, Quaternion.identity);
+            swarmEnemies.Add(Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Length)], transform.position + spawnPos + Random.onUnitSphere * 2f, Quaternion.identity));
         }
+
+        while (swarmEnemies.Count > 0)
+        {
+            yield return new WaitForEndOfFrame();
+
+            swarmEnemies.RemoveAll(enemy => enemy == null);
+        }
+
+        ServiceLocator.instance.GetService<SoundController>().SetSwarmBackgroundMusic(false);
+
+        isSpawning = false;
 
         if (oneshot)
             Destroy(gameObject);

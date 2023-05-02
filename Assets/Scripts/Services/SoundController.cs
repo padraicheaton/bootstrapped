@@ -27,21 +27,25 @@ public class SoundController : MonoBehaviour
 
     public void SetSwarmBackgroundMusic(bool enabled)
     {
-        foregroundAudioSource.clip = swarmMusic;
-
-        foregroundAudioSource.Play();
+        StopAllCoroutines();
 
         StartCoroutine(FadeAudioSource(foregroundAudioSource, enabled ? GetMaxVolumeMultiplier() : 0f));
 
         if (enabled)
+        {
+            foregroundAudioSource.clip = swarmMusic;
+
+            foregroundAudioSource.Play();
+
             StartCoroutine(FadeAudioSource(backgroundAudioSource, 0f));
+        }
         else
             SwitchBackgroundMusic(ServiceLocator.instance.GetService<SceneController>().GetActiveScene());
     }
 
     private IEnumerator FadeAudioSource(AudioSource source, float destinationVolume)
     {
-        while (Mathf.Abs(source.volume - destinationVolume) > 0.1f)
+        while (Mathf.Abs(source.volume - destinationVolume) > 0.01f)
         {
             yield return null;
 

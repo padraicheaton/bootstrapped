@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WorldControlHint : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private CanvasGroup cg;
+    [SerializeField] private TextMeshProUGUI hintTxt;
+
+    [Header("Params")]
+    [SerializeField] private string hintString;
 
     private float destAlpha;
     private Transform camTransform;
@@ -12,6 +18,15 @@ public class WorldControlHint : MonoBehaviour
     private void Start()
     {
         camTransform = ServiceLocator.instance.GetService<PlayerCamera>().transform;
+
+        hintTxt.gameObject.SetActive(false);
+
+        if (hintString != null && hintString != "")
+        {
+            hintTxt.gameObject.SetActive(true);
+
+            hintTxt.text = hintString;
+        }
 
         destAlpha = 1f;
     }

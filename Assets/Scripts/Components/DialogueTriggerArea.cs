@@ -10,6 +10,8 @@ public class DialogueTriggerArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag("Player")) return;
+
         ServiceLocator.instance.GetService<DialogueManager>().DisplayDialogue(voiceLine.text, voiceLine.clip);
 
         if (destroyAfterTrigger)

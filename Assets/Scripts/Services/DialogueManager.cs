@@ -23,6 +23,8 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayDialogue(string text, AudioClip clip = null)
     {
+        StopAllCoroutines();
+
         StartCoroutine(DisplayDialogueRoutine(text, clip));
     }
 

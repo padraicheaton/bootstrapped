@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class ScenePortal : Interactable
 {
+    [Header("Settings")]
     public LoadedScenes destination;
+    public string overrideDestinationName;
 
     public override string GetName()
     {
-        return $"To: The {destination.ToString()}";
+        if (overrideDestinationName == "" || overrideDestinationName == null)
+            return $"To: The {destination.ToString()}";
+        else
+            return $"To: {overrideDestinationName}";
     }
 
     public override void OnInteracted()

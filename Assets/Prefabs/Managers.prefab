@@ -1202,13 +1202,13 @@ MonoBehaviour:
     volume: 0.3
   - clip: {fileID: 8300000, guid: e4b395097c77ef344ba56835086143c9, type: 3}
     scene: 1
-    volume: 0.5
+    volume: 0.6
   - clip: {fileID: 8300000, guid: c5c02eaa39247fb46bdbdb51691f34f4, type: 3}
     scene: 0
-    volume: 0.5
+    volume: 0.6
   - clip: {fileID: 8300000, guid: dbaf47e48b071e14488c4b3e81139341, type: 3}
     scene: 3
-    volume: 0.5
+    volume: 0.6
   swarmMusic: {fileID: 8300000, guid: a77fe9b9acf8b69489caa8f4e0b5e545, type: 3}
   backgroundAudioSource: {fileID: 262329602}
   foregroundAudioSource: {fileID: 245012405}
