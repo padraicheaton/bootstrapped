@@ -8,7 +8,7 @@ public class PlayerHUDController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Image healthBarFill;
-    [SerializeField] private TextMeshProUGUI remainingAmmoTxt;
+    [SerializeField] private Image remainingAmmoChargeImg;
     [SerializeField] private CanvasGroup remainingAmmoCG;
     [SerializeField] private TextMeshProUGUI sparePartCountTxt;
     [SerializeField] private CanvasGroup crosshairCG;
@@ -23,13 +23,14 @@ public class PlayerHUDController : MonoBehaviour
     {
         healthBarFill.fillAmount = Mathf.Lerp(healthBarFill.fillAmount, ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetHealthPercentage(), Time.deltaTime * healthBarLerpSpeed);
 
-        int remainingAmmo = ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetEquippedWeaponAmmo();
+        float ammoCharge = ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetEquippedWeaponAmmoPercentage();
 
-        if (remainingAmmo == -1)
+        if (ammoCharge == -1)
             remainingAmmoCG.alpha = Mathf.Lerp(remainingAmmoCG.alpha, 0f, Time.deltaTime * ammoAlphaSpeed);
         else
         {
-            remainingAmmoTxt.text = remainingAmmo.ToString();
+            remainingAmmoChargeImg.color = ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetEquippedWeaponReloadingState() ? Color.red : Color.cyan;
+            remainingAmmoChargeImg.fillAmount = ammoCharge;
             remainingAmmoCG.alpha = Mathf.Lerp(remainingAmmoCG.alpha, 1f, Time.deltaTime * ammoAlphaSpeed);
         }
 

@@ -144,7 +144,7 @@ PrefabInstance:
     - target: {fileID: 3606283343415565487, guid: 039c9bb0db8696d478ca44a329ee4bde,
         type: 3}
       propertyPath: clipSize
-      value: 20
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3606283343415565487, guid: 039c9bb0db8696d478ca44a329ee4bde,
         type: 3}
@@ -155,6 +155,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isAutomatic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3606283343415565487, guid: 039c9bb0db8696d478ca44a329ee4bde,
+        type: 3}
+      propertyPath: timeToReload
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3606283343415565487, guid: 039c9bb0db8696d478ca44a329ee4bde,
         type: 3}

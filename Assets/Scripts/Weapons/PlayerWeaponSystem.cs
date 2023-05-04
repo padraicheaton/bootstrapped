@@ -206,12 +206,20 @@ public class PlayerWeaponSystem : MonoBehaviour
         return playerHealth;
     }
 
-    public int GetEquippedWeaponAmmo()
+    public bool GetEquippedWeaponReloadingState()
+    {
+        if (GetActiveWeapon() == null)
+            return false;
+        else
+            return GetActiveWeapon().isRecharging;
+    }
+
+    public float GetEquippedWeaponAmmoPercentage()
     {
         if (GetActiveWeapon() == null)
             return -1;
         else
-            return GetActiveWeapon().remainingAmmo;
+            return GetActiveWeapon().ammoCharge;
     }
 
     public void IncreaseWeaponSpace(int amt)

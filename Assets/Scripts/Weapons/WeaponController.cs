@@ -21,10 +21,13 @@ public class WeaponController : Interactable
     [SerializeField] private int clipSize;
     [SerializeField] private float spread;
     [SerializeField] private bool isAutomatic;
+    [SerializeField] private float timeToReload;
 
     private bool isFireInputPressed;
     private float timeSinceLastFired;
     public int remainingAmmo { get; private set; }
+    public float ammoCharge { get { return (float)remainingAmmo / (float)clipSize; } private set { ammoCharge = value; } }
+    public bool isRecharging { get; private set; }
 
     private Transform weaponFirePoint;
 
@@ -53,7 +56,7 @@ public class WeaponController : Interactable
 
     private void Update()
     {
-        if (isFireInputPressed && timeSinceLastFired >= timeBetweenShots && remainingAmmo > 0)
+        if (CanShoot())
         {
             Fire();
 
@@ -64,6 +67,11 @@ public class WeaponController : Interactable
         }
 
         timeSinceLastFired += Time.deltaTime;
+    }
+
+    private bool CanShoot()
+    {
+        return isFireInputPressed && timeSinceLastFired >= timeBetweenShots && remainingAmmo > 0 && !isRecharging;
     }
 
     public override void OnInteracted()
@@ -129,7 +137,7 @@ public class WeaponController : Interactable
         remainingAmmo--;
 
         if (remainingAmmo <= 0)
-            InvokeEvent(WeaponDataCollector.onWeaponClipEmptied);
+            OnWeaponClipEmptied();
     }
 
     private Vector3 GetSpreadOffset()
@@ -141,6 +149,34 @@ public class WeaponController : Interactable
         rotationOffset.z = Random.Range(-1f, 1f) * spread;
 
         return rotationOffset;
+    }
+
+    private void OnWeaponClipEmptied()
+    {
+        InvokeEvent(WeaponDataCollector.onWeaponClipEmptied);
+
+        StartCoroutine(ReloadAfterDelay());
+    }
+
+    private IEnumerator ReloadAfterDelay()
+    {
+        isRecharging = true;
+
+        float progressTimer = 0f;
+
+        while (progressTimer < timeToReload)
+        {
+            progressTimer += Time.deltaTime;
+
+            remainingAmmo = Mathf.RoundToInt(Mathf.Lerp(0f, clipSize, progressTimer / timeToReload));
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        // Not using existing reload function as I do not want to invoke the reload event every time
+        remainingAmmo = clipSize;
+
+        isRecharging = false;
     }
 
     private void InitiateDespawnTimer()
@@ -165,6 +201,9 @@ public class WeaponController : Interactable
 
     public void ReloadWeapon()
     {
+        // if the weapon is actively recharging when reloaded, stop the routine
+        StopAllCoroutines();
+
         remainingAmmo = clipSize;
 
         InvokeEvent(WeaponDataCollector.onWeaponReloaded);

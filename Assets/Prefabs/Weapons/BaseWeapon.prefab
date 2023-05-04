@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d142ae02fca7d46a100ab040f7cc37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsInteractable: 1
   visuals: {fileID: 4063967366586317436}
   projectilePrefab: {fileID: 4436875020215233490, guid: 365442eb8401c144786404bda60cb173,
     type: 3}
@@ -61,6 +62,7 @@ MonoBehaviour:
   clipSize: 50
   spread: 0
   isAutomatic: 1
+  timeToReload: 15
 --- !u!65 &7958299124740438811
 BoxCollider:
   m_ObjectHideFlags: 0
