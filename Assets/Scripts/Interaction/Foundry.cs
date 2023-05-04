@@ -28,8 +28,6 @@ public class Foundry : PhaseBasedInteractable
 
         ServiceLocator.instance.GetService<Spawner>().onSwarmEnd += () =>
         {
-            remainingWeaponsToGenerate = numWeaponsToGenerateEachWave;
-
             numWeaponsToGenerateEachWave += additiveIncrease;
         };
 
@@ -47,6 +45,8 @@ public class Foundry : PhaseBasedInteractable
     private IEnumerator SpawnRemainingWeapons()
     {
         currentlySpawningWeapons = true;
+
+        remainingWeaponsToGenerate = numWeaponsToGenerateEachWave;
 
         for (int i = 0; i < numWeaponsToGenerateEachWave; i++)
         {

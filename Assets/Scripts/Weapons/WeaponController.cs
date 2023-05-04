@@ -206,6 +206,8 @@ public class WeaponController : Interactable
 
         remainingAmmo = clipSize;
 
+        isRecharging = false;
+
         InvokeEvent(WeaponDataCollector.onWeaponReloaded);
     }
 

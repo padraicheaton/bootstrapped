@@ -30,7 +30,7 @@ public class PlayerHUDController : MonoBehaviour
         else
         {
             remainingAmmoChargeImg.color = ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetEquippedWeaponReloadingState() ? Color.red : Color.cyan;
-            remainingAmmoChargeImg.fillAmount = ammoCharge;
+            remainingAmmoChargeImg.fillAmount = Mathf.Lerp(remainingAmmoChargeImg.fillAmount, ammoCharge, Time.deltaTime * ammoAlphaSpeed);
             remainingAmmoCG.alpha = Mathf.Lerp(remainingAmmoCG.alpha, 1f, Time.deltaTime * ammoAlphaSpeed);
         }
 

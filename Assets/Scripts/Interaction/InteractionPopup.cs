@@ -66,7 +66,7 @@ public class InteractionPopup : MonoBehaviour
             // Number the list
             for (int i = 0; i < modifiers.Length; i++)
             {
-                modifierDescription += $"{i + 1}. {modifiers[i].ToString()}";
+                modifierDescription += $"{i + 1}. {modifiers[i].ToString()}\n";
             }
 
             // foreach (ProjectileModifier m in ServiceLocator.instance.GetService<WeaponComponentProvider>().GetProjectileModifiers(dna))
