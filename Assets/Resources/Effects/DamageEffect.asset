@@ -15,3 +15,5 @@ MonoBehaviour:
   displayName: Damage
   prefab: {fileID: 5235125972624838321, guid: 3f4a167d62afb18408aa0f1a71b835bc, type: 3}
   icon: {fileID: 21300000, guid: 56bee127125832242919c18365fab4cb, type: 3}
+  particlePrefab: {fileID: 3454687432492742740, guid: 50fef3b7bd8cf894c9dbb2fc9444cbf2,
+    type: 3}

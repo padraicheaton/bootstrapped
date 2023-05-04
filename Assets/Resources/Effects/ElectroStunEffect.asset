@@ -15,3 +15,5 @@ MonoBehaviour:
   displayName: ElectroStun
   prefab: {fileID: 7059207599760041301, guid: 8cbdb1f0c27983a45aefc6ef8ce87815, type: 3}
   icon: {fileID: 21300000, guid: af686ccf4dc372a4c9cddb8104d6fdc5, type: 3}
+  particlePrefab: {fileID: 6679978165497265013, guid: a357e81fb7aeb634e849396e1bc9e3d1,
+    type: 3}

@@ -15,3 +15,5 @@ MonoBehaviour:
   displayName: Fire
   prefab: {fileID: 5958620469006161488, guid: 02d4f6d00dad37e4e9d38c61fcc26871, type: 3}
   icon: {fileID: 21300000, guid: f5e07cbb5cda2db45897bbe110f4069f, type: 3}
+  particlePrefab: {fileID: 6679978165497265013, guid: 3f2bd83512c4a4f45a665e65faa97d37,
+    type: 3}

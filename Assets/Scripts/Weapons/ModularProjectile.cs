@@ -56,6 +56,9 @@ public class ModularProjectile : MonoBehaviour
 
         effectToApply = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna);
 
+        if (effectToApply.particlePrefab != null)
+            Instantiate(effectToApply.particlePrefab, transform);
+
         rb.AddForce(transform.forward * launchForce, ForceMode.Impulse);
 
         shouldTick = true;

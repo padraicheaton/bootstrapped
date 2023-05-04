@@ -15,3 +15,5 @@ MonoBehaviour:
   displayName: Magnetic
   prefab: {fileID: 7059207599760041301, guid: 9c4137f9253855f4c9e7342c149af980, type: 3}
   icon: {fileID: 21300000, guid: 093c932c8b39a3c45ba6d1ab030c87c0, type: 3}
+  particlePrefab: {fileID: 3454687432492742740, guid: f2b43767bea0d434cb9e67c84640b44b,
+    type: 3}

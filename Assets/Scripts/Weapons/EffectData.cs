@@ -9,4 +9,5 @@ public class EffectData : ScriptableObject
     public string displayName;
     public GameObject prefab;
     public Sprite icon;
+    public GameObject particlePrefab;
 }

@@ -15,3 +15,5 @@ MonoBehaviour:
   displayName: Ice Slow
   prefab: {fileID: 9209951596393014943, guid: 66d8c763e931a534e90f98b6d54ed903, type: 3}
   icon: {fileID: 21300000, guid: 6dbd4632b71adc84e8cfb28b82a42e59, type: 3}
+  particlePrefab: {fileID: 6679978165497265013, guid: 7f66769a75a91904ba937bbad2cc45a1,
+    type: 3}
