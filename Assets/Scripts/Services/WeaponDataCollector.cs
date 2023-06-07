@@ -63,9 +63,6 @@ public static class WeaponDataCollector
         evolutionaryData = new List<EvolutionaryData>();
 
         evolutionaryData.AddRange(serialisedData);
-
-        foreach (EvolutionaryData d in evolutionaryData)
-            Debug.Log($"Loaded weapon with {d.timesClipEmptied} times clip emptied");
     }
 
     public static EvolutionaryData[] GetEvolutionaryData()
