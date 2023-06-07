@@ -9,6 +9,9 @@ public class NavmeshRobot : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private TrailRenderer jumpTrail;
+    [SerializeField] private ParticleSystem chargeFX;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
 
     [Header("Movement Params")]
     [SerializeField] private float movementSpeed;
@@ -18,6 +21,8 @@ public class NavmeshRobot : MonoBehaviour
     [Header("Attack Params")]
     [SerializeField] private float attackRange;
     [SerializeField] private float attackDelay;
+    [SerializeField] private float attackDmg;
+    [SerializeField] private float projectileSpeed;
     private Coroutine attackRoutineRef;
 
     public enum State
@@ -31,6 +36,7 @@ public class NavmeshRobot : MonoBehaviour
 
     private Transform target;
     private NavMeshAgent agent;
+    private HealthComponent hc;
 
     private string[] attackAnimTagOptions = { "Left", "Right", "Both" };
     private string attackAnimTag;
@@ -41,6 +47,12 @@ public class NavmeshRobot : MonoBehaviour
         agent.speed = movementSpeed;
 
         target = ServiceLocator.instance.GetService<PlayerMovement>().transform;
+
+        hc = GetComponent<HealthComponent>();
+        hc.onDeath += () =>
+        {
+            SwitchState(State.Dead);
+        };
 
         SwitchState(State.Chase);
     }
@@ -85,6 +97,10 @@ public class NavmeshRobot : MonoBehaviour
         if (currentState == State.Stun)
         {
             anim.SetBool("Defend", false);
+        }
+        else if (currentState == State.Attack)
+        {
+            chargeFX.Stop();
         }
 
         // ENTER
@@ -163,7 +179,13 @@ public class NavmeshRobot : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(attackDelay);
+            yield return new WaitForSeconds(attackDelay / 2f);
+
+            chargeFX.Play();
+
+            yield return new WaitForSeconds(attackDelay / 2f);
+
+            chargeFX.Stop();
 
             FireWeapon();
         }
@@ -173,6 +195,11 @@ public class NavmeshRobot : MonoBehaviour
     {
         anim.SetTrigger($"{attackAnimTag} Blast Attack");
 
-        Debug.Log("Fire");
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+
+        if (projectile.TryGetComponent<NavmeshRobotProjectile>(out NavmeshRobotProjectile proj))
+        {
+            proj.Fire(attackDmg, projectileSpeed, target);
+        }
     }
 }
