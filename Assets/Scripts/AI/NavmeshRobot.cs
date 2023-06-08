@@ -156,7 +156,8 @@ public class NavmeshRobot : MonoBehaviour
 
         transform.LookAt(lookPos);
 
-        if (Vector3.Distance(transform.position, target.position) > attackRange)
+        // Check for tolerance threshold with attack range
+        if (Vector3.Distance(transform.position, target.position) > attackRange + 1f)
         {
             StopCoroutine(attackRoutineRef);
             anim.SetBool($"{attackAnimTag} Aim", false);

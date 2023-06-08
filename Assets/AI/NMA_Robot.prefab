@@ -115,11 +115,11 @@ MonoBehaviour:
     type: 3}
   firePoint: {fileID: 8125013888199358176}
   movementSpeed: 5
-  spreadRange: 4
-  attackRange: 10
+  spreadRange: 2
+  attackRange: 15
   attackDelay: 3
-  attackDmg: 2
-  projectileSpeed: 20
+  attackDmg: 5
+  projectileSpeed: 15
 --- !u!114 &1090444918084801581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
   damageTakenMultiplier: 1
-  maximumHealth: 100
+  maximumHealth: 50
   currentHealth: 0
 --- !u!136 &882395512638999545
 CapsuleCollider:

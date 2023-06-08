@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.AI;
 
 public class Spawner : MonoBehaviour
 {
@@ -80,7 +81,14 @@ public class Spawner : MonoBehaviour
         Vector3 spawnPoint = transform.position;
 
         if (spawnPoints.Count > 0)
+        {
             spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+
+            if (NavMesh.SamplePosition(spawnPoint, out NavMeshHit hit, 20f, NavMesh.AllAreas))
+            {
+                spawnPoint = hit.position;
+            }
+        }
 
         return Instantiate(objsToSpawn[Random.Range(0, objsToSpawn.Count)], spawnPoint, Quaternion.identity);
     }
