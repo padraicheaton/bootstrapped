@@ -23,9 +23,12 @@ public class NavmeshRobot : MonoBehaviour
     [SerializeField] private float attackDelay;
     [SerializeField] private float attackDmg;
     [SerializeField] private float projectileSpeed;
-    [SerializeField] private float fireKnockbackForce;
     private Coroutine attackRoutineRef;
     private Coroutine returnControlRoutineRef;
+
+    [Header("Misc Params")]
+    [SerializeField] private float fireKnockbackForce;
+    [SerializeField] private int itemsToDrop;
 
     public enum State
     {
@@ -186,7 +189,8 @@ public class NavmeshRobot : MonoBehaviour
 
     private void OnDeath()
     {
-        ServiceLocator.instance.GetService<LootController>().OnEnemyDefeated(transform.position, 2);
+        if (itemsToDrop > 0)
+            ServiceLocator.instance.GetService<LootController>().OnEnemyDefeated(transform.position, itemsToDrop);
 
         Destroy(gameObject, 1.5f);
     }

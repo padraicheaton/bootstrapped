@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 78630c66014fed9498e2ac48e160e83c, type: 2}
 --- !u!1001 &133814224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208,8 +208,8 @@ GameObject:
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &168754947
 Transform:
@@ -457,7 +457,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-248760
+  m_Name: pb_Mesh90222
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -646,14 +646,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objsToSpawn:
-  - {fileID: 5414178551845057452, guid: 089d77b966bf85f47be7606b857d44ab, type: 3}
-  - {fileID: 8670602774582999044, guid: 71f79335b929bf042852ac696eedde2d, type: 3}
-  - {fileID: 8670602774582999044, guid: b072dfbc755b17d4cb3d2f57dbe50131, type: 3}
-  - {fileID: 8670602774582999044, guid: 6c5e80034b8bd5147972a29c9897a782, type: 3}
-  - {fileID: 5414178551845057452, guid: 46bcb87a80b6bd5489c04156821a12b2, type: 3}
-  - {fileID: 5414178551845057452, guid: 9efc633f123718d42a98a138e0604252, type: 3}
-  - {fileID: 8670602774582999044, guid: 13705f5ed33974840af39befaf1e6ef2, type: 3}
-  - {fileID: 8670602774582999044, guid: 356709c1319201e4486789d735bef56d, type: 3}
+  - {fileID: 1514393247244800780, guid: 365b12afd28aa39429f6e317de5ff947, type: 3}
+  - {fileID: 5133683581547915446, guid: 1c62a10af0314bf4ab730180ec347b04, type: 3}
+  - {fileID: 4757118498128359040, guid: 232c5d3a0ac4db44ab986f541c997185, type: 3}
+  - {fileID: 4231702445179259939, guid: aa1e2c6a6f807f948bccd9fbfdc13400, type: 3}
   spawnPointCount: 5
   swarmSpawnDelay: 2
   swarmEnemyCount: 5
@@ -797,8 +793,8 @@ GameObject:
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1046412455
 Transform:
@@ -1127,8 +1123,8 @@ GameObject:
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1223958180
 Transform:
@@ -1225,8 +1221,8 @@ GameObject:
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1351912458
 Transform:
@@ -2607,7 +2603,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh126232
+  m_Name: pb_Mesh90194
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2783,7 +2779,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1718632409
 Transform:
@@ -4422,8 +4418,8 @@ GameObject:
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2109742892
 Transform:

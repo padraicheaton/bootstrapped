@@ -122,6 +122,7 @@ MonoBehaviour:
   attackDmg: 5
   projectileSpeed: 15
   fireKnockbackForce: 5
+  itemsToDrop: 2
 --- !u!114 &1090444918084801581
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objsToSpawn:
-  - {fileID: 250381116558488580, guid: f73d63541057aa546af0a2fc6e93347e, type: 3}
+  - {fileID: 4231702445179259939, guid: aa1e2c6a6f807f948bccd9fbfdc13400, type: 3}
   numObjsToSpawn: 2
   oneshot: 1
   spawnPos: {x: 0, y: 1, z: -2}
