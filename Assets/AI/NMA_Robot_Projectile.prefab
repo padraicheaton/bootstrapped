@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2087239038700262728}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 6254083622325497576}
   - component: {fileID: 4145838766780284994}
   - component: {fileID: 970139777134263395}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: NMA_Robot_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 1071572070658751216}
   - component: {fileID: 6539631276712757828}
   - component: {fileID: 1382811897875663668}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 7146444153051026299}
   - component: {fileID: 1250034175818085097}
   - component: {fileID: 3976922377775762818}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trail Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

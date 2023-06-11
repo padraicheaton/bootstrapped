@@ -5,7 +5,7 @@ using UnityEngine;
 public class E_ElectroStun : BaseEffect
 {
     private float damageToDurationScalar = 0.25f;
-    private RigidbodyAgent agentController;
+    private NavmeshRobot agentController;
 
     private float duration;
 
@@ -42,10 +42,10 @@ public class E_ElectroStun : BaseEffect
         }
         else
         {
-            agentController = affectedCharacterHealth.GetComponent<RigidbodyAgent>();
+            agentController = affectedCharacterHealth.GetComponent<NavmeshRobot>();
 
             if (agentController)
-                agentController.SetCanMove(false);
+                agentController.SwitchState(NavmeshRobot.State.Stun);
 
             StartCoroutine(RevertAfterDelay());
         }
@@ -66,7 +66,7 @@ public class E_ElectroStun : BaseEffect
         }
 
         if (agentController)
-            agentController.SetCanMove(true);
+            agentController.SwitchState(NavmeshRobot.State.Chase);
 
         Destroy(gameObject);
     }

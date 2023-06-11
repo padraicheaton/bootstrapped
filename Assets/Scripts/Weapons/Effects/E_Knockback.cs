@@ -16,24 +16,33 @@ public class E_Knockback : BaseEffect
         externalMultiplier = multiplier;
     }
 
+    private Vector3 GetKnockbackForceVector(float damage, GameObject projectile)
+    {
+        float knockBackForce = damage * damageToForceScalar * forceMultiplier;
+
+        Vector3 pointOfReference = projectile.transform.position;
+
+        Vector3 dirFromProjectileToTarget = (affectedCharacterHealth.transform.position - pointOfReference).normalized;
+
+        return dirFromProjectileToTarget * knockBackForce * externalMultiplier;
+    }
+
     public override void OnEffectApplied(HealthComponent hc, float damage, GameObject projectile)
     {
         base.OnEffectApplied(hc, damage, projectile);
 
-        if (affectedCharacterHealth.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        if (affectedCharacterHealth.TryGetComponent<NavmeshRobot>(out NavmeshRobot robot))
         {
-            float knockBackForce = damage * damageToForceScalar * forceMultiplier;
-
-            Vector3 pointOfReference = projectile.transform.position;//ServiceLocator.instance.GetService<PlayerCamera>().transform.position;
-
-            Vector3 dirFromProjectileToTarget = (affectedCharacterHealth.transform.position - pointOfReference).normalized;
-
-            accelDir = dirFromProjectileToTarget * knockBackForce * externalMultiplier;
+            robot.KnockAgent(GetKnockbackForceVector(damage, projectile));
+        }
+        else if (affectedCharacterHealth.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        {
+            accelDir = GetKnockbackForceVector(damage, projectile);
 
             this.rb = rb;
 
             // Cancel out existing forces
-            rb.velocity = dirFromProjectileToTarget;
+            rb.velocity = accelDir.normalized;
 
             rb.AddForce(accelDir, ForceMode.Impulse);
         }

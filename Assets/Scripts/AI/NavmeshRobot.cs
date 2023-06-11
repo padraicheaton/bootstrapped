@@ -23,7 +23,9 @@ public class NavmeshRobot : MonoBehaviour
     [SerializeField] private float attackDelay;
     [SerializeField] private float attackDmg;
     [SerializeField] private float projectileSpeed;
+    [SerializeField] private float fireKnockbackForce;
     private Coroutine attackRoutineRef;
+    private Coroutine returnControlRoutineRef;
 
     public enum State
     {
@@ -37,6 +39,7 @@ public class NavmeshRobot : MonoBehaviour
     private Transform target;
     private NavMeshAgent agent;
     private HealthComponent hc;
+    private Rigidbody rb;
 
     private string[] attackAnimTagOptions = { "Left", "Right", "Both" };
     private string attackAnimTag;
@@ -53,6 +56,9 @@ public class NavmeshRobot : MonoBehaviour
         {
             SwitchState(State.Dead);
         };
+
+        rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
 
         SwitchState(State.Chase);
     }
@@ -100,6 +106,9 @@ public class NavmeshRobot : MonoBehaviour
         }
         else if (currentState == State.Attack)
         {
+            if (attackRoutineRef != null)
+                StopCoroutine(attackRoutineRef);
+            anim.SetBool($"{attackAnimTag} Aim", false);
             chargeFX.Stop();
         }
 
@@ -132,6 +141,8 @@ public class NavmeshRobot : MonoBehaviour
         {
             agent.isStopped = true;
             anim.SetTrigger("Die");
+
+            OnDeath();
         }
 
         currentState = nextState;
@@ -159,9 +170,6 @@ public class NavmeshRobot : MonoBehaviour
         // Check for tolerance threshold with attack range
         if (Vector3.Distance(transform.position, target.position) > attackRange + 1f)
         {
-            StopCoroutine(attackRoutineRef);
-            anim.SetBool($"{attackAnimTag} Aim", false);
-
             SwitchState(State.Chase);
         }
     }
@@ -174,6 +182,13 @@ public class NavmeshRobot : MonoBehaviour
     private void DeadTick()
     {
 
+    }
+
+    private void OnDeath()
+    {
+        ServiceLocator.instance.GetService<LootController>().OnEnemyDefeated(transform.position, 2);
+
+        Destroy(gameObject, 1.5f);
     }
 
     private IEnumerator AttackRoutine()
@@ -201,6 +216,46 @@ public class NavmeshRobot : MonoBehaviour
         if (projectile.TryGetComponent<NavmeshRobotProjectile>(out NavmeshRobotProjectile proj))
         {
             proj.Fire(attackDmg, projectileSpeed, target);
+
+            if (fireKnockbackForce > 0f)
+                KnockAgent((transform.forward * -1f + Vector3.up * 0.5f) * fireKnockbackForce);
         }
+    }
+
+    public void KnockAgent(Vector3 force)
+    {
+        Debug.Log($"Knocking for {force}");
+
+        SwitchState(State.Stun);
+
+        agent.enabled = false;
+        rb.isKinematic = false;
+
+        rb.AddForce(force, ForceMode.Impulse);
+
+        if (returnControlRoutineRef != null)
+            StopCoroutine(returnControlRoutineRef);
+
+        returnControlRoutineRef = StartCoroutine(ReturnControlFromKnock());
+    }
+
+    private IEnumerator ReturnControlFromKnock()
+    {
+        // Bandaid fix, this delay allows the rigidbody to accelerate before being exited out of
+        yield return new WaitForSeconds(0.5f);
+
+        yield return new WaitWhile(() => rb.velocity.magnitude > 0.5f);
+
+        // Find closest location on Navmesh
+        NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 100f, NavMesh.AllAreas);
+        Vector3 closestPosition = hit.position;
+
+        // Move to that position - this could be changed to move progressively
+        transform.position = closestPosition;
+
+        agent.enabled = true;
+        rb.isKinematic = true;
+
+        SwitchState(State.Chase);
     }
 }
