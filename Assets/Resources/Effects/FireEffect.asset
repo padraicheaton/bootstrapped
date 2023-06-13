@@ -17,3 +17,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: f5e07cbb5cda2db45897bbe110f4069f, type: 3}
   particlePrefab: {fileID: 6679978165497265013, guid: 3f2bd83512c4a4f45a665e65faa97d37,
     type: 3}
+  weaponVFXColour: {r: 1, g: 0.37376443, b: 0, a: 1}

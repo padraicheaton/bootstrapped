@@ -36,6 +36,7 @@ public class FoundryManager : MonoBehaviour
         foundryRef.IsInteractable = true;
         foundryOutline.enabled = true;
         foundryRef.transform.position = GetNextFoundryPosition();
+        foundryRef.transform.rotation = GetFoundryRotation();
     }
 
     private Vector3 GetNextFoundryPosition()
@@ -46,6 +47,11 @@ public class FoundryManager : MonoBehaviour
             currentPointIndex = 0;
 
         return foundryPoints[currentPointIndex].position;
+    }
+
+    private Quaternion GetFoundryRotation()
+    {
+        return foundryPoints[currentPointIndex].rotation;
     }
 
     private void OnDrawGizmos()

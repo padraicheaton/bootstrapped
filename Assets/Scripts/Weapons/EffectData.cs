@@ -10,4 +10,5 @@ public class EffectData : ScriptableObject
     public GameObject prefab;
     public Sprite icon;
     public GameObject particlePrefab;
+    public Color weaponVFXColour;
 }

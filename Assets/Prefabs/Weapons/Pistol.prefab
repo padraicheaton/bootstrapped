@@ -187,7 +187,7 @@ PrefabInstance:
     - target: {fileID: 3606283343415565487, guid: 039c9bb0db8696d478ca44a329ee4bde,
         type: 3}
       propertyPath: timeToReload
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3606283343415565487, guid: 039c9bb0db8696d478ca44a329ee4bde,
         type: 3}
