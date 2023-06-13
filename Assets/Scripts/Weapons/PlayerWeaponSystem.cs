@@ -11,6 +11,7 @@ public class PlayerWeaponSystem : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private bool useStartingWeapon = true;
+    [SerializeField] private bool shouldHealOnReload = true;
 
     public int weaponSlotCount { get; private set; } = 2;
     private List<WeaponController> weaponSlots = new List<WeaponController>();
@@ -195,6 +196,9 @@ public class PlayerWeaponSystem : MonoBehaviour
     {
         if (GetActiveWeapon())
             GetActiveWeapon().ReloadWeapon();
+
+        if (shouldHealOnReload)
+            playerHealth.Reset();
     }
 
     public float GetHealthPercentage()

@@ -27,6 +27,8 @@ public class NavmeshRobotProjectile : MonoBehaviour
             }
         }
 
+        Debug.Log($"Collided with {other.name}");
+
         Destroy(gameObject);
     }
 }

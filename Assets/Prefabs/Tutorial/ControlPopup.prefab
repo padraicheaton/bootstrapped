@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1285344883}
   - component: {fileID: 1285344885}
   - component: {fileID: 1285344884}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: HintTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8588821006064782297}
   - component: {fileID: 1655975828032184991}
   - component: {fileID: 145380546119263252}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ControlPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 7373443907879688264}
   - component: {fileID: 8566755242566828514}
   - component: {fileID: 6746414166123691412}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 728802627004365029}
   - component: {fileID: 5635958940651307593}
   - component: {fileID: 4664532535986001884}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 4854095399079030123}
   - component: {fileID: 9062253072583469307}
   - component: {fileID: 8232589610047729271}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: ButtonFG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 4770605428396341321}
   - component: {fileID: 8297904112846476060}
   - component: {fileID: 8423718630156582611}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: ButtonBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}

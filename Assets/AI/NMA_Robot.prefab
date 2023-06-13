@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
   damageTakenMultiplier: 1
-  maximumHealth: 25
+  maximumHealth: 20
   currentHealth: 0
 --- !u!136 &882395512638999545
 CapsuleCollider:

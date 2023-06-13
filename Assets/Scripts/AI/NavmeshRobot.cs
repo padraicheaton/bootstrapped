@@ -159,8 +159,8 @@ public class NavmeshRobot : MonoBehaviour
         }
 
         if (Vector3.Distance(transform.position, target.position) <= attackRange)
-            if (!Physics.Raycast(transform.position, target.position, attackRange, whatIsGround))
-                SwitchState(State.Attack);
+            //if (!Physics.Raycast(firePoint.position, target.position, attackRange, whatIsGround))
+            SwitchState(State.Attack);
     }
 
     private void AttackTick()
@@ -228,8 +228,6 @@ public class NavmeshRobot : MonoBehaviour
 
     public void KnockAgent(Vector3 force)
     {
-        Debug.Log($"Knocking for {force}");
-
         SwitchState(State.Stun);
 
         agent.enabled = false;
