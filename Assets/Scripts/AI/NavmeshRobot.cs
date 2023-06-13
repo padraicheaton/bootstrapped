@@ -46,11 +46,8 @@ public class NavmeshRobot : MonoBehaviour
     private NavMeshAgent agent;
     private HealthComponent hc;
     private Rigidbody rb;
-<<<<<<< HEAD
     private Vector3 wanderTargetDestination;
-=======
     private bool canReceiveKnockDamage = false;
->>>>>>> d2b2943d96d630fb18fbab8d2429e722f3be7bde
 
     private string[] attackAnimTagOptions = { "Left", "Right", "Both" };
     private string attackAnimTag;
