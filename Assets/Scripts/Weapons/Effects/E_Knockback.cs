@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class E_Knockback : BaseEffect
 {
-    protected float damageToForceScalar = 10f;
+    protected float damageToForceScalar = 4f;
     protected float forceMultiplier = 1f;
     protected float externalMultiplier = 1f;
 
@@ -23,6 +23,10 @@ public class E_Knockback : BaseEffect
         Vector3 pointOfReference = projectile.transform.position;
 
         Vector3 dirFromProjectileToTarget = (affectedCharacterHealth.transform.position - pointOfReference).normalized;
+
+        // Zero out any negative Y axis knockback
+        if (dirFromProjectileToTarget.y < 0)
+            dirFromProjectileToTarget.y = 0f;
 
         return dirFromProjectileToTarget * knockBackForce * externalMultiplier;
     }
