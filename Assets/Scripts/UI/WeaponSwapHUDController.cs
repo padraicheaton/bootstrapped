@@ -33,7 +33,7 @@ public class WeaponSwapHUDController : MonoBehaviour
             hudObj.Populate(null);
 
         StopAllCoroutines();
-        StartCoroutine(ShowForDuration(3f));
+        StartCoroutine(ShowForDuration(5f));
 
         int prevIndex = activeWeaponIndex - 1;
 
@@ -93,7 +93,7 @@ public class WeaponSwapHUDController : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
-        while (cg.alpha > 0)
+        while (cg.alpha > 0f)
         {
             cg.alpha -= Time.deltaTime;
 
@@ -176,8 +176,8 @@ public class WeaponSwapHUDController : MonoBehaviour
             // if (target)
             //     instance.transform.localPosition = Vector3.Lerp(instance.transform.localPosition, target.localPosition, Time.deltaTime * 5f);
 
-            cg.alpha = Mathf.Lerp(cg.alpha, destAlpha, Time.deltaTime * 5f);
-            instance.transform.localPosition = Vector3.Lerp(instance.transform.localPosition, Vector3.zero, Time.deltaTime * 5f);
+            cg.alpha = Mathf.Lerp(cg.alpha, destAlpha, Time.deltaTime * 6f);
+            instance.transform.localPosition = Vector3.Lerp(instance.transform.localPosition, Vector3.zero, Time.deltaTime * 3f);
         }
 
         private T GetChildComponentOfName<T>(string name)

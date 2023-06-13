@@ -11,6 +11,7 @@ public class WeaponController : Interactable
     [SerializeField] private Transform visuals;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private ParticleSystem effectIndicatorVFX;
 
     [Header("Settings")]
     [SerializeField] private string displayName;
@@ -50,6 +51,11 @@ public class WeaponController : Interactable
 
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<BoxCollider>();
+
+        // Set indicator colour
+        Color particleColour = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna).weaponVFXColour;
+        ParticleSystem.MainModule particleSettings = effectIndicatorVFX.main;
+        particleSettings.startColor = particleColour;
 
         InitiateDespawnTimer();
     }

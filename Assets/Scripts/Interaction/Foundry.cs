@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Foundry : PhaseBasedInteractable
+public class Foundry : Interactable
 {
     [Header("Settings")]
     [SerializeField] private int numWeaponsToGenerateEachWave;
@@ -20,15 +20,14 @@ public class Foundry : PhaseBasedInteractable
         return $"Weapon Foundry\n({remainingWeaponsToGenerate})";
     }
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-
         remainingWeaponsToGenerate = numWeaponsToGenerateEachWave;
 
         ServiceLocator.instance.GetService<Spawner>().onSwarmEnd += () =>
         {
-            numWeaponsToGenerateEachWave += additiveIncrease;
+            if (numWeaponsToGenerateEachWave < 20)
+                numWeaponsToGenerateEachWave += additiveIncrease;
             remainingWeaponsToGenerate = numWeaponsToGenerateEachWave;
         };
 

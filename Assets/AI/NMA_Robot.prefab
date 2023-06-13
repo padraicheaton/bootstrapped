@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 1090444918084801581}
   - component: {fileID: 882395512638999545}
   - component: {fileID: 5911280349836939475}
+  - component: {fileID: 2636090535541539976}
   m_Layer: 9
   m_Name: NMA_Robot
   m_TagString: Untagged
@@ -115,12 +116,12 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3365441087581712259, guid: b298d751b251ae84faec15ac8c436ce5,
     type: 3}
   firePoint: {fileID: 8125013888199358176}
-  movementSpeed: 5
+  movementSpeed: 6
   spreadRange: 2
   attackRange: 15
-  attackDelay: 3
+  attackDelay: 2
   attackDmg: 5
-  projectileSpeed: 15
+  projectileSpeed: 30
   fireKnockbackForce: 5
   itemsToDrop: 2
 --- !u!114 &1090444918084801581
@@ -137,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
   damageTakenMultiplier: 1
-  maximumHealth: 25
+  maximumHealth: 20
   currentHealth: 0
 --- !u!136 &882395512638999545
 CapsuleCollider:
@@ -168,7 +169,25 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
+--- !u!114 &2636090535541539976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514393247244800780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 4
+  outlineColor: {r: 1, g: 0, b: 0, a: 0.078431375}
+  outlineWidth: 1
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1809370854539551435
 GameObject:
   m_ObjectHideFlags: 0

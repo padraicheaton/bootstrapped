@@ -5227,7 +5227,7 @@ PrefabInstance:
     - target: {fileID: 4224228368798340621, guid: 6741d7f523fc2d54cb0261d426157d58,
         type: 3}
       propertyPath: forceMultiplier
-      value: 6
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5599006533402889554, guid: 6741d7f523fc2d54cb0261d426157d58,
         type: 3}

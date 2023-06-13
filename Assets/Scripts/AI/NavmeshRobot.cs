@@ -46,7 +46,11 @@ public class NavmeshRobot : MonoBehaviour
     private NavMeshAgent agent;
     private HealthComponent hc;
     private Rigidbody rb;
+<<<<<<< HEAD
     private Vector3 wanderTargetDestination;
+=======
+    private bool canReceiveKnockDamage = false;
+>>>>>>> d2b2943d96d630fb18fbab8d2429e722f3be7bde
 
     private string[] attackAnimTagOptions = { "Left", "Right", "Both" };
     private string attackAnimTag;
@@ -153,6 +157,8 @@ public class NavmeshRobot : MonoBehaviour
         else if (nextState == State.Dead)
         {
             agent.isStopped = true;
+            anim.SetBool($"{attackAnimTag} Aim", false);
+            anim.SetBool("Defend", false);
             anim.SetTrigger("Die");
 
             OnDeath();
@@ -175,8 +181,8 @@ public class NavmeshRobot : MonoBehaviour
         }
 
         if (Vector3.Distance(transform.position, target.position) <= attackRange)
-            if (!Physics.Raycast(transform.position, target.position, attackRange, whatIsGround))
-                SwitchState(State.Attack);
+            //if (!Physics.Raycast(firePoint.position, target.position, attackRange, whatIsGround))
+            SwitchState(State.Attack);
     }
 
     private void HackedTick()
@@ -256,12 +262,14 @@ public class NavmeshRobot : MonoBehaviour
 
     public void KnockAgent(Vector3 force)
     {
-        Debug.Log($"Knocking for {force}");
+        if (currentState != State.Stun)
+        {
+            // Only need to do this if the agent is currently not being knocked around
+            SwitchState(State.Stun);
 
-        SwitchState(State.Stun);
-
-        agent.enabled = false;
-        rb.isKinematic = false;
+            agent.enabled = false;
+            rb.isKinematic = false;
+        }
 
         rb.AddForce(force, ForceMode.Impulse);
 
@@ -276,6 +284,8 @@ public class NavmeshRobot : MonoBehaviour
         // Bandaid fix, this delay allows the rigidbody to accelerate before being exited out of
         yield return new WaitForSeconds(0.5f);
 
+        canReceiveKnockDamage = true;
+
         yield return new WaitWhile(() => rb.velocity.magnitude > 0.5f);
 
         // Find closest location on Navmesh
@@ -287,6 +297,8 @@ public class NavmeshRobot : MonoBehaviour
 
         agent.enabled = true;
         rb.isKinematic = true;
+
+        canReceiveKnockDamage = false;
 
         SwitchState(State.Chase);
     }
@@ -305,5 +317,14 @@ public class NavmeshRobot : MonoBehaviour
             damage = attackDmg / 2f;
         else
             damage = attackDmg;
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (currentState == State.Stun && !rb.isKinematic && canReceiveKnockDamage)
+        {
+            // If being controlled by physics (i.e. knocked), inflict damage when impacting at high speed
+            hc.TakeDamage(rb.velocity.magnitude);
+            canReceiveKnockDamage = false;
+        }
     }
 }

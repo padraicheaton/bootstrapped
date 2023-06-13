@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7096187493307640398}
   - component: {fileID: 5540576030759654277}
   - component: {fileID: 2931752382611788446}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AreaSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

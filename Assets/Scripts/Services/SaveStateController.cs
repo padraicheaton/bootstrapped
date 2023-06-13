@@ -8,6 +8,7 @@ public static class SaveStateController
     public static readonly string tutorialCompleteSaveKey = "tutorialComplete";
     public static string masterVolumeValueKey = "setting_masterVolume";
     public static string startingWeaponGenotypeKey = "startingWeaponGenotype";
+    public static string sensitivityValueKey = "settings_sensitivity";
 
     private static Dictionary<string, string> saveData = new Dictionary<string, string>();
 

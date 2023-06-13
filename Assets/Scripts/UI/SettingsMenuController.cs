@@ -9,6 +9,8 @@ public class SettingsMenuController : ModalWindow
     [Header("References")]
     [SerializeField] private Slider masterVolumeSlider;
     [SerializeField] private TextMeshProUGUI masterVolumeTextIndicator;
+    [SerializeField] private Slider sensitivitySlider;
+    [SerializeField] private TextMeshProUGUI sensitivityTextIndicator;
 
 
     protected override void Start()
@@ -18,11 +20,17 @@ public class SettingsMenuController : ModalWindow
         LoadSettings();
 
         masterVolumeSlider.onValueChanged.AddListener(delegate { MasterVolumeValueChanged(); });
+        sensitivitySlider.onValueChanged.AddListener(delegate { SensitivityValueChanged(); });
     }
 
     private void MasterVolumeValueChanged()
     {
         masterVolumeTextIndicator.text = masterVolumeSlider.value.ToString();
+    }
+
+    private void SensitivityValueChanged()
+    {
+        sensitivityTextIndicator.text = sensitivitySlider.value.ToString("F1");
     }
 
     public void Show()
@@ -45,6 +53,7 @@ public class SettingsMenuController : ModalWindow
     private void SaveSettings()
     {
         SaveStateController.SetData(SaveStateController.masterVolumeValueKey, masterVolumeSlider.value);
+        SaveStateController.SetData(SaveStateController.sensitivityValueKey, sensitivitySlider.value);
     }
 
     private void LoadSettings()
@@ -52,12 +61,20 @@ public class SettingsMenuController : ModalWindow
         if (SaveStateController.DatabaseContains(SaveStateController.masterVolumeValueKey))
             masterVolumeSlider.value = SaveStateController.GetData<float>(SaveStateController.masterVolumeValueKey);
         else
-            masterVolumeSlider.value = 100f;
+            masterVolumeSlider.value = 50f;
         masterVolumeSlider.onValueChanged.Invoke(masterVolumeSlider.value);
+
+        if (SaveStateController.DatabaseContains(SaveStateController.sensitivityValueKey))
+            sensitivitySlider.value = SaveStateController.GetData<float>(SaveStateController.sensitivityValueKey);
+        else
+            sensitivitySlider.value = 2.5f;
+        sensitivitySlider.onValueChanged.Invoke(sensitivitySlider.value);
     }
 
     public void OnClearSaveDataBtnPressed()
     {
         SaveStateController.ClearSaveData();
+
+        LoadSettings();
     }
 }

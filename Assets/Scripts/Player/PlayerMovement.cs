@@ -74,6 +74,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CanMove)
         {
+            //! BANDAID FIX
+            sensitivity = SaveStateController.GetData<float>(SaveStateController.sensitivityValueKey);
+
             MyInput();
             Look();
         }
@@ -186,6 +189,14 @@ public class PlayerMovement : MonoBehaviour
         //Perform the rotations
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+    }
+
+    public void SetAimState(bool isAiming)
+    {
+        if (isAiming)
+            sensMultiplier = 0.5f;
+        else
+            sensMultiplier = 1f;
     }
 
     private void CounterMovement(float x, float y, Vector2 mag)
