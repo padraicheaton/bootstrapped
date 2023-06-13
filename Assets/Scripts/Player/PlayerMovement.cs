@@ -74,6 +74,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CanMove)
         {
+            //! BANDAID FIX
+            sensitivity = SaveStateController.GetData<float>(SaveStateController.sensitivityValueKey);
+
             MyInput();
             Look();
         }
