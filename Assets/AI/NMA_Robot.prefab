@@ -116,10 +116,10 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3365441087581712259, guid: b298d751b251ae84faec15ac8c436ce5,
     type: 3}
   firePoint: {fileID: 8125013888199358176}
-  movementSpeed: 5
+  movementSpeed: 6
   spreadRange: 2
   attackRange: 15
-  attackDelay: 3
+  attackDelay: 2
   attackDmg: 5
   projectileSpeed: 30
   fireKnockbackForce: 5
