@@ -10,13 +10,13 @@ public class FoundryManager : MonoBehaviour
     private int currentPointIndex = -1;
 
     private Foundry foundryRef;
-    private Outline foundryOutline;
+    private Outline[] foundryOutline;
 
     private void Start()
     {
         GameObject foundryObject = Instantiate(foundryPrefab, transform);
         foundryRef = foundryObject.GetComponent<Foundry>();
-        foundryOutline = foundryObject.GetComponent<Outline>();
+        foundryOutline = foundryObject.GetComponentsInChildren<Outline>();
 
         OnWaveEnd();
 
@@ -27,16 +27,22 @@ public class FoundryManager : MonoBehaviour
     private void OnWaveStart()
     {
         foundryRef.IsInteractable = false;
-        foundryOutline.enabled = false;
+        SetOutline(false);
         foundryRef.transform.position = Vector3.down * 100f;
     }
 
     private void OnWaveEnd()
     {
         foundryRef.IsInteractable = true;
-        foundryOutline.enabled = true;
+        SetOutline(true);
         foundryRef.transform.position = GetNextFoundryPosition();
         foundryRef.transform.rotation = GetFoundryRotation();
+    }
+
+    private void SetOutline(bool enabled)
+    {
+        foreach (Outline o in foundryOutline)
+            o.enabled = enabled;
     }
 
     private Vector3 GetNextFoundryPosition()

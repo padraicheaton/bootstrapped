@@ -194,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
     public void SetAimState(bool isAiming)
     {
         if (isAiming)
-            sensMultiplier = 0.25f;
+            sensMultiplier = 0.5f;
         else
             sensMultiplier = 1f;
     }

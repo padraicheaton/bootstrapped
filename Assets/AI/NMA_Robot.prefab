@@ -121,7 +121,7 @@ MonoBehaviour:
   attackRange: 15
   attackDelay: 3
   attackDmg: 5
-  projectileSpeed: 15
+  projectileSpeed: 30
   fireKnockbackForce: 5
   itemsToDrop: 2
 --- !u!114 &1090444918084801581
