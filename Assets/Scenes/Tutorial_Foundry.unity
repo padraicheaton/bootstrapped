@@ -4224,11 +4224,6 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 256
       objectReference: {fileID: 0}
-    - target: {fileID: 6256144007111590488, guid: 1203fc341c28d724da60354db8b11748,
-        type: 3}
-      propertyPath: damageTakenMultiplier
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 6256144007111590491, guid: 1203fc341c28d724da60354db8b11748,
         type: 3}
       propertyPath: useStartingWeapon

@@ -2,71 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E_Hacking : BaseEffect
+public class E_Hacking : TimeStackingEffect
 {
-    private float damageToDurationScalar = 0.25f;
-    private RigidbodyAgent agentController;
-
-    private float duration;
+    private float totalDuration = 5f;
+    private NavmeshRobot agentController;
 
     public override void OnEffectApplied(HealthComponent hc, float damage, GameObject projectile)
     {
         base.OnEffectApplied(hc, damage, projectile);
 
-        duration = damage * damageToDurationScalar;
+        agentController = affectedCharacterHealth.GetComponent<NavmeshRobot>();
 
-        StartCoroutine(DelayedSetup());
+        agentController.SwitchState(NavmeshRobot.State.Hacked);
     }
 
-    private IEnumerator DelayedSetup()
+    protected override void OnEffectExpired()
     {
-        // This is required as some effects may be applied at the same frame
-        yield return new WaitForEndOfFrame();
-
-        // Multiply duration if already applied effect
-        List<E_Hacking> existingEffects = GetEffectObjectsOnParent<E_Hacking>();
-        existingEffects.Remove(this);
-
-        if (existingEffects.Count > 0)
-        {
-            existingEffects[0].AddDuration(duration);
-
-            Destroy(gameObject);
-
-            yield break;
-        }
-        else
-        {
-            agentController = affectedCharacterHealth.GetComponent<RigidbodyAgent>();
-
-            if (agentController)
-                agentController.SetAllegiance(RigidbodyAgent.Allegiance.Player);
-
-            StartCoroutine(RevertAfterDelay());
-        }
-    }
-    protected override float GetApplicationDamageMultiplier()
-    {
-        return 0.25f;
+        agentController.SwitchState(NavmeshRobot.State.Chase);
     }
 
-    public void AddDuration(float amt)
+    protected override float GetStackDuration()
     {
-        duration += amt;
-    }
-
-    private IEnumerator RevertAfterDelay()
-    {
-        while (duration > 0)
-        {
-            duration -= Time.deltaTime;
-
-            yield return null;
-        }
-
-        if (agentController)
-            agentController.SetAllegiance(RigidbodyAgent.Allegiance.Enemy);
-
-        Destroy(gameObject);
+        return totalDuration;
     }
 }

@@ -2,47 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E_IceSlow : BaseEffect
+public class E_IceSlow : TimeStackingEffect
 {
-    private float damageToDurationScalar = 0.5f;
-    private float movementSpeedMultiplier = 0.75f;
-    private Rigidbody rb;
-
-    private float duration;
+    private float totalDuration = 10f;
+    private NavmeshRobot agentController;
 
     public override void OnEffectApplied(HealthComponent hc, float damage, GameObject projectile)
     {
         base.OnEffectApplied(hc, damage, projectile);
 
-        duration = damage * damageToDurationScalar;
+        agentController = affectedCharacterHealth.GetComponent<NavmeshRobot>();
 
-        rb = affectedCharacterHealth.GetComponent<Rigidbody>();
-
-        StartCoroutine(RevertAfterDelay());
+        agentController.SetSlowedState(true);
     }
 
-    private void Update()
+    protected override void OnEffectExpired()
     {
-        if (rb)
-        {
-            rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * movementSpeedMultiplier);
-        }
+        agentController.SetSlowedState(false);
     }
 
-    protected override float GetApplicationDamageMultiplier()
+    protected override float GetStackDuration()
     {
-        return 0.25f;
-    }
-
-    private IEnumerator RevertAfterDelay()
-    {
-        while (duration > 0)
-        {
-            duration -= Time.deltaTime;
-
-            yield return null;
-        }
-
-        Destroy(gameObject);
+        return totalDuration;
     }
 }

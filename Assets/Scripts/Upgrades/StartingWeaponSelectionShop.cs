@@ -14,7 +14,7 @@ public class StartingWeaponSelectionShop : Interactable
     [SerializeField] private TextMeshProUGUI costTxt;
     [SerializeField] private Button buyBtn;
 
-    private readonly int cost = 20;
+    private readonly int cost = 1;
 
     private int[] chosenStartingWeapon;
     private int[] selectedShopItem;

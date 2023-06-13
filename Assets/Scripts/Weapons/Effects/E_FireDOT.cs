@@ -2,37 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E_FireDOT : BaseEffect
+public class E_FireDOT : TimeStackingEffect
 {
     private float totalDuration = 5f;
     private float tickDelay = 0.5f;
-    private float tickDamage;
 
     public override void OnEffectApplied(HealthComponent hc, float damage, GameObject projectile)
     {
         base.OnEffectApplied(hc, damage, projectile);
 
-        int tickTimes = Mathf.RoundToInt(totalDuration / tickDelay);
+        float tickDamage = damage / totalDuration;
 
-        tickDamage = damage / tickTimes;
-
-        StartCoroutine(DamageOverTime(tickTimes));
+        StartCoroutine(DamageOverTime(tickDamage));
     }
 
-    protected override float GetApplicationDamageMultiplier()
+    private IEnumerator DamageOverTime(float tickDamage)
     {
-        return 0f;
-    }
-
-    private IEnumerator DamageOverTime(int tickTimes)
-    {
-        for (int i = 0; i < tickTimes; i++)
+        while (true)
         {
             yield return new WaitForSeconds(tickDelay);
 
             affectedCharacterHealth.TakeDamage(tickDamage);
         }
+    }
 
-        Destroy(gameObject);
+    protected override float GetStackDuration()
+    {
+        return totalDuration;
     }
 }

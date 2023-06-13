@@ -29,9 +29,8 @@ public class Foundry : PhaseBasedInteractable
         ServiceLocator.instance.GetService<Spawner>().onSwarmEnd += () =>
         {
             numWeaponsToGenerateEachWave += additiveIncrease;
+            remainingWeaponsToGenerate = numWeaponsToGenerateEachWave;
         };
-
-        WeaponDataCollector.onWeaponEquipped += UntrackSpawnedWeapon;
 
         ServiceLocator.instance.GetService<Spawner>().onSwarmBegin += DestroyUnusedWeapons;
     }
@@ -45,8 +44,6 @@ public class Foundry : PhaseBasedInteractable
     private IEnumerator SpawnRemainingWeapons()
     {
         currentlySpawningWeapons = true;
-
-        remainingWeaponsToGenerate = numWeaponsToGenerateEachWave;
 
         for (int i = 0; i < numWeaponsToGenerateEachWave; i++)
         {
@@ -70,29 +67,10 @@ public class Foundry : PhaseBasedInteractable
     {
         foreach (WeaponController wep in spawnedWeapons)
         {
-            if (wep != null)
+            if (wep != null && wep.transform.parent == null)
                 Destroy(wep.gameObject);
         }
 
         spawnedWeapons.Clear();
-    }
-
-    private void UntrackSpawnedWeapon(int[] dna)
-    {
-        List<WeaponController> toRemove = new List<WeaponController>();
-
-        foreach (WeaponController wep in spawnedWeapons)
-        {
-            //! BANDAID FIX - Only equipped weapons are parented to the weapon container
-            if (wep == null) continue;
-
-            if (wep.isEquipped || wep.transform.parent != null)
-            {
-                toRemove.Add(wep);
-            }
-        }
-
-        foreach (WeaponController rem in toRemove)
-            spawnedWeapons.Remove(rem);
     }
 }

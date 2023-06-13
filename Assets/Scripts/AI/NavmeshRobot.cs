@@ -17,12 +17,14 @@ public class NavmeshRobot : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private float spreadRange;
     private Vector3 spreadTargetOffset;
+    private float speed;
 
     [Header("Attack Params")]
     [SerializeField] private float attackRange;
     [SerializeField] private float attackDelay;
     [SerializeField] private float attackDmg;
     [SerializeField] private float projectileSpeed;
+    private float damage;
     private Coroutine attackRoutineRef;
     private Coroutine returnControlRoutineRef;
 
@@ -35,7 +37,8 @@ public class NavmeshRobot : MonoBehaviour
         Chase,
         Attack,
         Stun,
-        Dead
+        Dead,
+        Hacked
     }
     private State currentState = State.Chase;
 
@@ -43,6 +46,7 @@ public class NavmeshRobot : MonoBehaviour
     private NavMeshAgent agent;
     private HealthComponent hc;
     private Rigidbody rb;
+    private Vector3 wanderTargetDestination;
 
     private string[] attackAnimTagOptions = { "Left", "Right", "Both" };
     private string attackAnimTag;
@@ -50,7 +54,8 @@ public class NavmeshRobot : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = movementSpeed;
+        speed = movementSpeed;
+        damage = attackDmg;
 
         target = ServiceLocator.instance.GetService<PlayerMovement>().transform;
 
@@ -68,6 +73,8 @@ public class NavmeshRobot : MonoBehaviour
 
     private void FixedUpdate()
     {
+        agent.speed = speed;
+
         switch (currentState)
         {
             case State.Chase:
@@ -82,6 +89,9 @@ public class NavmeshRobot : MonoBehaviour
                 break;
             case State.Dead:
                 DeadTick();
+                break;
+            case State.Hacked:
+                HackedTick();
                 break;
         }
     }
@@ -147,6 +157,12 @@ public class NavmeshRobot : MonoBehaviour
 
             OnDeath();
         }
+        else if (nextState == State.Hacked)
+        {
+            agent.isStopped = false;
+            NavMesh.SamplePosition(transform.position + Random.onUnitSphere * 2f, out NavMeshHit hit, 10f, NavMesh.AllAreas);
+            wanderTargetDestination = hit.position;
+        }
 
         currentState = nextState;
     }
@@ -162,6 +178,18 @@ public class NavmeshRobot : MonoBehaviour
             if (!Physics.Raycast(transform.position, target.position, attackRange, whatIsGround))
                 SwitchState(State.Attack);
     }
+
+    private void HackedTick()
+    {
+        agent.SetDestination(wanderTargetDestination);
+
+        if (Vector3.Distance(transform.position, wanderTargetDestination) <= 0.1f)
+        {
+            NavMesh.SamplePosition(transform.position + Random.onUnitSphere * 2f, out NavMeshHit hit, 10f, NavMesh.AllAreas);
+            wanderTargetDestination = hit.position;
+        }
+    }
+
 
     private void AttackTick()
     {
@@ -219,7 +247,7 @@ public class NavmeshRobot : MonoBehaviour
 
         if (projectile.TryGetComponent<NavmeshRobotProjectile>(out NavmeshRobotProjectile proj))
         {
-            proj.Fire(attackDmg, projectileSpeed, target);
+            proj.Fire(damage, projectileSpeed, target);
 
             if (fireKnockbackForce > 0f)
                 KnockAgent((transform.forward * -1f + Vector3.up * 0.5f) * fireKnockbackForce);
@@ -261,5 +289,21 @@ public class NavmeshRobot : MonoBehaviour
         rb.isKinematic = true;
 
         SwitchState(State.Chase);
+    }
+
+    public void SetSlowedState(bool slowed)
+    {
+        if (slowed)
+            speed = movementSpeed / 2f;
+        else
+            speed = movementSpeed;
+    }
+
+    public void SetJammedState(bool jammed)
+    {
+        if (jammed)
+            damage = attackDmg / 2f;
+        else
+            damage = attackDmg;
     }
 }

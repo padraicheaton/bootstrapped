@@ -27991,7 +27991,7 @@ PrefabInstance:
     - target: {fileID: 8863665919768556815, guid: 8332c32cafe8ad44f83cab0dc02615fd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8863665919768556815, guid: 8332c32cafe8ad44f83cab0dc02615fd,
         type: 3}
@@ -31634,7 +31634,7 @@ Transform:
   - {fileID: 169601429}
   - {fileID: 16900138}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989775492
 GameObject:
@@ -43668,7 +43668,7 @@ RectTransform:
   m_Children:
   - {fileID: 826440621}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -62250,7 +62250,7 @@ PrefabInstance:
     - target: {fileID: 6256144006217171361, guid: 1203fc341c28d724da60354db8b11748,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6256144006217171361, guid: 1203fc341c28d724da60354db8b11748,
         type: 3}
@@ -62366,11 +62366,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 6256144007111590488, guid: 1203fc341c28d724da60354db8b11748,
-        type: 3}
-      propertyPath: damageTakenMultiplier
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6285899570376125129, guid: 1203fc341c28d724da60354db8b11748,
         type: 3}

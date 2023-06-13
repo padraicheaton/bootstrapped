@@ -7,6 +7,7 @@ public abstract class BaseEffect : MonoBehaviour
     /*
     Effects are applied by weapons, and are instantiated as children of those applied to
     */
+
     protected HealthComponent affectedCharacterHealth;
 
     public virtual void OnEffectApplied(HealthComponent hc, float damage, GameObject projectile)
