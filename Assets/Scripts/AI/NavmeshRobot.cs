@@ -43,6 +43,7 @@ public class NavmeshRobot : MonoBehaviour
     private NavMeshAgent agent;
     private HealthComponent hc;
     private Rigidbody rb;
+    private bool canReceiveKnockDamage = false;
 
     private string[] attackAnimTagOptions = { "Left", "Right", "Both" };
     private string attackAnimTag;
@@ -143,6 +144,8 @@ public class NavmeshRobot : MonoBehaviour
         else if (nextState == State.Dead)
         {
             agent.isStopped = true;
+            anim.SetBool($"{attackAnimTag} Aim", false);
+            anim.SetBool("Defend", false);
             anim.SetTrigger("Die");
 
             OnDeath();
@@ -228,10 +231,14 @@ public class NavmeshRobot : MonoBehaviour
 
     public void KnockAgent(Vector3 force)
     {
-        SwitchState(State.Stun);
+        if (currentState != State.Stun)
+        {
+            // Only need to do this if the agent is currently not being knocked around
+            SwitchState(State.Stun);
 
-        agent.enabled = false;
-        rb.isKinematic = false;
+            agent.enabled = false;
+            rb.isKinematic = false;
+        }
 
         rb.AddForce(force, ForceMode.Impulse);
 
@@ -246,6 +253,8 @@ public class NavmeshRobot : MonoBehaviour
         // Bandaid fix, this delay allows the rigidbody to accelerate before being exited out of
         yield return new WaitForSeconds(0.5f);
 
+        canReceiveKnockDamage = true;
+
         yield return new WaitWhile(() => rb.velocity.magnitude > 0.5f);
 
         // Find closest location on Navmesh
@@ -258,6 +267,18 @@ public class NavmeshRobot : MonoBehaviour
         agent.enabled = true;
         rb.isKinematic = true;
 
+        canReceiveKnockDamage = false;
+
         SwitchState(State.Chase);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (currentState == State.Stun && !rb.isKinematic && canReceiveKnockDamage)
+        {
+            // If being controlled by physics (i.e. knocked), inflict damage when impacting at high speed
+            hc.TakeDamage(rb.velocity.magnitude);
+            canReceiveKnockDamage = false;
+        }
     }
 }
