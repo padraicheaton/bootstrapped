@@ -67,7 +67,7 @@ public class SettingsMenuController : ModalWindow
         if (SaveStateController.DatabaseContains(SaveStateController.sensitivityValueKey))
             sensitivitySlider.value = SaveStateController.GetData<float>(SaveStateController.sensitivityValueKey);
         else
-            sensitivitySlider.value = 5f;
+            sensitivitySlider.value = 2.5f;
         sensitivitySlider.onValueChanged.Invoke(sensitivitySlider.value);
     }
 
