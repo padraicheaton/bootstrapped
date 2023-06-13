@@ -87,6 +87,7 @@ public class PlayerWeaponSystem : MonoBehaviour
             GetActiveWeapon().transform.rotation = performed ? aimHoldPoint.rotation : weaponContainer.rotation;
 
             ServiceLocator.instance.GetService<PlayerCamera>().SetFOV(performed);
+            ServiceLocator.instance.GetService<PlayerMovement>().SetAimState(performed);
         }
     }
 

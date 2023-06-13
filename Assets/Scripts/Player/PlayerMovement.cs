@@ -188,6 +188,14 @@ public class PlayerMovement : MonoBehaviour
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
     }
 
+    public void SetAimState(bool isAiming)
+    {
+        if (isAiming)
+            sensMultiplier = 0.25f;
+        else
+            sensMultiplier = 1f;
+    }
+
     private void CounterMovement(float x, float y, Vector2 mag)
     {
         //if (!grounded || jumping) return;
