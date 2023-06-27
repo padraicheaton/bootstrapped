@@ -129,14 +129,14 @@ public class NavmeshRobot : MonoBehaviour
         // ENTER
         if (nextState == State.Chase)
         {
-            agent.isStopped = false;
+            SafeSetStopState(false);
 
             spreadTargetOffset = Random.onUnitSphere * spreadRange;
             spreadTargetOffset.y = 0f;
         }
         else if (nextState == State.Attack)
         {
-            agent.isStopped = true;
+            SafeSetStopState(true);
 
             attackAnimTag = attackAnimTagOptions[Random.Range(0, attackAnimTagOptions.Length)];
             anim.SetBool($"{attackAnimTag} Aim", true);
@@ -148,12 +148,12 @@ public class NavmeshRobot : MonoBehaviour
         }
         else if (nextState == State.Stun)
         {
-            agent.isStopped = true;
+            SafeSetStopState(true);
             anim.SetBool("Defend", true);
         }
         else if (nextState == State.Dead)
         {
-            agent.isStopped = true;
+            SafeSetStopState(true);
             anim.SetBool($"{attackAnimTag} Aim", false);
             anim.SetBool("Defend", false);
             anim.SetTrigger("Die");
@@ -168,6 +168,12 @@ public class NavmeshRobot : MonoBehaviour
         }
 
         currentState = nextState;
+    }
+
+    private void SafeSetStopState(bool stopped)
+    {
+        if (agent.enabled)
+            agent.isStopped = stopped;
     }
 
     private void ChaseTick()

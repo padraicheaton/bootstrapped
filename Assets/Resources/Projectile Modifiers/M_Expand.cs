@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class M_Expand : ProjectileModifier
 {
-    private float scaleModifier = 3f;
+    private float scaleModifier = 4f;
     private float damageMultiplier = 0.7f;
 
     public override void OnModifierApplied()

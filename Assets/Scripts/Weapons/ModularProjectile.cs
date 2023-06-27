@@ -148,6 +148,11 @@ public class ModularProjectile : MonoBehaviour
         return mask == (mask | (1 << obj.layer));
     }
 
+    public void AddLayerToAffectingLayers(int layer)
+    {
+        affectingLayers |= (1 << layer);
+    }
+
     private void ExplodeEffect()
     {
         activeModifiers.Clear();

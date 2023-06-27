@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class M_Condense : ProjectileModifier
 {
-    private float scaleModifier = 0.5f;
-    private float damageMultiplier = 1.25f;
+    private float scaleModifier = 0.3f;
+    private float damageMultiplier = 1.5f;
 
     public override void OnModifierApplied()
     {

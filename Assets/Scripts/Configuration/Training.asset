@@ -15,4 +15,4 @@ MonoBehaviour:
   noveltyChance: 0
   shouldIncrementNovelty: 0
   noveltyChanceIncrement: 0
-  mutationChance: 0.2
+  mutationChance: 0.3

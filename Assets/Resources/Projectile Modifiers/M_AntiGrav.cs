@@ -7,7 +7,7 @@ public class M_AntiGrav : ProjectileModifier
     public override void OnModifierApplied()
     {
         projectileRigidbody.useGravity = false;
-        projectileRigidbody.velocity = projectileRigidbody.velocity.normalized * projectileRigidbody.velocity.magnitude / 2f;
+        projectileRigidbody.velocity = projectileRigidbody.velocity.normalized * projectileRigidbody.velocity.magnitude * 0.75f;
     }
 
     public override void TickModifier(float deltaTime)

@@ -7,7 +7,7 @@ public class M_Rebound : ProjectileModifier
     private int livesToAdd = 1;
     private float noClipWindow = 0.1f;
 
-    private float searchRadius = 10f;
+    private float searchRadius = 8f;
 
     private Vector3 storedVelocity;
 
@@ -37,6 +37,6 @@ public class M_Rebound : ProjectileModifier
                 return (coll.transform.position - projectileTransform.position).normalized * storedVelocity.magnitude;
         }
 
-        return storedVelocity;
+        return Vector3.up * 5f;
     }
 }

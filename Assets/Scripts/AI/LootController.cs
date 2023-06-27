@@ -20,6 +20,12 @@ public class LootController : MonoBehaviour
                 Instantiate(items[choice], position, Quaternion.identity);
             }
         }
+
+        // Have a chance to drop a weapon as well
+        if (Random.value < itemDropChance)
+        {
+            ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(position);
+        }
     }
 
     public void AddItemDropChance(float additiveChance)

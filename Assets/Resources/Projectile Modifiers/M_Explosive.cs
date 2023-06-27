@@ -9,6 +9,8 @@ public class M_Explosive : ProjectileModifier
     public override void OnModifierApplied()
     {
         projectileComponent.MultiplyExplosionRadius(explosionRadiusMultiplier);
+
+        projectileComponent.AddLayerToAffectingLayers(LayerMask.NameToLayer("Ground"));
     }
 
     public override void TickModifier(float deltaTime)
