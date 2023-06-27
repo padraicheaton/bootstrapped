@@ -54,7 +54,7 @@ public class PlayerWeaponSystem : MonoBehaviour
 
         if (scrollValue != 0)
         {
-            SwitchWeapons(Mathf.RoundToInt(Mathf.Sign(scrollValue)));
+            SwitchWeapons(-Mathf.RoundToInt(Mathf.Sign(scrollValue)));
         }
     }
 

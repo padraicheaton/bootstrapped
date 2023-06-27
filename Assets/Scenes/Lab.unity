@@ -1425,6 +1425,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tutorial_Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 8719977652690317021, guid: 6741e78fbff5a684bbd78bcf7f9173d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6741e78fbff5a684bbd78bcf7f9173d2, type: 3}
 --- !u!1001 &876958362
@@ -1543,6 +1548,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256144006038977876, guid: 1203fc341c28d724da60354db8b11748,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 6256144006217171360, guid: 1203fc341c28d724da60354db8b11748,
         type: 3}

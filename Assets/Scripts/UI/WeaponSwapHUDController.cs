@@ -8,7 +8,8 @@ public class WeaponSwapHUDController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject weaponInfoPrefab;
-    [SerializeField] private RectTransform equippedTransform, previousTransform, nextTransform;
+    //[SerializeField] private RectTransform equippedTransform, previousTransform, nextTransform;
+    [SerializeField] private List<RectTransform> weaponSlots;
 
     private List<WeaponHUDObject> hudObjects = new List<WeaponHUDObject>();
     private CanvasGroup cg;
@@ -33,44 +34,23 @@ public class WeaponSwapHUDController : MonoBehaviour
             hudObj.Populate(null);
 
         StopAllCoroutines();
-        StartCoroutine(ShowForDuration(5f));
-
-        int prevIndex = activeWeaponIndex - 1;
-
-        if (prevIndex < 0)
-            prevIndex = weapons.Count - 1;
-
-        int nextIndex = activeWeaponIndex + 1;
-
-        if (nextIndex >= weapons.Count)
-            nextIndex = 0;
+        cg.alpha = 1f;
 
         for (int i = 0; i < weapons.Count; i++)
         {
-            hudObjects[i].Populate(weapons[i]);
+            if (i >= weaponSlots.Count)
+                continue;
 
-            RectTransform parent = null;
+            hudObjects[i].Populate(weapons[i]);
+            hudObjects[i].SetParent(weaponSlots[i]);
+            hudObjects[i].SetAlpha(0.4f);
+            hudObjects[i].SetOffset(Vector3.zero);
 
             if (i == activeWeaponIndex)
             {
                 hudObjects[i].SetAlpha(1f);
-                parent = equippedTransform;
+                hudObjects[i].SetOffset(Vector3.left * 30f);
             }
-            else if (i == prevIndex)
-            {
-                hudObjects[i].SetAlpha(0.25f);
-                parent = previousTransform;
-            }
-            else if (i == nextIndex)
-            {
-                hudObjects[i].SetAlpha(0.25f);
-                parent = nextTransform;
-            }
-            else
-                hudObjects[i].SetAlpha(0f);
-
-            if (parent)
-                hudObjects[i].SetTargetPos(parent);
         }
     }
 
@@ -87,20 +67,6 @@ public class WeaponSwapHUDController : MonoBehaviour
         }
     }
 
-    private IEnumerator ShowForDuration(float duration)
-    {
-        cg.alpha = 1f;
-
-        yield return new WaitForSeconds(duration);
-
-        while (cg.alpha > 0f)
-        {
-            cg.alpha -= Time.deltaTime;
-
-            yield return null;
-        }
-    }
-
     public class WeaponHUDObject
     {
         public TextMeshProUGUI nameTxt, modifierTxt, ammoTxt;
@@ -110,6 +76,7 @@ public class WeaponSwapHUDController : MonoBehaviour
         public RectTransform target;
 
         private float destAlpha;
+        private Vector3 offset;
 
         public WeaponHUDObject(GameObject prefab, Transform parent, WeaponController weapon)
         {
@@ -165,10 +132,15 @@ public class WeaponSwapHUDController : MonoBehaviour
             destAlpha = alpha;
         }
 
-        public void SetTargetPos(RectTransform rt)
+        public void SetParent(RectTransform rt)
         {
             //target = rt;
             instance.transform.SetParent(rt);
+        }
+
+        public void SetOffset(Vector3 offset)
+        {
+            this.offset = offset;
         }
 
         public void Tick()
@@ -177,7 +149,7 @@ public class WeaponSwapHUDController : MonoBehaviour
             //     instance.transform.localPosition = Vector3.Lerp(instance.transform.localPosition, target.localPosition, Time.deltaTime * 5f);
 
             cg.alpha = Mathf.Lerp(cg.alpha, destAlpha, Time.deltaTime * 6f);
-            instance.transform.localPosition = Vector3.Lerp(instance.transform.localPosition, Vector3.zero, Time.deltaTime * 3f);
+            instance.transform.localPosition = Vector3.Lerp(instance.transform.localPosition, Vector3.zero + offset, Time.deltaTime * 3f);
         }
 
         private T GetChildComponentOfName<T>(string name)

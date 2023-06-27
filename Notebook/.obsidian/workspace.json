@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GDS1/Group Notes.md",
+                "file": "Notebook/Page 1.md",
                 "mode": "source",
                 "source": false
               }
@@ -64,6 +64,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "1c66b25e4553a489",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -85,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GDS1/Group Notes.md",
+                "file": "Notebook/Page 1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GDS1/Group Notes.md",
+                "file": "Notebook/Page 1.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GDS1/Group Notes.md"
+                "file": "Notebook/Page 1.md"
               }
             }
           }
@@ -148,12 +156,18 @@
   },
   "active": "eb93ae2a032de943",
   "lastOpenFiles": [
+    "Tutorial Level Design.png",
+    "Tutorial Level Design Light.png",
+    "Tears of the Kingdom - The Conversation.md",
+    "TOTK Article.md",
+    "GDS1/Group Notes.md",
+    "Notebook/Page 1.md",
+    "Notebook",
     "GDS1/Feedback/Team 2 - 5pm.md",
     "Masters/Dev/Tutorial Level Design.canvas",
     "Masters/Dev/Major Design Choices.md",
     "Masters/Concepts/Efficient Communication of Complex Game Mechanics.md",
     "Masters/Dev/Algorithm Design.md",
-    "GDS1/Group Notes.md",
     "GDS1/Feedback",
     "Masters/Concepts/Epsilon Greedy Path Optimisation.md",
     "GDS1",
