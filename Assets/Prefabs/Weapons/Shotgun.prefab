@@ -79,6 +79,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3606283343415565487, guid: 039c9bb0db8696d478ca44a329ee4bde,
         type: 3}
+      propertyPath: fireSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ecf3a12588d10044abfc8fcef8dbf699, type: 3}
+    - target: {fileID: 3606283343415565487, guid: 039c9bb0db8696d478ca44a329ee4bde,
+        type: 3}
       propertyPath: clipSize
       value: 5
       objectReference: {fileID: 0}
@@ -126,6 +131,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233144958790092459, guid: 039c9bb0db8696d478ca44a329ee4bde,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 039c9bb0db8696d478ca44a329ee4bde, type: 3}

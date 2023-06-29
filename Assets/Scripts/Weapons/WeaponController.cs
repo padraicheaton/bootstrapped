@@ -13,6 +13,9 @@ public class WeaponController : Interactable
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private ParticleSystem effectIndicatorVFX;
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip fireSFX;
+
     [Header("Settings")]
     [SerializeField] private string displayName;
     [SerializeField] private float damage;
@@ -35,6 +38,7 @@ public class WeaponController : Interactable
     // Private Component References
     private Rigidbody rb;
     private BoxCollider coll;
+    private AudioSource audioSource;
 
     private float despawnDelay = 90f;
 
@@ -51,6 +55,8 @@ public class WeaponController : Interactable
 
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<BoxCollider>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = fireSFX;
 
         // Set indicator colour
         Color particleColour = ServiceLocator.instance.GetService<WeaponComponentProvider>().GetEffectObject(dna).weaponVFXColour;
@@ -144,6 +150,11 @@ public class WeaponController : Interactable
 
         if (remainingAmmo <= 0)
             OnWeaponClipEmptied();
+
+        if (audioSource.isPlaying)
+            audioSource.Stop();
+
+        audioSource.Play();
     }
 
     private Vector3 GetSpreadOffset()
