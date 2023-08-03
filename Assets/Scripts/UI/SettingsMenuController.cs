@@ -61,13 +61,21 @@ public class SettingsMenuController : ModalWindow
         if (SaveStateController.DatabaseContains(SaveStateController.masterVolumeValueKey))
             masterVolumeSlider.value = SaveStateController.GetData<float>(SaveStateController.masterVolumeValueKey);
         else
+        {
             masterVolumeSlider.value = 50f;
+
+            SaveStateController.SetData(SaveStateController.masterVolumeValueKey, masterVolumeSlider.value);
+        }
         masterVolumeSlider.onValueChanged.Invoke(masterVolumeSlider.value);
 
         if (SaveStateController.DatabaseContains(SaveStateController.sensitivityValueKey))
             sensitivitySlider.value = SaveStateController.GetData<float>(SaveStateController.sensitivityValueKey);
         else
+        {
             sensitivitySlider.value = 2.5f;
+
+            SaveStateController.SetData(SaveStateController.sensitivityValueKey, sensitivitySlider.value);
+        }
         sensitivitySlider.onValueChanged.Invoke(sensitivitySlider.value);
     }
 

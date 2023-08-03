@@ -6,37 +6,37 @@ public class WeaponGenerator : MonoBehaviour
 {
     [SerializeField] private List<SceneGenSettings> settings = new List<SceneGenSettings>();
 
-    private float cachedNoveltyChance;
-
     private void Start()
     {
-        cachedNoveltyChance = GetSettings().noveltyChance;
-
         ServiceLocator.instance.GetService<SceneController>().onSceneChanged += OnSceneChanged;
     }
 
     private void OnSceneChanged()
     {
-        cachedNoveltyChance = GetSettings().noveltyChance;
+
     }
 
     public GameObject GenerateWeapon(Vector3 spawnPoint, bool forceRandom = false)
     {
-        if (Random.value < GetSettings().noveltyChance || forceRandom)
-        {
-            // Reset the novelty chance back to default
-            GetSettings().noveltyChance = cachedNoveltyChance;
+        // if (Random.value < GetSettings().noveltyChance || forceRandom)
+        // {
+        //     // Reset the novelty chance back to default
+        //     GetSettings().noveltyChance = cachedNoveltyChance;
 
-            return GenerateWeapon(EvolutionAlgorithms.Randomised(), spawnPoint);
-        }
-        else
-        {
-            // Increment the novelty chance if switched on
-            if (GetSettings().shouldIncrementNovelty)
-                GetSettings().noveltyChance += GetSettings().noveltyChanceIncrement;
+        //     return GenerateWeapon(EvolutionAlgorithms.Randomised(), spawnPoint);
+        // }
+        // else
+        // {
+        //     // Increment the novelty chance if switched on
+        //     if (GetSettings().shouldIncrementNovelty)
+        //         GetSettings().noveltyChance += GetSettings().noveltyChanceIncrement;
 
-            return GenerateWeapon(EvolutionAlgorithms.Crossover(GetSettings().mutationChance), spawnPoint);
-        }
+        //     return GenerateWeapon(EvolutionAlgorithms.Crossover(GetSettings().mutationChance), spawnPoint);
+        // }
+
+        int[] weaponDNA = GetSettings().GetNextWeapon(WeaponDataCollector.GetEvolutionaryData());
+
+        return GenerateWeapon(weaponDNA, spawnPoint);
     }
 
     public GameObject GenerateWeapon(int[] dna, Vector3 spawnPoint)
@@ -52,7 +52,7 @@ public class WeaponGenerator : MonoBehaviour
         return createdWeapon;
     }
 
-    private GenConfig GetSettings()
+    private BaseGenerationAlgorithm GetSettings()
     {
         LoadedScenes activeScene = ServiceLocator.instance.GetService<SceneController>().GetActiveScene();
 
@@ -72,6 +72,6 @@ public class WeaponGenerator : MonoBehaviour
     public struct SceneGenSettings
     {
         public LoadedScenes scene;
-        public GenConfig config;
+        public BaseGenerationAlgorithm config;
     }
 }
