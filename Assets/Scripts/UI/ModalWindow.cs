@@ -5,12 +5,24 @@ using UnityEngine.UI;
 
 public class ModalWindow : MonoBehaviour
 {
+    [SerializeField] private AudioClip windowOpenClip;
+    private AudioSource sfxAudioSource;
     protected CanvasGroup cg;
     protected float destAlpha;
     protected bool isVisible;
 
     protected virtual void Start()
     {
+        if (windowOpenClip != null)
+        {
+            sfxAudioSource = gameObject.AddComponent<AudioSource>();
+            sfxAudioSource.playOnAwake = false;
+            sfxAudioSource.loop = false;
+            sfxAudioSource.volume = 0.5f;
+
+            sfxAudioSource.clip = windowOpenClip;
+        }
+
         cg = GetComponent<CanvasGroup>();
 
         ServiceLocator.instance.GetService<InputManager>().OnCloseMenu += OnCloseMenuInput;
@@ -72,6 +84,11 @@ public class ModalWindow : MonoBehaviour
             // If it is the main menu, always have the cursor visible
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+        }
+
+        if (visible && windowOpenClip != null && !sfxAudioSource.isPlaying)
+        {
+            sfxAudioSource.Play();
         }
     }
 }

@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsInteractable: 1
+  waveStartAudio: {fileID: 8300000, guid: 97723815f0a0cef45b1fba2a7ff13d74, type: 3}
 --- !u!65 &1520371231863514839
 BoxCollider:
   m_ObjectHideFlags: 0
