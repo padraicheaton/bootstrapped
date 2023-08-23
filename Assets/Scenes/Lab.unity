@@ -899,6 +899,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 5266468976780974227, guid: df02c5ac659421746a769151474961ab,
+        type: 3}
+      propertyPath: timeInSandboxBeforeQuestionnaire
+      value: 1205
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df02c5ac659421746a769151474961ab, type: 3}
 --- !u!1 &589149685
@@ -3621,7 +3626,27 @@ PrefabInstance:
     - target: {fileID: 8719977652690317018, guid: 6741e78fbff5a684bbd78bcf7f9173d2,
         type: 3}
       propertyPath: destination
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8719977652690317018, guid: 6741e78fbff5a684bbd78bcf7f9173d2,
+        type: 3}
+      propertyPath: overrideDestinationName
+      value: Game Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 8719977652690317018, guid: 6741e78fbff5a684bbd78bcf7f9173d2,
+        type: 3}
+      propertyPath: timeSensitiveDestination
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8719977652690317018, guid: 6741e78fbff5a684bbd78bcf7f9173d2,
+        type: 3}
+      propertyPath: minutesUntilTimeSensitiveDestination
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8719977652690317018, guid: 6741e78fbff5a684bbd78bcf7f9173d2,
+        type: 3}
+      propertyPath: secondsUntilTimeSensitiveDestination
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8719977652690317021, guid: 6741e78fbff5a684bbd78bcf7f9173d2,
         type: 3}

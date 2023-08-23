@@ -42,6 +42,7 @@ public class PauseMenuController : ModalWindow
                 backScene = LoadedScenes.MainMenu;
                 break;
             case LoadedScenes.Sandbox:
+            case LoadedScenes.Sandbox_Random:
                 backScene = LoadedScenes.Lab;
                 break;
         }

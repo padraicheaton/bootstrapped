@@ -18,7 +18,7 @@ public class Cache : Interactable
     {
         for (int i = 0; i < weaponsToDrop; i++)
         {
-            GameObject generatedWeapon = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(transform.position + Vector3.up, forceRandom);
+            GameObject generatedWeapon = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(transform.position + Vector3.up);
 
             generatedWeapon.GetComponent<Rigidbody>().AddForce((Random.insideUnitSphere + Vector3.up) * 5f, ForceMode.Impulse);
         }

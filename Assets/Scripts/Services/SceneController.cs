@@ -10,7 +10,9 @@ public enum LoadedScenes
     Lab,
     Sandbox,
     Tutorial,
-    Tutorial_Foundry
+    Tutorial_Foundry,
+    Sandbox_Random,
+    MidExperimentQuestionnaire
 }
 
 public class SceneController : MonoBehaviour
@@ -18,6 +20,8 @@ public class SceneController : MonoBehaviour
     [SerializeField] private CanvasGroup loadingScreen;
 
     public UnityAction onSceneChanged;
+
+    private List<LoadedScenes> scenesWithMouseControl = new List<LoadedScenes>() { LoadedScenes.MainMenu, LoadedScenes.MidExperimentQuestionnaire };
 
     private void Start()
     {
@@ -29,6 +33,12 @@ public class SceneController : MonoBehaviour
         {
             // Already exists
             Destroy(gameObject);
+        }
+        else if (transform.parent != null)
+        {
+            transform.SetParent(null);
+
+            DontDestroyOnLoad(gameObject);
         }
         else
             DontDestroyOnLoad(gameObject);
@@ -67,6 +77,17 @@ public class SceneController : MonoBehaviour
         {
             loadingScreen.alpha -= Time.deltaTime * 2f;
             yield return null;
+        }
+
+        if (scenesWithMouseControl.Contains(scene))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }

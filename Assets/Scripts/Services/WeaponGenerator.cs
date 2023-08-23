@@ -16,24 +16,8 @@ public class WeaponGenerator : MonoBehaviour
 
     }
 
-    public GameObject GenerateWeapon(Vector3 spawnPoint, bool forceRandom = false)
+    public GameObject GenerateWeapon(Vector3 spawnPoint)
     {
-        // if (Random.value < GetSettings().noveltyChance || forceRandom)
-        // {
-        //     // Reset the novelty chance back to default
-        //     GetSettings().noveltyChance = cachedNoveltyChance;
-
-        //     return GenerateWeapon(EvolutionAlgorithms.Randomised(), spawnPoint);
-        // }
-        // else
-        // {
-        //     // Increment the novelty chance if switched on
-        //     if (GetSettings().shouldIncrementNovelty)
-        //         GetSettings().noveltyChance += GetSettings().noveltyChanceIncrement;
-
-        //     return GenerateWeapon(EvolutionAlgorithms.Crossover(GetSettings().mutationChance), spawnPoint);
-        // }
-
         int[] weaponDNA = GetSettings().GetNextWeapon(WeaponDataCollector.GetEvolutionaryData());
 
         return GenerateWeapon(weaponDNA, spawnPoint);

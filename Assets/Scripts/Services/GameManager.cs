@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Experiment Settings")]
+    [SerializeField] private float timeInSandboxBeforeQuestionnaire;
+    private float timeInSandbox;
+    public static float totalTimeInSandbox;
+    private bool isInSandbox;
+
     private void Awake()
     {
         // Load the data
@@ -11,6 +17,29 @@ public class GameManager : MonoBehaviour
 
         CurrencyHandler.Setup();
         WeaponDataCollector.RegisterEventListeners();
+    }
+
+    private void OnSceneChanged()
+    {
+        LoadedScenes activeScene = ServiceLocator.instance.GetService<SceneController>().GetActiveScene();
+
+        isInSandbox = activeScene == LoadedScenes.Sandbox || activeScene == LoadedScenes.Sandbox_Random;
+    }
+
+    private void Update()
+    {
+        if (isInSandbox)
+        {
+            totalTimeInSandbox += Time.deltaTime;
+            timeInSandbox += Time.deltaTime;
+
+            if (timeInSandbox >= timeInSandboxBeforeQuestionnaire)
+            {
+                timeInSandbox = 0f;
+
+                ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(LoadedScenes.MidExperimentQuestionnaire);
+            }
+        }
     }
 
     private void Start()
@@ -22,13 +51,18 @@ public class GameManager : MonoBehaviour
     {
         UpgradeLoader.ApplyUpgradesToPlayer();
 
-        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.MainMenu)
+        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.MainMenu &&
+            ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.MidExperimentQuestionnaire)
             ServiceLocator.instance.GetService<PlayerWeaponSystem>().GetHealth().onDeath += OnGameOver;
+
+        ServiceLocator.instance.GetService<SceneController>().onSceneChanged += OnSceneChanged;
     }
 
     private IEnumerator DelayedStart()
     {
         yield return new WaitForEndOfFrame();
+
+        totalTimeInSandbox = timeInSandbox = 0f;
 
         RegisterEventListeners();
 
