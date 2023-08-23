@@ -28,7 +28,7 @@ public class ScenePortal : Interactable
 
         secondsUntilTimeSensitiveDestination = minutesUntilTimeSensitiveDestination * 60;
 
-        if (destination != timeSensitiveDestination && GameManager.totalTimeInSandbox > secondsUntilTimeSensitiveDestination)
+        if (minutesUntilTimeSensitiveDestination != 0 && destination != timeSensitiveDestination && GameManager.totalTimeInSandbox > secondsUntilTimeSensitiveDestination)
         {
             destination = timeSensitiveDestination;
         }
