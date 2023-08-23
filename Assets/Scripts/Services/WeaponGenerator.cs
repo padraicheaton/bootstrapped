@@ -20,6 +20,14 @@ public class WeaponGenerator : MonoBehaviour
     {
         int[] weaponDNA = GetSettings().GetNextWeapon(WeaponDataCollector.GetEvolutionaryData());
 
+        // Log this event
+        EventLogger.Event weaponGeneratedEvent = new EventLogger.Event(
+            "Weapon Generated",
+            string.Join(",", weaponDNA)
+        );
+
+        EventLogger.Log(weaponGeneratedEvent);
+
         return GenerateWeapon(weaponDNA, spawnPoint);
     }
 

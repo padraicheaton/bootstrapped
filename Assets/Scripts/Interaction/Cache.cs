@@ -7,7 +7,6 @@ public class Cache : Interactable
     [Header("Settings")]
     [SerializeField] private int weaponsToDrop;
     [SerializeField] private bool destroyOnOpen;
-    [SerializeField] private bool forceRandom = false;
 
     public override string GetName()
     {

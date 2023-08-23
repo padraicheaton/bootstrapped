@@ -30,7 +30,6 @@ public class GA_Voting : GA_Genetic
         }
 
         string strRepresentation = string.Join(",", electedDna.ToArray());
-        Debug.Log($"Elected DNA: {strRepresentation}");
 
         return electedDna.ToArray();
     }

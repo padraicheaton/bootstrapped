@@ -42,6 +42,8 @@ public class SceneController : MonoBehaviour
         }
         else
             DontDestroyOnLoad(gameObject);
+
+        LogSceneChange();
     }
 
     public void SwitchSceneTo(LoadedScenes scene)
@@ -89,5 +91,17 @@ public class SceneController : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+
+        LogSceneChange();
+    }
+
+    private void LogSceneChange()
+    {
+        EventLogger.Event sceneChangeEvent = new EventLogger.Event(
+            "Scene Changed",
+            GetActiveScene().ToString()
+        );
+
+        EventLogger.Log(sceneChangeEvent);
     }
 }
