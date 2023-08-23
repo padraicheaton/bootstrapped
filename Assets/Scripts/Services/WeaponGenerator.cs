@@ -23,7 +23,7 @@ public class WeaponGenerator : MonoBehaviour
         // Log this event
         EventLogger.Event weaponGeneratedEvent = new EventLogger.Event(
             "Weapon Generated",
-            string.Join(",", weaponDNA)
+            string.Join("-", weaponDNA)
         );
 
         EventLogger.Log(weaponGeneratedEvent);
