@@ -235,17 +235,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""de783786-4886-4999-9482-4c72c4418f63"",
-                    ""path"": ""<Keyboard>/p"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CloseMenu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""ec0248db-d80d-4864-b827-e571ca70ef04"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",

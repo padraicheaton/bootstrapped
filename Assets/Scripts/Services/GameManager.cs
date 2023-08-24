@@ -7,8 +7,11 @@ public class GameManager : MonoBehaviour
     [Header("Experiment Settings")]
     [SerializeField] private float timeInSandboxBeforeQuestionnaire;
     private float timeInSandbox;
-    public static float totalTimeInSandbox;
     private bool isInSandbox;
+
+    public static float totalTimeInSandbox;
+    public static string participantID = "Unknown";
+
 
     private void Awake()
     {
@@ -24,6 +27,15 @@ public class GameManager : MonoBehaviour
         LoadedScenes activeScene = ServiceLocator.instance.GetService<SceneController>().GetActiveScene();
 
         isInSandbox = activeScene == LoadedScenes.Sandbox || activeScene == LoadedScenes.Sandbox_Random;
+    }
+
+    public void SetParticipantID(string id)
+    {
+        GameManager.participantID = id;
+
+        EventLogger.Event idChangedEvent = new EventLogger.Event("Participant ID Changed", GameManager.participantID);
+
+        EventLogger.Log(idChangedEvent);
     }
 
     private void Update()

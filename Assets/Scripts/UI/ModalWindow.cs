@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ModalWindow : MonoBehaviour
 {
     [SerializeField] private AudioClip windowOpenClip;
+    [SerializeField] private bool defaultVisibleState = false;
     private AudioSource sfxAudioSource;
     protected CanvasGroup cg;
     protected float destAlpha;
@@ -38,7 +39,7 @@ public class ModalWindow : MonoBehaviour
             }
         }
 
-        SetVisibility(false);
+        SetVisibility(defaultVisibleState);
     }
 
     private void OnDisable()

@@ -43,7 +43,7 @@ public class SceneController : MonoBehaviour
         else
             DontDestroyOnLoad(gameObject);
 
-        LogSceneChange();
+        //LogSceneChange();
     }
 
     public void SwitchSceneTo(LoadedScenes scene)

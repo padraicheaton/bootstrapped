@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class EventLogger
 {
-    private static string eventsFileName = "eventLogs.csv";
+    private static string eventsFileName = $"{GameManager.participantID} - eventLogs.csv";
 
     public static void Log(Event occuredEvent)
     {
@@ -44,10 +44,10 @@ public static class EventLogger
         public string eventTitle;
         public string eventData;
 
-        public Event(string eventTitle, string eventData, string participantID = "Unknown")
+        public Event(string eventTitle, string eventData)
         {
             timestamp = System.DateTime.Now.ToShortDateString() + " " + System.DateTime.Now.ToString("T");
-            this.participantID = participantID;
+            participantID = GameManager.participantID;
             this.eventTitle = eventTitle;
             this.eventData = eventData;
         }
