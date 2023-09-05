@@ -70,6 +70,9 @@ public class NavmeshRobot : MonoBehaviour
         rb.isKinematic = true;
 
         SwitchState(State.Chase);
+
+        new EventLogger.Event("Enemy Spawned",
+                                gameObject.name);
     }
 
     private void FixedUpdate()
@@ -228,6 +231,9 @@ public class NavmeshRobot : MonoBehaviour
     {
         if (itemsToDrop > 0)
             ServiceLocator.instance.GetService<LootController>().OnEnemyDefeated(transform.position, itemsToDrop);
+
+        new EventLogger.Event("Enemy Defeated",
+                                gameObject.name);
 
         Destroy(gameObject, 1.5f);
     }

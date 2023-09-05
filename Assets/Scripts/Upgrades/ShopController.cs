@@ -108,6 +108,9 @@ public class ShopController : Interactable
             focusedUpgrade.OnUnlocked();
 
             ShowUpgradeDetails(focusedUpgrade);
+
+            new EventLogger.Event("Upgrade Purchased",
+                                $"{focusedUpgrade.displayName}");
         }
     }
 

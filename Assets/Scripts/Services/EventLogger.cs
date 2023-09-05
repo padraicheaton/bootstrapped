@@ -10,7 +10,7 @@ public static class EventLogger
     public static void Log(Event occuredEvent)
     {
         // For now, just log everything into the console
-        string consoleMsg = $"[{occuredEvent.timestamp}] {occuredEvent.participantID} | {occuredEvent.eventTitle}: {occuredEvent.eventData}";
+        string consoleMsg = occuredEvent.GetDataString();
 
         Debug.Log(consoleMsg);
 
@@ -46,10 +46,13 @@ public static class EventLogger
 
         public Event(string eventTitle, string eventData)
         {
-            timestamp = System.DateTime.Now.ToShortDateString() + " " + System.DateTime.Now.ToString("T");
+            timestamp = $"{System.DateTime.Now.ToShortDateString()} {System.DateTime.Now.ToLongTimeString()}";
+
             participantID = GameManager.participantID;
             this.eventTitle = eventTitle;
             this.eventData = eventData;
+
+            Log(this);
         }
 
         public string GetDataString()

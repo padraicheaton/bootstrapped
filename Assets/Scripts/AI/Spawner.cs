@@ -29,11 +29,17 @@ public class Spawner : MonoBehaviour
         onSwarmBegin += () =>
         {
             swarmInProgress = true;
+
+            new EventLogger.Event("Wave Started",
+                                $"{swarmEnemyCount} Enemies");
         };
 
         onSwarmEnd += () =>
         {
             swarmInProgress = false;
+
+            new EventLogger.Event("Wave Ended",
+                                "");
         };
     }
 

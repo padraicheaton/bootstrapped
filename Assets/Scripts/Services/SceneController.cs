@@ -97,11 +97,9 @@ public class SceneController : MonoBehaviour
 
     private void LogSceneChange()
     {
-        EventLogger.Event sceneChangeEvent = new EventLogger.Event(
+        new EventLogger.Event(
             "Scene Changed",
             GetActiveScene().ToString()
         );
-
-        EventLogger.Log(sceneChangeEvent);
     }
 }

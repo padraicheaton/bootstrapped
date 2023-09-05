@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
   - scene: 1
-    config: {fileID: 11400000, guid: 21eec5b32c2cb034ba3b3569b0d400cd, type: 2}
+    config: {fileID: 11400000, guid: c3acd786b727c264a8c2475613b21be9, type: 2}
   - scene: 2
     config: {fileID: 11400000, guid: 21eec5b32c2cb034ba3b3569b0d400cd, type: 2}
   - scene: 3
@@ -1176,6 +1176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec129fe492027040a8e830f837c2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeInSandboxBeforeQuestionnaire: 1200
 --- !u!114 &767621610241688008
 MonoBehaviour:
   m_ObjectHideFlags: 0

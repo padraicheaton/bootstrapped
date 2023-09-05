@@ -44,6 +44,9 @@ public class Foundry : Interactable
     {
         currentlySpawningWeapons = true;
 
+        new EventLogger.Event("Interacted With Foundry",
+                                $"{numWeaponsToGenerateEachWave} Weapons To Generate");
+
         for (int i = 0; i < numWeaponsToGenerateEachWave; i++)
         {
             GameObject generatedWeapon = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(transform.position + Vector3.up);

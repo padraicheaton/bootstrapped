@@ -109,6 +109,9 @@ public class WeaponController : Interactable
         InvokeEvent(WeaponDataCollector.onWeaponEquipped);
 
         isEquipped = true;
+
+        new EventLogger.Event("Weapon Picked Up",
+                                string.Join("-", dna));
     }
 
     public void OnDropped()
@@ -128,6 +131,9 @@ public class WeaponController : Interactable
             InitiateDespawnTimer();
 
         isEquipped = false;
+
+        new EventLogger.Event("Weapon Dropped",
+                                string.Join("-", dna));
     }
 
     public void OnFireInput(bool performed)
@@ -226,6 +232,9 @@ public class WeaponController : Interactable
         isRecharging = false;
 
         InvokeEvent(WeaponDataCollector.onWeaponReloaded);
+
+        new EventLogger.Event("Weapon Reloaded",
+                                string.Join("-", dna));
     }
 
     private void InvokeEvent(UnityAction<int[]> action)

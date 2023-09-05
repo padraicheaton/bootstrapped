@@ -33,9 +33,7 @@ public class GameManager : MonoBehaviour
     {
         GameManager.participantID = id;
 
-        EventLogger.Event idChangedEvent = new EventLogger.Event("Participant ID Changed", GameManager.participantID);
-
-        EventLogger.Log(idChangedEvent);
+        new EventLogger.Event("Participant ID Changed", GameManager.participantID);
     }
 
     private void Update()

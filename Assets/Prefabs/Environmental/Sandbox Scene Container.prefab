@@ -54103,6 +54103,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 5266468976780974227, guid: df02c5ac659421746a769151474961ab,
+        type: 3}
+      propertyPath: timeInSandboxBeforeQuestionnaire
+      value: 1200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df02c5ac659421746a769151474961ab, type: 3}
 --- !u!4 &6918262530314705827 stripped
