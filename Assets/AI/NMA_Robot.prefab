@@ -124,6 +124,7 @@ MonoBehaviour:
   projectileSpeed: 30
   fireKnockbackForce: 5
   itemsToDrop: 2
+  autoDeathTimeout: 60
 --- !u!114 &1090444918084801581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
   damageTakenMultiplier: 1
-  maximumHealth: 20
+  maximumHealth: 10
   currentHealth: 0
 --- !u!136 &882395512638999545
 CapsuleCollider:

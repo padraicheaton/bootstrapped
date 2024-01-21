@@ -30,6 +30,8 @@ public class Spawner : MonoBehaviour
         {
             swarmInProgress = true;
 
+            ServiceLocator.instance.GetService<DialogueManager>().DisplayDialogue("Watch out! Robots are on the way. Defend yourself!");
+
             new EventLogger.Event("Wave Started",
                                 $"{swarmEnemyCount} Enemies");
         };
@@ -37,6 +39,8 @@ public class Spawner : MonoBehaviour
         onSwarmEnd += () =>
         {
             swarmInProgress = false;
+
+            ServiceLocator.instance.GetService<DialogueManager>().DisplayDialogue("Looks like you're all done, we've moved the foundry to a safer location. Locate it and start the process again!");
 
             new EventLogger.Event("Wave Ended",
                                 "");

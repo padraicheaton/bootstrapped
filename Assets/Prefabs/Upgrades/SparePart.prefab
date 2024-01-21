@@ -62,10 +62,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d584f0e97cee19542ad189ba9306f450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 1
-  pickupRange: 16
+  pickupRange: 50
   moveSpeed: 30
   rotateSpeed: 100
+  value: 1
 --- !u!1 &5764548990053524948
 GameObject:
   m_ObjectHideFlags: 0

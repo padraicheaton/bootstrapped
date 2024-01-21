@@ -31,6 +31,7 @@ public class NavmeshRobot : MonoBehaviour
     [Header("Misc Params")]
     [SerializeField] private float fireKnockbackForce;
     [SerializeField] private int itemsToDrop;
+    [SerializeField] private float autoDeathTimeout;
 
     public enum State
     {
@@ -73,6 +74,8 @@ public class NavmeshRobot : MonoBehaviour
 
         new EventLogger.Event("Enemy Spawned",
                                 gameObject.name);
+
+        StartCoroutine(AutoDeathTimeout());
     }
 
     private void FixedUpdate()
@@ -193,7 +196,8 @@ public class NavmeshRobot : MonoBehaviour
 
     private void HackedTick()
     {
-        agent.SetDestination(wanderTargetDestination);
+        if (NavMesh.SamplePosition(wanderTargetDestination, out NavMeshHit testHit, 10f, NavMesh.AllAreas))
+            agent.SetDestination(testHit.position);
 
         if (Vector3.Distance(transform.position, wanderTargetDestination) <= 0.1f)
         {
@@ -335,5 +339,15 @@ public class NavmeshRobot : MonoBehaviour
             hc.TakeDamage(rb.velocity.magnitude);
             canReceiveKnockDamage = false;
         }
+    }
+
+    private IEnumerator AutoDeathTimeout()
+    {
+        // This is an extreme bandaid fix in the case that the player takes too long to kill the enemy
+        // This should only occur if the enemy has been spawned out of bounds
+
+        yield return new WaitForSeconds(autoDeathTimeout);
+
+        SwitchState(State.Dead);
     }
 }
