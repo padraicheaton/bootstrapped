@@ -8,6 +8,8 @@ public class ModularProjectile : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Collider physicalCollider;
+    [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private ParticleSystem projectileParticle;
 
     private Rigidbody rb;
 
@@ -62,6 +64,9 @@ public class ModularProjectile : MonoBehaviour
         rb.AddForce(transform.forward * launchForce, ForceMode.Impulse);
 
         shouldTick = true;
+
+        ParticleSystem.MainModule main = projectileParticle.main;
+        main.startColor = effectToApply.weaponVFXColour;
 
         StartCoroutine(ModifierApplicationRoutine());
     }
@@ -167,6 +172,21 @@ public class ModularProjectile : MonoBehaviour
                 effectScript.OnEffectApplied(hc, damage, collidableTransform.gameObject); // passing the child here as this ref is used for force calculation
             }
         }
+
+        ShowExplosionEffect();
+
+    }
+
+    private void ShowExplosionEffect()
+    {
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+
+        ParticleSystem.MainModule main = explosion.GetComponent<ParticleSystem>().main;
+
+        main.startColor = effectToApply.weaponVFXColour;
+
+        // 1.5f = Radius of the trigger for the explosion
+        main.startSize = 1.5f * explosionRadiusMultiplier;
     }
 
     public LayerMask GetAffectingLayers()
@@ -177,6 +197,7 @@ public class ModularProjectile : MonoBehaviour
     public void MultiplyProjectileScale(float multiplier)
     {
         MultiplyProjectileScale(Vector3.one * multiplier);
+        MultiplyExplosionRadius(multiplier);
     }
 
     public void MultiplyProjectileScale(Vector3 multiplier)

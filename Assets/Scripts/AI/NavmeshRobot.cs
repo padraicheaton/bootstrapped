@@ -350,4 +350,9 @@ public class NavmeshRobot : MonoBehaviour
 
         SwitchState(State.Dead);
     }
+
+    private Transform GetTarget()
+    {
+        return currentState == State.Hacked ? null : ServiceLocator.instance.GetService<PlayerMovement>().transform;
+    }
 }

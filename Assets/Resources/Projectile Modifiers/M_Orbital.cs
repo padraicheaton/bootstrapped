@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class M_Orbital : ProjectileModifier
 {
-    private float moveForce = 8f;
+    private float moveForce = 12f;
     private Transform target;
 
     public override void OnModifierApplied()

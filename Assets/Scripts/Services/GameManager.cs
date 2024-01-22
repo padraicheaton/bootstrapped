@@ -5,12 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [Header("Experiment Settings")]
-    [SerializeField] private float timeInSandboxBeforeQuestionnaire;
-    private float timeInSandbox;
-    private bool isInSandbox;
-
-    public static float totalTimeInSandbox;
+    [SerializeField] private float playSessionIntervalMinutes;
     public static string participantID = "Unknown";
+    public static bool playerPresentedWithQuestionnaire = false;
+
+    private Coroutine questionnaireTimerRoutine;
 
 
     private void Awake()
@@ -26,7 +25,13 @@ public class GameManager : MonoBehaviour
     {
         LoadedScenes activeScene = ServiceLocator.instance.GetService<SceneController>().GetActiveScene();
 
-        isInSandbox = activeScene == LoadedScenes.Sandbox || activeScene == LoadedScenes.Sandbox_Random;
+        if (activeScene == LoadedScenes.Sandbox || activeScene == LoadedScenes.Sandbox_Random)
+        {
+            if (questionnaireTimerRoutine != null)
+                StopCoroutine(questionnaireTimerRoutine);
+
+            questionnaireTimerRoutine = StartCoroutine(QuestionnaireExpiryTimer());
+        }
     }
 
     public void SetParticipantID(string id)
@@ -34,22 +39,6 @@ public class GameManager : MonoBehaviour
         GameManager.participantID = id;
 
         new EventLogger.Event("Participant ID Changed", GameManager.participantID);
-    }
-
-    private void Update()
-    {
-        if (isInSandbox)
-        {
-            totalTimeInSandbox += Time.deltaTime;
-            timeInSandbox += Time.deltaTime;
-
-            if (timeInSandbox >= timeInSandboxBeforeQuestionnaire)
-            {
-                timeInSandbox = 0f;
-
-                ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(LoadedScenes.MidExperimentQuestionnaire);
-            }
-        }
     }
 
     private void Start()
@@ -68,11 +57,20 @@ public class GameManager : MonoBehaviour
         ServiceLocator.instance.GetService<SceneController>().onSceneChanged += OnSceneChanged;
     }
 
+    private IEnumerator QuestionnaireExpiryTimer()
+    {
+        Debug.Log($"Session will expire after {playSessionIntervalMinutes} minutes");
+
+        yield return new WaitForSecondsRealtime(playSessionIntervalMinutes * 60);
+
+        playerPresentedWithQuestionnaire = true;
+
+        ServiceLocator.instance.GetService<SceneController>().SwitchSceneTo(LoadedScenes.MidExperimentQuestionnaire);
+    }
+
     private IEnumerator DelayedStart()
     {
         yield return new WaitForEndOfFrame();
-
-        totalTimeInSandbox = timeInSandbox = 0f;
 
         RegisterEventListeners();
 

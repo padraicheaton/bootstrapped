@@ -22,6 +22,9 @@ public class M_BuildUp : ProjectileModifier
         if (timer >= damageIncreaseInterval)
         {
             projectileComponent.MultiplyDamageAmount(damageIncreaseMultiplier);
+            projectileComponent.MultiplyProjectileScale(1.25f);
+
+            timer = 0f;
         }
     }
 }

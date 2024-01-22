@@ -1164,6 +1164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c096cbc6d3690343a44b24765aa1925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformPrefab: {fileID: 8625405207199474796, guid: f5b243692f4dc644ead5fd651cd7a9a0,
+    type: 3}
 --- !u!114 &5266468976780974227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,7 +1178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec129fe492027040a8e830f837c2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeInSandboxBeforeQuestionnaire: 1200
+  playSessionIntervalMinutes: 2
 --- !u!114 &767621610241688008
 MonoBehaviour:
   m_ObjectHideFlags: 0

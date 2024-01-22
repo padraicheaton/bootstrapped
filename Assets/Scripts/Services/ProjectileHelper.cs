@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ProjectileHelper : MonoBehaviour
 {
+    [SerializeField] private GameObject platformPrefab;
+
     public void OnPlatformProjectileDestroyed(GameObject prefab, float lifetime)
     {
-        GameObject platform = Instantiate(prefab, prefab.transform.position, prefab.transform.rotation);
-        platform.layer = LayerMask.NameToLayer("Ground");
+        GameObject platform = Instantiate(platformPrefab, prefab.transform.position, Quaternion.identity);
 
-        platform.GetComponentInChildren<MeshRenderer>().material.color = Color.grey;
+        platform.transform.localScale = prefab.transform.localScale;
 
         Destroy(platform, lifetime);
     }

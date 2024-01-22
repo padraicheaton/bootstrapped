@@ -6,7 +6,7 @@ public class M_Curve : ProjectileModifier
 {
     private Vector3[] possibleCurveDirs = new Vector3[] { Vector3.left, Vector3.right };
 
-    private float curveAcceleration = 3f;
+    private float curveAcceleration = 5f;
     private Vector3 curveDir;
 
     public override void OnModifierApplied()
