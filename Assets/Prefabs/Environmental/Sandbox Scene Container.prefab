@@ -46745,6 +46745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objsToSpawn:
   - {fileID: 1514393247244800780, guid: 365b12afd28aa39429f6e317de5ff947, type: 3}
+  - {fileID: 1514393247244800780, guid: 365b12afd28aa39429f6e317de5ff947, type: 3}
   - {fileID: 5133683581547915446, guid: 1c62a10af0314bf4ab730180ec347b04, type: 3}
   - {fileID: 4757118498128359040, guid: 232c5d3a0ac4db44ab986f541c997185, type: 3}
   - {fileID: 7862779880740339058, guid: 9e34de2cd0ce977408e4549793ba2942, type: 3}

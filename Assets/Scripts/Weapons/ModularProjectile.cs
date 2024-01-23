@@ -158,7 +158,7 @@ public class ModularProjectile : MonoBehaviour
         affectingLayers |= (1 << layer);
     }
 
-    private void ExplodeEffect()
+    public void ExplodeEffect()
     {
         activeModifiers.Clear();
         StopAllCoroutines();

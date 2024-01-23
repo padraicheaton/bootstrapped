@@ -7,7 +7,7 @@ public class M_Heavyweight : ProjectileModifier
     private float massMultiplier = 2f;
     private float damageMultiplier = 1.25f;
 
-    private float continuousDownwardForce = 2f;
+    private float continuousDownwardForce = 4f;
 
     public override void OnModifierApplied()
     {

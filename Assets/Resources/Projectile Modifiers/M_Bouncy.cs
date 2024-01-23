@@ -9,7 +9,7 @@ public class M_Bouncy : ProjectileModifier
     private bool shouldBounceAfterDelay = false;
     private float timer = 0f;
     private float timeToBounce = 0.1f;
-    private float bounceForce = 4f;
+    private float bounceForce = 8f;
 
     public override void OnModifierApplied()
     {

@@ -15,9 +15,16 @@ public class M_Piercing : ProjectileModifier
 
         projectileComponent.onCollided += other =>
         {
-            projectileComponent.DisableColliderForDuration(noClipWindow);
+            if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+            {
+                projectileComponent.ExplodeEffect();
 
-            projectileRigidbody.velocity = storedVelocity;
+                projectileComponent.DisableColliderForDuration(noClipWindow);
+
+                storedVelocity.y = 0f;
+
+                projectileRigidbody.velocity = storedVelocity;
+            }
         };
     }
 

@@ -10,6 +10,9 @@ public class M_Sticky : ProjectileModifier
         {
             projectileRigidbody.velocity = Vector3.zero;
             projectileRigidbody.isKinematic = true;
+
+            projectileComponent.MultiplyExplosionRadius(1.2f);
+            projectileComponent.MultiplyTimeToLive(1.5f);
         };
     }
 

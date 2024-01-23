@@ -11,6 +11,9 @@ public class M_Homing : ProjectileModifier
     public override void OnModifierApplied()
     {
         SearchForTarget();
+
+        if (target)
+            projectileRigidbody.velocity = Vector3.Lerp(projectileRigidbody.velocity, Vector3.Normalize(target.position - projectileTransform.position) * moveForce, 0.75f);
     }
 
     public override void TickModifier(float deltaTime)
@@ -20,7 +23,7 @@ public class M_Homing : ProjectileModifier
 
         if (target)
         {
-            projectileRigidbody.AddForce((target.position - projectileTransform.position).normalized * moveForce, ForceMode.Acceleration);
+            projectileRigidbody.AddForce((target.position - projectileTransform.position).normalized * moveForce, ForceMode.Force);
 
             // Slowly override other forces in favour of this one
             projectileRigidbody.velocity = Vector3.Lerp(projectileRigidbody.velocity, (target.position - projectileTransform.position).normalized, Time.deltaTime);

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class M_Orbital : ProjectileModifier
 {
-    private float moveForce = 12f;
+    private float moveForce = 8f;
     private Transform target;
 
     public override void OnModifierApplied()
     {
+        projectileComponent.MultiplyTimeToLive(2f);
+
         SearchForTarget();
+
+        if (target)
+            projectileRigidbody.velocity = Vector3.Lerp(projectileRigidbody.velocity, Vector3.zero, 0.75f);
     }
 
     public override void TickModifier(float deltaTime)
@@ -28,9 +33,11 @@ public class M_Orbital : ProjectileModifier
                 SearchForTarget();
             }
 
-            Vector3 dir = projectileTransform.forward + projectileTransform.right * 0.25f;
+            Vector3 dir = projectileTransform.forward + projectileTransform.right * 1.5f;
 
-            projectileRigidbody.AddForce(dir * moveForce, ForceMode.Acceleration);
+            projectileRigidbody.AddForce(dir * moveForce, ForceMode.Force);
+
+            projectileRigidbody.velocity = Vector3.Lerp(projectileRigidbody.velocity, dir * moveForce, Time.deltaTime * moveForce);
         }
     }
 

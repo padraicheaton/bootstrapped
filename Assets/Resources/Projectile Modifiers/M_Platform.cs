@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class M_Platform : ProjectileModifier
 {
-    private float velocityMultiplier = 0.25f;
-    private float horizontalModifier = 4f;
-    private float verticalModifier = 0.2f;
+    private float horizontalModifier = 2f;
+    private float verticalModifier = 0.75f;
 
-    private float platformLifetime = 10f;
+    private float platformLifetime = 20f;
 
     public override void OnModifierApplied()
     {
-        projectileRigidbody.velocity *= velocityMultiplier;
-
         projectileComponent.MultiplyProjectileScale(new Vector3(horizontalModifier, verticalModifier, horizontalModifier));
+        projectileComponent.AddLayerToAffectingLayers(LayerMask.NameToLayer("Ground"));
 
         projectileComponent.onDestroyed += OnDestroyed;
     }

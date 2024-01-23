@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class M_Volatile : ProjectileModifier
 {
-    private float damageIncreaseMultiplier = 1.1f;
-    private float damageIncreaseInterval = 0.5f;
+    private float damageIncreaseMultiplier = 2f;
+    private float damageIncreaseInterval, maxDamageIncreaseInterval = 0.5f;
 
     private float timer = 0f;
 
@@ -13,6 +13,7 @@ public class M_Volatile : ProjectileModifier
 
     public override void OnModifierApplied()
     {
+        UpdateInterval();
     }
 
     public override void TickModifier(float deltaTime)
@@ -26,15 +27,22 @@ public class M_Volatile : ProjectileModifier
             if (expand)
             {
                 projectileComponent.MultiplyDamageAmount(damageIncreaseMultiplier);
-                projectileComponent.MultiplyProjectileScale(2f);
+                projectileComponent.MultiplyProjectileScale(damageIncreaseMultiplier);
             }
             else
             {
                 projectileComponent.MultiplyDamageAmount(1 / damageIncreaseMultiplier);
-                projectileComponent.MultiplyProjectileScale(1 / 2f);
+                projectileComponent.MultiplyProjectileScale(1 / damageIncreaseMultiplier);
             }
 
             timer = 0f;
+
+            UpdateInterval();
         }
+    }
+
+    private void UpdateInterval()
+    {
+        damageIncreaseInterval = Random.Range(0f, maxDamageIncreaseInterval);
     }
 }
