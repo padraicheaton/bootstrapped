@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [CreateAssetMenu(fileName = "New Voting Gen", menuName = "Bootstrapped/Gen Obj/Voting")]
 public class GA_Voting : GA_Genetic
@@ -31,7 +32,17 @@ public class GA_Voting : GA_Genetic
 
         string strRepresentation = string.Join(",", electedDna.ToArray());
 
-        return electedDna.ToArray();
+        // Cross over the elected DNA with the fittest parent DNA
+        int[] fittestParentDNA = WeaponDataCollector.GetFittestParents(1)[0];
+
+        int[][] parents = new int[2][];
+        parents[0] = electedDna.ToArray();
+        parents[1] = fittestParentDNA;
+
+        int[] childDNA = EvolutionAlgorithms.Crossover(parents, mutationRate);
+
+        //return electedDna.ToArray();
+        return childDNA;
     }
 
     private int GetBiasedAllele(int dnaIndex, EvolutionaryData[] evolutionaryData)

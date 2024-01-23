@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff4d5a8e8038014a9fedb160b616592, type: 3}
   m_Name: Allele Voting
   m_EditorClassIdentifier: 
-  mutationRate: 0
+  mutationRate: 0.2
   minimumDataPoints: 10
   noveltyChance: 0.1
   noveltyChanceIncrement: 0.1

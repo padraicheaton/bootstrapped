@@ -12,7 +12,7 @@ public static class EventLogger
         // For now, just log everything into the console
         string consoleMsg = occuredEvent.GetDataString();
 
-        Debug.Log(consoleMsg);
+        //Debug.Log(consoleMsg);
 
         //! Here is where it will be appended to the csv with each relevant column
         //! Create the csv if doesn't exist

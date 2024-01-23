@@ -186,10 +186,10 @@ public class NavmeshRobot : MonoBehaviour
             Vector3 fleePosition = transform.position + Vector3.Normalize(transform.position - target.position) * 25f;
 
             SafeSetStopState(false);
-            NavMesh.SamplePosition(fleePosition, out NavMeshHit hit, 10f, NavMesh.AllAreas);
+            NavMesh.SamplePosition(fleePosition, out NavMeshHit hit, 50f, NavMesh.AllAreas);
             wanderTargetDestination = hit.position;
 
-            transform.LookAt(wanderTargetDestination);
+            //transform.LookAt(wanderTargetDestination);
 
             agent.speed *= 5f;
             agent.acceleration *= 5f;
