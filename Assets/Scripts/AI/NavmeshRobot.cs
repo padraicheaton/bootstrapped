@@ -16,6 +16,9 @@ public class NavmeshRobot : MonoBehaviour
     [Header("Movement Params")]
     [SerializeField] private float movementSpeed;
     [SerializeField] private float spreadRange;
+    [SerializeField] private float hackedSpeed;
+    [SerializeField] private float slowedSpeed;
+    private bool slowed;
     private Vector3 spreadTargetOffset;
     private float speed;
 
@@ -80,6 +83,18 @@ public class NavmeshRobot : MonoBehaviour
 
     private void FixedUpdate()
     {
+        switch (currentState)
+        {
+            case State.Hacked:
+                speed = hackedSpeed;
+                break;
+            default:
+                speed = movementSpeed;
+                break;
+        }
+        if (slowed)
+            speed /= 2f;
+
         agent.speed = speed;
 
         switch (currentState)
@@ -168,9 +183,16 @@ public class NavmeshRobot : MonoBehaviour
         }
         else if (nextState == State.Hacked)
         {
-            agent.isStopped = false;
-            NavMesh.SamplePosition(transform.position + Random.onUnitSphere * 2f, out NavMeshHit hit, 10f, NavMesh.AllAreas);
+            Vector3 fleePosition = transform.position + Vector3.Normalize(transform.position - target.position) * 25f;
+
+            SafeSetStopState(false);
+            NavMesh.SamplePosition(fleePosition, out NavMeshHit hit, 10f, NavMesh.AllAreas);
             wanderTargetDestination = hit.position;
+
+            transform.LookAt(wanderTargetDestination);
+
+            agent.speed *= 5f;
+            agent.acceleration *= 5f;
         }
 
         currentState = nextState;
@@ -201,8 +223,7 @@ public class NavmeshRobot : MonoBehaviour
 
         if (Vector3.Distance(transform.position, wanderTargetDestination) <= 0.1f)
         {
-            NavMesh.SamplePosition(transform.position + Random.onUnitSphere * 2f, out NavMeshHit hit, 10f, NavMesh.AllAreas);
-            wanderTargetDestination = hit.position;
+            SwitchState(State.Stun);
         }
     }
 
@@ -318,10 +339,7 @@ public class NavmeshRobot : MonoBehaviour
 
     public void SetSlowedState(bool slowed)
     {
-        if (slowed)
-            speed = movementSpeed / 2f;
-        else
-            speed = movementSpeed;
+        this.slowed = slowed;
     }
 
     public void SetJammedState(bool jammed)
@@ -349,10 +367,5 @@ public class NavmeshRobot : MonoBehaviour
         yield return new WaitForSeconds(autoDeathTimeout);
 
         SwitchState(State.Dead);
-    }
-
-    private Transform GetTarget()
-    {
-        return currentState == State.Hacked ? null : ServiceLocator.instance.GetService<PlayerMovement>().transform;
     }
 }

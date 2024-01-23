@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a42d3c7956994747a108542a4020d61, type: 3}
   m_Name: HackingEffect
   m_EditorClassIdentifier: 
-  displayName: Hacking
+  displayName: Fear
   prefab: {fileID: 5256955986577040266, guid: 62467de7f2fa2a54ebe99707eb84bac8, type: 3}
-  icon: {fileID: 21300000, guid: 5f1904ebf5c64824c9a49e656108b0a3, type: 3}
+  icon: {fileID: 21300000, guid: c0c6293606e263a45a45deed4adbbcb8, type: 3}
   particlePrefab: {fileID: 6679978165497265013, guid: 1e71e90fe4f059842afbd0c6bc96faf3,
     type: 3}
   weaponVFXColour: {r: 0.04830408, g: 1, b: 0, a: 1}

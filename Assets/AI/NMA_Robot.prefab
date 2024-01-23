@@ -118,6 +118,8 @@ MonoBehaviour:
   firePoint: {fileID: 8125013888199358176}
   movementSpeed: 6
   spreadRange: 2
+  hackedSpeed: 15
+  slowedSpeed: 0
   attackRange: 15
   attackDelay: 2
   attackDmg: 5

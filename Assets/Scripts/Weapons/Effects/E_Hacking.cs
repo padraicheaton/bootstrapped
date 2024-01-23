@@ -18,6 +18,7 @@ public class E_Hacking : TimeStackingEffect
 
     protected override void OnEffectExpired()
     {
+        agentController.SwitchState(NavmeshRobot.State.Hacked);
         agentController.SwitchState(NavmeshRobot.State.Chase);
     }
 
