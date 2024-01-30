@@ -48,6 +48,8 @@ public class LevelPopulator : MonoBehaviour
     {
         // Spawn Caches
         SpawnObject(cachePrefab, numCaches);
+
+        SpawnObject(refillStationPrefab, numRefillStations);
     }
 
     public List<Vector3> PopPoints(int count)

@@ -52,7 +52,7 @@ MonoBehaviour:
   drawLevelDimensions: 0
   pointIncrement: 5
   numCaches: 0
-  numRefillStations: 2
+  numRefillStations: 6
   rayOriginHeight: 45
 --- !u!1 &6918262528629091496
 GameObject:

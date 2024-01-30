@@ -7,21 +7,29 @@ public class RefillStation : Interactable
     [SerializeField] private int charges;
     [SerializeField] private bool infinite = false;
 
+    private void Start()
+    {
+        ServiceLocator.instance.GetService<Spawner>().onSwarmBegin += () =>
+        {
+            charges = 3;
+        };
+    }
+
     public override string GetName()
     {
-        if (!infinite)
-            return $"Reload Station ({charges})";
+        if (charges > 0)
+            return $"Reload ({charges})";
         else
-            return "Reload Station (∞)";
+            return "Reload (EMPTY)";
     }
 
     public override void OnInteracted()
     {
-        charges--;
+        if (charges > 0)
+        {
+            ServiceLocator.instance.GetService<PlayerWeaponSystem>().ReloadEquippedWeapon();
 
-        ServiceLocator.instance.GetService<PlayerWeaponSystem>().ReloadEquippedWeapon();
-
-        if (charges <= 0 && !infinite)
-            Destroy(gameObject);
+            charges--;
+        }
     }
 }

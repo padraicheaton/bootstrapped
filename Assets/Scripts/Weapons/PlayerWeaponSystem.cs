@@ -13,7 +13,7 @@ public class PlayerWeaponSystem : MonoBehaviour
     [SerializeField] private bool useStartingWeapon = true;
     [SerializeField] private bool shouldHealOnReload = true;
 
-    public int weaponSlotCount { get; private set; } = 2;
+    public int weaponSlotCount { get; private set; } = 3;
     private List<WeaponController> weaponSlots = new List<WeaponController>();
     private int activeWeaponIndex;
 
