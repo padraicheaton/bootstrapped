@@ -18,7 +18,9 @@ public class RefillStation : Interactable
 
     public override string GetName()
     {
-        if (charges > 0)
+        if (infinite)
+            return "Reload";
+        else if (charges > 0)
             return $"Reload ({charges})";
         else
             return "Reload (EMPTY)";
