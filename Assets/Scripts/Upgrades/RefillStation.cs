@@ -9,10 +9,11 @@ public class RefillStation : Interactable
 
     private void Start()
     {
-        ServiceLocator.instance.GetService<Spawner>().onSwarmBegin += () =>
-        {
-            charges = 3;
-        };
+        if (ServiceLocator.instance.GetService<SceneController>().GetActiveScene() != LoadedScenes.Tutorial)
+            ServiceLocator.instance.GetService<Spawner>().onSwarmBegin += () =>
+            {
+                charges = 3;
+            };
     }
 
     public override string GetName()
@@ -29,7 +30,8 @@ public class RefillStation : Interactable
         {
             ServiceLocator.instance.GetService<PlayerWeaponSystem>().ReloadEquippedWeapon();
 
-            charges--;
+            if (!infinite)
+                charges--;
         }
     }
 }
