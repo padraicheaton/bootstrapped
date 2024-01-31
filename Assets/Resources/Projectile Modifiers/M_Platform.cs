@@ -7,12 +7,12 @@ public class M_Platform : ProjectileModifier
     private float horizontalModifier = 2f;
     private float verticalModifier = 0.75f;
 
-    private float platformLifetime = 20f;
+    private float platformLifetime = 10f;
 
     public override void OnModifierApplied()
     {
         projectileComponent.MultiplyProjectileScale(new Vector3(horizontalModifier, verticalModifier, horizontalModifier));
-        projectileComponent.AddLayerToAffectingLayers(LayerMask.NameToLayer("Ground"));
+        //projectileComponent.AddLayerToAffectingLayers(LayerMask.NameToLayer("Ground"));
 
         projectileComponent.onDestroyed += OnDestroyed;
     }
