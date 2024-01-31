@@ -197,7 +197,7 @@ public class ModularProjectile : MonoBehaviour
     public void MultiplyProjectileScale(float multiplier)
     {
         MultiplyProjectileScale(Vector3.one * multiplier);
-        MultiplyExplosionRadius(multiplier);
+        MultiplyExplosionRadius(1f + (multiplier * 0.1f));
     }
 
     public void MultiplyProjectileScale(Vector3 multiplier)

@@ -17,9 +17,12 @@ public class M_Rebound : ProjectileModifier
 
         projectileComponent.onCollided += other =>
         {
-            projectileComponent.DisableColliderForDuration(noClipWindow);
+            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                projectileComponent.DisableColliderForDuration(noClipWindow);
 
-            projectileRigidbody.velocity = GetNearestEnemyDir();
+                projectileRigidbody.velocity = GetNearestEnemyDir();
+            }
         };
     }
 
@@ -37,6 +40,6 @@ public class M_Rebound : ProjectileModifier
                 return (coll.transform.position - projectileTransform.position).normalized * storedVelocity.magnitude;
         }
 
-        return Vector3.up * 5f;
+        return storedVelocity;
     }
 }

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mutationRate: 0.25
   minimumDataPoints: 10
-  noveltyChance: 0.2
-  noveltyChanceIncrement: 0.1
+  noveltyChance: 0
+  noveltyChanceIncrement: 0.15
