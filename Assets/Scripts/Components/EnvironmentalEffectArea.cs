@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnvironmentalEffectArea : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private AudioSource sfxComponent;
+
     [Header("Settings")]
     [SerializeField] private EffectData effect;
     [SerializeField] private float damage;
@@ -29,6 +32,9 @@ public class EnvironmentalEffectArea : MonoBehaviour
             affectedObjects.Add(other.gameObject);
 
             StartCoroutine(RemoveGameObjectAfterDelay(other.gameObject));
+
+            if (sfxComponent != null)
+                sfxComponent.Play();
         }
     }
 

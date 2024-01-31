@@ -46750,8 +46750,8 @@ MonoBehaviour:
   - {fileID: 4757118498128359040, guid: 232c5d3a0ac4db44ab986f541c997185, type: 3}
   - {fileID: 7862779880740339058, guid: 9e34de2cd0ce977408e4549793ba2942, type: 3}
   spawnPointCount: 8
-  swarmSpawnDelay: 1
-  swarmEnemyCount: 10
+  swarmSpawnDelay: 0.5
+  swarmEnemyCount: 5
   swarmCountAdditiveIncrease: 3
 --- !u!114 &6918262530458764223
 MonoBehaviour:

@@ -1084,6 +1084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowOpenClip: {fileID: 8300000, guid: 299bad4ebb1a987438c6e3b617cb09f6, type: 3}
+  defaultVisibleState: 0
 --- !u!225 &4529420333267203581
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3968,17 +3969,17 @@ MonoBehaviour:
   playerCam: {fileID: 6256144005859503989}
   orientation: {fileID: 6256144005545016279}
   moveSpeed: 4500
-  maxSpeed: 10
+  maxSpeed: 12
   grounded: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   groundCounterMovement: 0.175
   airCounterMovement: 0.01
-  maxSlopeAngle: 55
+  maxSlopeAngle: 75
   slideForce: 400
   slideCounterMovement: 0.2
-  jumpForce: 450
+  jumpForce: 550
 --- !u!114 &6256144007111590491
 MonoBehaviour:
   m_ObjectHideFlags: 0

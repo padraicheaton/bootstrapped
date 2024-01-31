@@ -5,6 +5,11 @@ using System.Linq;
 
 public class Foundry : Interactable
 {
+    [Header("References")]
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject boxObj;
+    [SerializeField] private Collider interactinCollider;
+
     [Header("Settings")]
     [SerializeField] private int numWeaponsToGenerateEachWave;
     [SerializeField] private int additiveIncrease;
@@ -29,6 +34,8 @@ public class Foundry : Interactable
             if (numWeaponsToGenerateEachWave < 20)
                 numWeaponsToGenerateEachWave += additiveIncrease;
             remainingWeaponsToGenerate = numWeaponsToGenerateEachWave;
+
+            SetVisibility(true);
         };
 
         ServiceLocator.instance.GetService<Spawner>().onSwarmBegin += DestroyUnusedWeapons;
@@ -44,12 +51,14 @@ public class Foundry : Interactable
     {
         currentlySpawningWeapons = true;
 
+        SetVisibility(false);
+
         new EventLogger.Event("Interacted With Foundry",
                                 $"{numWeaponsToGenerateEachWave} Weapons To Generate");
 
         for (int i = 0; i < numWeaponsToGenerateEachWave; i++)
         {
-            GameObject generatedWeapon = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(transform.position + Vector3.up);
+            GameObject generatedWeapon = ServiceLocator.instance.GetService<WeaponGenerator>().GenerateWeapon(spawnPoint.position);
 
             Rigidbody rb = generatedWeapon.GetComponent<Rigidbody>();
             rb.AddForce((Random.onUnitSphere + Vector3.up) * 5f, ForceMode.Impulse);
@@ -74,5 +83,11 @@ public class Foundry : Interactable
         }
 
         spawnedWeapons.Clear();
+    }
+
+    private void SetVisibility(bool visible)
+    {
+        boxObj.SetActive(visible);
+        interactinCollider.enabled = visible;
     }
 }
