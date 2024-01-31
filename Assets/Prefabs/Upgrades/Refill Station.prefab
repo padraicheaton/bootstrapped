@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsInteractable: 1
-  charges: 5
+  charges: 3
   infinite: 0
 --- !u!1001 &6400566462018520408
 PrefabInstance:

@@ -5,7 +5,7 @@ using UnityEngine;
 public class M_Homing : ProjectileModifier
 {
     private float searchRadius = 20f;
-    private float moveForce = 8f;
+    private float moveForce = 12f;
     private Transform target;
 
     public override void OnModifierApplied()
@@ -32,10 +32,17 @@ public class M_Homing : ProjectileModifier
 
     private void SearchForTarget()
     {
-        foreach (Collider coll in Physics.OverlapSphere(projectileTransform.position, searchRadius, projectileComponent.GetAffectingLayers()))
+        // foreach (Collider coll in Physics.OverlapSphere(projectileTransform.position, searchRadius, projectileComponent.GetAffectingLayers()))
+        // {
+        //     target = coll.transform;
+        //     break;
+        // }
+
+        Collider[] foundEnemies = Physics.OverlapSphere(projectileTransform.position, searchRadius, projectileComponent.GetAffectingLayers());
+
+        if (foundEnemies.Length > 0)
         {
-            target = coll.transform;
-            break;
+            target = foundEnemies[Random.Range(0, foundEnemies.Length)].transform;
         }
     }
 }
