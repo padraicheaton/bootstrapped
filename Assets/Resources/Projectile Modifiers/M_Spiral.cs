@@ -5,8 +5,8 @@ using UnityEngine;
 public class M_Spiral : ProjectileModifier
 {
     //* Settings
-    private float spiralRadius = 1f;
-    private float spiralSpeed = 2f;
+    private float spiralRadius = 30f;
+    private float spiralSpeed = 10f;
 
     private Transform childTransform;
     private Vector3 spiralPosition = Vector3.zero;
@@ -17,10 +17,14 @@ public class M_Spiral : ProjectileModifier
 
     public override void TickModifier(float deltaTime)
     {
-        spiralPosition.x = Mathf.Sin(Time.time * spiralSpeed);
+        // spiralPosition.x = Mathf.Sin(Time.time * spiralSpeed);
 
-        spiralPosition *= spiralRadius;
+        // spiralPosition *= spiralRadius;
 
-        projectileTransform.localPosition = Vector3.Lerp(projectileTransform.localPosition, spiralPosition, deltaTime * spiralSpeed * 10f);
+        // projectileTransform.localPosition = Vector3.Lerp(projectileTransform.localPosition, spiralPosition, deltaTime * spiralSpeed * 10f);
+
+        Vector3 spiralDirection = projectileTransform.right * Mathf.Sin(Time.time * spiralSpeed);
+
+        projectileRigidbody.AddForce(spiralDirection * spiralRadius, ForceMode.Force);
     }
 }
