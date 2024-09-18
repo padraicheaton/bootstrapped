@@ -6,10 +6,13 @@ public class M_Orbital : ProjectileModifier
 {
     private float moveForce = 8f;
     private Transform target;
+    private int orbitDirection = 1;
 
     public override void OnModifierApplied()
     {
         projectileComponent.MultiplyTimeToLive(2f);
+
+        orbitDirection = Random.value > 0.5f ? 1 : -1;
 
         SearchForTarget();
 
@@ -33,7 +36,7 @@ public class M_Orbital : ProjectileModifier
                 SearchForTarget();
             }
 
-            Vector3 dir = projectileTransform.forward + projectileTransform.right * 1.5f;
+            Vector3 dir = projectileTransform.forward + projectileTransform.right * 1.5f * orbitDirection;
 
             projectileRigidbody.AddForce(dir * moveForce, ForceMode.Force);
 

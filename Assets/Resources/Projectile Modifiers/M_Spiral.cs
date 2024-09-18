@@ -5,7 +5,7 @@ using UnityEngine;
 public class M_Spiral : ProjectileModifier
 {
     //* Settings
-    private float spiralRadius = 30f;
+    private float spiralRadius = 50f;
     private float spiralSpeed = 10f;
 
     private Transform childTransform;

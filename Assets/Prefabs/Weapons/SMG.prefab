@@ -198,12 +198,12 @@ PrefabInstance:
     - target: {fileID: 3606283343415565487, guid: 039c9bb0db8696d478ca44a329ee4bde,
         type: 3}
       propertyPath: timeToReload
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3606283343415565487, guid: 039c9bb0db8696d478ca44a329ee4bde,
         type: 3}
       propertyPath: timeBetweenShots
-      value: 0.05
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7958299124740438811, guid: 039c9bb0db8696d478ca44a329ee4bde,
         type: 3}
